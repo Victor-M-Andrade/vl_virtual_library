@@ -28,7 +28,7 @@ Para tentar contornar o problema da pandemina de COVID-19 e evitar o prejuízo f
 <details> <!-- Traduzir a página -->
   <summary>Show description in English </summary>
   
-<h1 text align = "center">📚🌏🌍🌎 VL - VIRTUAL LIBRARY 🌎🌍🌏📚</h1>
+<h1 text align = "center">📚🌎 VL - VIRTUAL LIBRARY 🌎📚</h1>
 
 <h6 text align = "center">Project developed by <a href="">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> and <a href="https://github.com/wprs18">William de Paula</a>.</h6>
 
