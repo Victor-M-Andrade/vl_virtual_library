@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Library</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+    <section id="sectionGeralLogin">
+        
+        <div id="capa">
+
+        <img id="logoInicio" src="assets/images/logo.png" alt="logo">
+        
+        <section id = "section_login">
+            <header id="telaLogin">
+                <h1>Seja Bem Vindo ao Virtual Library</h1>
+                <p>Login
+                <input type="text" name="Nome" size="40" />
+                </p>
+                <p>Senha
+                <input type="password" name="Nome" size="40" />
+                </p>
+                <div class="botoesInicio">
+                <input id = "entrar" type="button" value="Entrar" style="cursor:pointer;" onclick="entrarSistema()">
+                <input id = "entrar" type="button" value="Criar Novo Usuário" style="cursor:pointer;" onclick="novoUsuario()">
+                </div>
+            </header>
+        </section>
+
+        </div>
+    </section>
 </body>
+<script src="assets/js/script.js"></script>
 </html>
