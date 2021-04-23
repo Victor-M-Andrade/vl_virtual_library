@@ -1,6 +1,6 @@
 <h1 text align = "center">📚🌎 VL - VIRTUAL LIBRARY 🌎📚</h1>
 
-<h6 text align = "center">Projeto desenvolvido por <a href="">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> e <a href="https://github.com/wprs18">William de Paula</a>.</h6>
+<h6 text align = "center">Projeto desenvolvido por <a href="https://github.com/LucasLima147">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> e <a href="https://github.com/wprs18">William de Paula</a>.</h6>
 
 <h3 text align = "center">📝 Contextualização</h3>
 <p>
@@ -30,18 +30,18 @@ Para tentar contornar o problema da pandemina de COVID-19 e evitar o prejuízo f
   
 <h1 text align = "center">📚🌎 VL - VIRTUAL LIBRARY 🌎📚</h1>
 
-<h6 text align = "center">Project developed by <a href="">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> and <a href="https://github.com/wprs18">William de Paula</a>.</h6>
+<h6 text align = "center">Project developed by <a href="https://github.com/LucasLima147">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> and <a href="https://github.com/wprs18">William de Paula</a>.</h6>
 
 <h3 text align = "center">📝 Contextualization</h3>
 <p>
-To try to circumvent the pandemic problem of COVID-19 and avoid financial and cultural damage, Virtual Library comes with the idea of ​​bringing libraries to the online environment, to facilitate the life of the reader who, through a system, can order books available and receive the same at home, and it also helps society to maintain social distance and to keep the culture of reading alive.
+Trying to circumvent the problems of COVID-19 pandemic and to avoid financial and cultural damage, Virtual Library comes up with the idea of bringing libraries to the online environment, facilitating the life of the reader who, through a system, can order available books and receive them at home, and it also helps society to maintain social distance and to keep the culture of reading alive.
 </p>
 <h3 text align = "center">🎯 Goals</h3>
 <ul>
-<li>Decrease the cost of accessing books, as we know that nowadays in Brazil it is becoming more expensive to acquire books.</li>
-  <li>Facilitates people's access to books and articles (in some cases in PDF format).</li>
-  <li>Helping the social distance from the COVID-19 pandemic</li>
-  <li>Present different cultures through recommendations from different types of genres and authors</li>
+<li>Decreasing the cost of access to books, as we know that, nowadays, it is becoming more expensive to acquire books in Brazil.</li>
+  <li>Facilitating people's access to books and articles (in some cases as PDF files).</li>
+  <li>Helping the social distance due to COVID-19 pandemic.</li>
+  <li>Presenting different cultures through recommendations from different types of genres and authors.</li>
 </ul>
 
 <h3 text align = "center">💻 Project developed in:</h3>
