@@ -4,7 +4,7 @@
 
 <h3 text align = "center">📝 Contextualização</h3>
 <p>
-Para tentar contornar o problema da pandemina de COVID-19 e evitar o prejuízo financeiro e cultural, o Virtual Library vem com a ideia de trazer para o ambiente online as bibliotecas, para facilitar a vida do leitor que por meio de um sistema pode pedir livros disponíveis e receber o mesmo em casa, e também ajuda a sociedade a manter o distanciamento social e a manter a cultura de leitura viva.
+Para tentar contornar o problema da pandemia de COVID-19 e evitar o prejuízo financeiro e cultural, o Virtual Library vem com a ideia de trazer para o ambiente online as bibliotecas, para facilitar a vida do leitor que por meio de um sistema pode pedir livros disponíveis e receber o mesmo em casa, e também ajuda a sociedade a manter o distanciamento social e a manter a cultura de leitura viva.
 </p>
 <h3 text align = "center">🎯 Objetivos</h3>
 <ul>
