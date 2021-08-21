@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Library</title>
+
+    <script src="resources/js/jquery/jquery-3.4.1.min.js"></script>
+
+    <link href="resources/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="resources/css/livro.css">
+    <link href="resources/css/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <script src="resources/js/font-awesome/all.min.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
+        <img class="logo" src="resources/assets/img/logo.png" alt="">
+        <a class="navbar-brand" href="index.html">Virtual Library</a>
+
+
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Procurar por..." />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Navbar-->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>VERIFIQUE SEUS DADOS</h1>
+
+    <section class="preencher-envio">
+        <form class="formulario" action="">
+            <div class="formulario-a"><img src="resources/assets/img/capa-livros/senhor-dos-aneis.png" alt=""></div>
+            <div class="formulario-b">
+                <form>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group"><label class="small mb-1">Nome</label><input
+                                    class="form-control py-4" type="text" placeholder="Usuario Teste" /></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"><label class="small mb-1">Sobrenome</label><input
+                                    class="form-control py-4" type="text" placeholder="Sobrenome Teste" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="small mb-1">Email</label><input class="form-control py-4"
+                            type="email" placeholder="teste@teste.com" /></div>
+                    <div class="form-row">
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="small mb-1">Rua</label><input
+                                    class="form-control py-4" type="text" placeholder="Rua Teste" /></div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="small mb-1">Bairro</label><input
+                                    class="form-control py-4" type="text" placeholder="Bairro teste" /></div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group"><label class="small mb-1">Número</label><input
+                                    class="form-control py-4" type="text" placeholder="123" /></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4 mb-0"><a class="btn-large btn-success btn-block"
+                            href="index.html">Finalizar Pedido</a></div>
+                </form>
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>

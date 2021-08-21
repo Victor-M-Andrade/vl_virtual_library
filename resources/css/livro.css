@@ -1,0 +1,72 @@
+body{
+    background-color: #3d2f79f5;
+    margin-top: 150px;
+}
+
+.navbar {
+    height:100px;
+}
+
+.navbar-brand{
+    font-size: 40px;
+}
+
+.logo{
+    width: 60px;
+    margin-left: 100px;
+}
+
+h1{
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+}
+
+.livro{
+    margin: 10px;
+    margin-top: 50px;
+    
+    
+}
+
+.menu-livro, .preencher-envio, .formulario{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.livro:hover {
+    transform: scale(105%);
+    cursor: pointer;
+}
+
+.nome-livro{
+    display: grid;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.preencher-envio{
+    margin-top: 50px;
+}
+
+.formulario-a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario-b{
+    width: 1000px;
+    margin-left: 25px;
+}
+
+.form-group{
+    color: ivory;
+    font-size: 35px;
+    text-align: center;
+}
