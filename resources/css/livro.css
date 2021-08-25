@@ -1,25 +1,68 @@
 body{
-    background-color: #3d2f79f5;
-    margin-top: 150px;
+    background-color: #373B69;
+    margin-top: 110px;
+}
+
+footer{
+    height: 65px;
+    background-color: #262950;
+    color: white;
+    text-align: center;
+}
+
+#layoutAuthentication_footer{
+    margin-top: 30px;
 }
 
 .navbar {
     height:100px;
 }
 
-.navbar-brand{
-    font-size: 40px;
+.nav-link{
+    font-size: 25px;
 }
+
 
 .logo{
-    width: 60px;
-    margin-left: 100px;
+    width: 160px;
+    margin-right: 50px;
 }
 
-h1{
+h1, h2, h3, h5{
+    margin-left: 100px;
+    margin-right: 100px;
     text-align: center;
     font-weight: bolder;
     color: white;
+}
+
+h1{
+    margin-bottom: 25px;
+}
+
+h2{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+h3{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+h4{
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.div-btn{
+    margin-top: 50px;
+    text-align: center;
+}
+.btn-login{
+    font-size: 30px;
+    width: auto;
 }
 
 .livro{
@@ -40,6 +83,7 @@ h1{
 .livro:hover {
     transform: scale(105%);
     cursor: pointer;
+    box-shadow: 0px 0px 50px rgb(132, 0, 255);
 }
 
 .nome-livro{
@@ -50,7 +94,9 @@ h1{
 }
 
 .preencher-envio{
+    display: block;
     margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .formulario-a{
@@ -58,6 +104,7 @@ h1{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 500px;
 }
 
 .formulario-b{
@@ -66,7 +113,99 @@ h1{
 }
 
 .form-group{
-    color: ivory;
+    color: rgb(255, 255, 255);
     font-size: 35px;
     text-align: center;
+}
+
+.container img {
+    height: 400px;
+}
+
+.container {
+    width: auto;
+}
+
+.carrossel{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.carousel-index{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 700px;
+}
+
+p{
+    color: white;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.img-index-1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.btn-preencher-envio{
+    padding-bottom: 100px;
+}
+
+.img-criador{
+    margin-right: auto;
+    margin-left: auto;
+    width: 100px;
+}
+
+.img-criadores{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 20px violet;
+}
+
+.tabela-criadores{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-body{
+    text-align: center;
+}
+
+.nome-criador{
+    color: white;
+    font-size: 30px;
+}
+
+.tabela-criadores-conteudo{
+    width: 400px;
+}
+
+
+.img-livro-descricao{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+}
+
+.btn-descricao-livro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    margin-top: 50px;
 }
