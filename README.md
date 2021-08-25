@@ -2,6 +2,12 @@
 
 <h6 text align = "center">Projeto desenvolvido por <a href="https://github.com/LucasLima147">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> e <a href="https://github.com/wprs18">William de Paula</a>.</h6>
 
+
+<div align="center">
+     <img src="https://user-images.githubusercontent.com/79486487/130864721-dbe191c1-d5d3-4138-92d5-30c6dcfce677.png" width="250px" />
+</div>
+
+
 <h3 text align = "center">📝 Contextualização</h3>
 <p>
 Para tentar contornar o problema da pandemia de COVID-19 e evitar o prejuízo financeiro e cultural, o Virtual Library vem com a ideia de trazer para o ambiente online as bibliotecas, para facilitar a vida do leitor que por meio de um sistema pode pedir livros disponíveis e receber o mesmo em casa, e também ajuda a sociedade a manter o distanciamento social e a manter a cultura de leitura viva.
@@ -32,6 +38,11 @@ Para tentar contornar o problema da pandemia de COVID-19 e evitar o prejuízo fi
 
 <h6 text align = "center">Project developed by <a href="https://github.com/LucasLima147">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a> and <a href="https://github.com/wprs18">William de Paula</a>.</h6>
 
+  
+  <div align="center">
+     <img src="https://user-images.githubusercontent.com/79486487/130864721-dbe191c1-d5d3-4138-92d5-30c6dcfce677.png" width="250px" />
+</div>
+  
 <h3 text align = "center">📝 Contextualization</h3>
 <p>
 Trying to circumvent the problems of COVID-19 pandemic and to avoid financial and cultural damage, Virtual Library comes up with the idea of bringing libraries to the online environment, facilitating the life of the reader who, through a system, can order available books and receive them at home, and it also helps society to maintain social distance and to keep the culture of reading alive.
