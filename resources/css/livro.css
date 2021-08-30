@@ -10,9 +10,6 @@ footer{
     text-align: center;
 }
 
-#layoutAuthentication_footer{
-    margin-top: 30px;
-}
 
 .navbar {
     height:100px;
@@ -212,4 +209,15 @@ p{
 
 .p-descricao{
     font-size: 20px;
+}
+
+.btn-acervo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+}
+
+.p-criar{
+    color: black;
 }
