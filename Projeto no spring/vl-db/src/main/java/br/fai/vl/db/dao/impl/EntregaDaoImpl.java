@@ -11,101 +11,97 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import br.fai.vl.db.connection.ConnectionFactory;
-import br.fai.vl.db.dao.AutorDao;
-import br.fai.vl.model.Autor;
+import br.fai.vl.db.dao.EntregaDao;
+import br.fai.vl.model.Entrega;
 
 @Repository
-public class AutorDaoImpl implements AutorDao {
+public class EntregaDaoImpl implements EntregaDao {
 
-	public List<Autor> readAll() {
-		final List<Autor> autores = new ArrayList<Autor>();
+	public List<Entrega> readAll() {
+		final List<Entrega> entregas = new ArrayList<Entrega>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
-			// faz a conexão
 			connection = ConnectionFactory.getConnection();
-			final String sql = "SELECT * FROM autor;";
-			// prepara a query
+			final String sql = "select * from entrega;";
 			preparedStatement = connection.prepareStatement(sql);
-			// executa a query
 			resultSet = preparedStatement.executeQuery();
 
-			// pegando os resultados obtidos
 			while (resultSet.next()) {
-				final Autor autor = new Autor();
-				autor.setId(resultSet.getInt("id"));
-				autor.setNome(resultSet.getString("nome"));
-				autor.setObra(resultSet.getString("obra"));
-				autor.setFrase(resultSet.getString("frase"));
-				autores.add(autor);
+				final Entrega entrega = new Entrega();
+				entrega.setId(resultSet.getInt("id"));
+				entrega.setDataSolicitacao(resultSet.getTimestamp("datasolicitacao"));
+				entrega.setDataEntrega(resultSet.getTimestamp("dataentrega"));
+				entrega.setEntregue(resultSet.getBoolean("entregue"));
+				entrega.setLeitorId(resultSet.getInt("leitor_id"));
+				entrega.setEmprestimoId(resultSet.getInt("emprestimo_id"));
+				entregas.add(entrega);
 			}
 
 		} catch (final Exception e) {
-			System.out.println("Não foi possível resgatar os Leitores ou houve um erro interno no sistema");
+			System.out.println("Não foi possível resgatar as entregas ou houve um erro interno no sistema");
 		} finally {
 			ConnectionFactory.close(resultSet, preparedStatement, connection);
 		}
 
-		return autores;
+		return entregas;
 	}
 
-	public Autor readById(final int id) {
-		Autor autor = null;
+	public Entrega readById(final int id) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
+		Entrega entrega = null;
+
 		try {
-			// faz a conexão
+			final String sql = "SELECT * FROM entrega WHERE id = ?;";
+
 			connection = ConnectionFactory.getConnection();
-			final String sql = "SELECT * FROM autor A WHERE A.id = ?;";
-			// prepara a query
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
-			// executa a query
 			resultSet = preparedStatement.executeQuery();
 
-			// pegando os resultados obtidos
 			while (resultSet.next()) {
-				autor = new Autor();
-				autor.setId(resultSet.getInt("id"));
-				autor.setNome(resultSet.getString("nome"));
-				autor.setObra(resultSet.getString("obra"));
-				autor.setFrase(resultSet.getString("frase"));
+				entrega = new Entrega();
+				entrega.setId(resultSet.getInt("id"));
+				entrega.setDataSolicitacao(resultSet.getTimestamp("datasolicitacao"));
+				entrega.setDataEntrega(resultSet.getTimestamp("dataentrega"));
+				entrega.setEntregue(resultSet.getBoolean("entregue"));
+				entrega.setLeitorId(resultSet.getInt("leitor_id"));
+				entrega.setEmprestimoId(resultSet.getInt("emprestimo_id"));
 			}
 
 		} catch (final Exception e) {
-			System.out.println("Não foi possível resgatar o Leitor solicitado ou houve um erro interno no sistema");
+			System.out.println(e.getMessage());
 		} finally {
 			ConnectionFactory.close(resultSet, preparedStatement, connection);
 		}
-		return autor;
+
+		return entrega;
 	}
 
-	public int create(final Autor entity) {
+	public int create(final Entrega entity) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String sql = "";
 
-		// sql
-		sql = "INSERT INTO autor(nome, obra, frase) " + "VALUES(?, ?, ?);";
+		final String sql = "INSERT INTO entrega(datasolicitacao, dataentrega, entregue, leitor_id, emprestimo_id) "
+				+ "VALUES(?, ?, ?, ?, ?);";
 		int id = Integer.valueOf(-1);
 
 		try {
-			// faz a conexão
 			connection = ConnectionFactory.getConnection();
 
-			// para impedir que, caso for inserir dados em mais de uma tabela, não seja
-			// inserido lixo no BD
 			connection.setAutoCommit(false);
-			// prepara a query
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setString(1, entity.getNome());
-			preparedStatement.setString(2, entity.getObra());
-			preparedStatement.setString(3, entity.getFrase());
+			preparedStatement.setTimestamp(1, entity.getDataSolicitacao());
+			preparedStatement.setTimestamp(2, entity.getDataEntrega());
+			preparedStatement.setBoolean(3, entity.isEntregue());
+			preparedStatement.setInt(4, entity.getLeitorId());
+			preparedStatement.setInt(5, entity.getEmprestimoId());
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -128,25 +124,20 @@ public class AutorDaoImpl implements AutorDao {
 		return id;
 	}
 
-	public boolean update(final Autor entity) {
+	public boolean update(final Entrega entity) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		// sql
-		final String sql = "UPDATE autor SET obra = ?, frase = ?" + " WHERE id = ?;";
+		final String sql = "UPDATE entrega SET dataentrega = ?, entregue = ? WHERE id = ?;";
 
 		try {
-			// prepara a query
 			connection = ConnectionFactory.getConnection();
-			// para impedir que, caso for inserir dados em mais de uma tabela, não seja
-			// inserido lixo no BD
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, entity.getObra());
-			preparedStatement.setString(2, entity.getFrase());
-			preparedStatement.setLong(3, entity.getId());
+			preparedStatement.setTimestamp(1, entity.getDataEntrega());
+			preparedStatement.setBoolean(2, entity.isEntregue());
+			preparedStatement.setInt(3, entity.getId());
 
-			// executa a query
 			preparedStatement.execute();
 			connection.commit();
 
@@ -168,20 +159,14 @@ public class AutorDaoImpl implements AutorDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		// sql
-		final String sql = "DELETE FROM autor WHERE id = ?;";
+		final String sql = "DELETE FROM entrega WHERE id = ?;";
 
 		try {
-			// faz a conexão
 			connection = ConnectionFactory.getConnection();
-			// para impedir que, caso for inserir dados em mais de uma tabela, não seja
-			// inserido lixo no BD
 			connection.setAutoCommit(false);
-			// prepara a query
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, id);
 
-			// executa a query
 			preparedStatement.execute();
 			connection.commit();
 			return true;
@@ -198,4 +183,5 @@ public class AutorDaoImpl implements AutorDao {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
 	}
+
 }

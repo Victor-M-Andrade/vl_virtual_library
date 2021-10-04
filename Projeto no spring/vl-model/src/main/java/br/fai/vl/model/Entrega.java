@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Entrega {
 	private int id;
 	private Timestamp dataSolicitacao;
-	private Timestamp dataentrega;
+	private Timestamp dataEntrega;
 	private boolean entregue;
 	private int leitorId;
 	private int emprestimoId;
@@ -26,12 +26,12 @@ public class Entrega {
 		this.dataSolicitacao = dataSolicitacao;
 	}
 
-	public Timestamp getDataentrega() {
-		return dataentrega;
+	public Timestamp getDataEntrega() {
+		return dataEntrega;
 	}
 
-	public void setDataentrega(final Timestamp dataentrega) {
-		this.dataentrega = dataentrega;
+	public void setDataEntrega(final Timestamp dataentrega) {
+		this.dataEntrega = dataentrega;
 	}
 
 	public boolean isEntregue() {
