@@ -21,54 +21,69 @@
 
 <body class="sb-nav-fixed">
 
-<!-- ------------- -->
+    <!-- ------------- -->
 
-<body class="sb-nav-fixed">
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            
-            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                <img class="logo" src="../resources/assets/img/logo/VL sem fundo sem nome2.png" alt="">
-                <div class="collapse navbar-collapse" id="navbar">
-            
-                    <ul class="navbar-nav">
-            
-                        <li class="nav-item">
-                            <a href="../livro/acervo.html" class="nav-link">ACERVO</a>
-                        </li>
-            
-                    </ul>
-                </div>
-        
-    
+    <body class="sb-nav-fixed">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
 
-                 <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Procurar por..." />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+                    <img class="logo" src="../resources/assets/img/logo/VL sem fundo sem nome2.png" alt="">
+                    <div class="collapse navbar-collapse" id="navbar">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="../index.html" class="nav-link">HOME</a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a href="../general/criadores.html" class="nav-link">CRIADORES</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a href="../livro/acervo.html" class="nav-link">ACERVO</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                    <!-- Navbar Search-->
+                    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Procurar por..." />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Navbar-->
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user fa-fw"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../usuario/perfil-usuario.html">Perfil</a>
+                            <a class="dropdown-item" href="../usuario/editar-perfil.html">Editar Perfil</a>
+                            <a class="dropdown-item" href="../usuario/notificacao.html">Notificação <span
+                                    class="badge  badge-pill badge-danger">1</span></a>
+                            <a class="dropdown-item" href="../index.html">Sair</a>
+                        </div>
+                    </div>
+
+
+
+                </nav>
+
             </div>
-        </form>
-    
-            <!-- Navbar-->
-            <div class="btn-group dropleft">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="../usuario/perfil-usuario.html">Perfil</a>
-                    <a class="dropdown-item" href="../usuario/editar-perfil.html">Editar Perfil</a>
-                    <a class="dropdown-item" href="../usuario/notificacao.html">Notificação <span class="badge  badge-pill badge-danger">1</span></a>
-                    <a class="dropdown-item" href="../index.html">Sair</a>
-                  </div>
-              </div>
-        </nav>
 
-        <main>
+            <br><br><br><br><br>
+
+            <main>
             <div class="container-fluid">
                 <h1 class="mt-4">Editar Perfil</h1>
 
@@ -174,23 +189,24 @@
             </div>
         </main>
 
-        </div>
-        <div id="layoutAuthentication_footer">
-            <footer class="py-4 mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div>Copyright &copy; Virtual Library - 2021</div>
-                        <div>
-                            <a href="#">Política de privacidade</a>
-                            &middot;
-                            <a href="#">Termos &amp; Condições</a>
+
+
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div>Copyright &copy; Virtual Library - 2021</div>
+                            <div>
+                                <a href="#">Política de privacidade</a>
+                                &middot;
+                                <a href="#">Termos &amp; Condições</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
+            </div>
         </div>
-    </div>
 
-    <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../resources/js/scripts.js"></script>
-</body>
+        <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="../resources/js/scripts.js"></script>
+    </body>

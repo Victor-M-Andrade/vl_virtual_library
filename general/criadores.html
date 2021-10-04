@@ -21,38 +21,70 @@
 
 <body class="sb-nav-fixed">
 
-<!-- ------------- -->
+    <!-- ------------- -->
 
-<body class="sb-nav-fixed">
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            
-            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                <img class="logo" src="../resources/assets/img/logo/VL sem fundo sem nome2.png" alt="">
-                <div class="collapse navbar-collapse" id="navbar">
-        
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="../index.html" class="nav-link">HOME</a>
-                        </li>
-        
-                        <li class="nav-item active">
-                            <a href="criadores.html" class="nav-link">CRIADORES</a>
-                        </li>
-        
-                        <li class="nav-item">
-                            <a href="../conta/login.html" class="nav-link">LOGIN</a>
-                        </li>
-        
-                    </ul>
-                </div>
-        
-        
+    <body class="sb-nav-fixed">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+
+                <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+                    <img class="logo" src="../resources/assets/img/logo/VL sem fundo sem nome2.png" alt="">
+                    <div class="collapse navbar-collapse" id="navbar">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="../index.html" class="nav-link">HOME</a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a href="../general/criadores.html" class="nav-link">CRIADORES</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a href="../livro/acervo.html" class="nav-link">ACERVO</a>
+                            </li>
+
+                        </ul>
+                    </div>
 
 
-            </nav>
+                    <!-- Navbar Search-->
+                    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Procurar por..." />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
-            <img class="img-index-1" src="../resources/assets/img/logo/VL sem fundo com nome2.png" alt="">
+                    <!-- Navbar-->
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user fa-fw"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../usuario/perfil-usuario.html">Perfil</a>
+                            <a class="dropdown-item" href="../usuario/editar-perfil.html">Editar Perfil</a>
+                            <a class="dropdown-item" href="../usuario/notificacao.html">Notificação <span
+                                    class="badge  badge-pill badge-danger">1</span></a>
+                            <a class="dropdown-item" href="../index.html">Sair</a>
+                        </div>
+                    </div>
+
+
+
+                </nav>
+
+            </div>
+
+
+            <br><br><br><br><br>
+
+           <img class="img-index-1" src="../resources/assets/img/logo/VL sem fundo com nome2.png" alt="">
 
             <h1>CRIADORES</h1>
 
@@ -100,28 +132,31 @@
                 <img src="../resources/assets/img/logo/logo-ferramentas/bootstrap.png" alt="" width="110px">
                 <img src="../resources/assets/img/logo/logo-ferramentas/postgresql.png" alt="" width="90px">
                 <img src="../resources/assets/img/logo/logo-ferramentas/spring.png" alt="" width="80px">
+                <img src="../resources/assets/img/logo/logo-ferramentas/sql.png" alt="" width="80px">
             </p>
 
             <!-- <img class="img-criadores" src="resources/assets/img/logo/VL com fundo sem nome2.png" alt=""> -->
 
         </div>
 
-        <div id="layoutAuthentication_footer">
-            <footer class="py-4 mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div>Copyright &copy; Virtual Library - 2021</div>
-                        <div>
-                            <a href="#">Política de privacidade</a>
-                            &middot;
-                            <a href="#">Termos &amp; Condições</a>
+
+
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div>Copyright &copy; Virtual Library - 2021</div>
+                            <div>
+                                <a href="#">Política de privacidade</a>
+                                &middot;
+                                <a href="#">Termos &amp; Condições</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
+            </div>
         </div>
-    </div>
 
-    <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../resources/js/scripts.js"></script>
-</body>
+        <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="../resources/js/scripts.js"></script>
+    </body>

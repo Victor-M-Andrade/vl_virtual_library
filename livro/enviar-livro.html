@@ -21,58 +21,72 @@
 
 <body class="sb-nav-fixed">
 
-<!-- ------------- -->
+    <!-- ------------- -->
 
-<body class="sb-nav-fixed">
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            
-            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                <img class="logo" src="../resources/assets/img/logo/VL sem fundo sem nome2.png" alt="">
-                <div class="collapse navbar-collapse" id="navbar">
-        
-                    <ul class="navbar-nav">
-        
-                        <li class="nav-item">
-                            <a href="acervo-adm.html" class="nav-link">ACERVO</a>
-                        </li>
-        
-                    </ul>
-                </div>
-        
+    <body class="sb-nav-fixed">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
 
-         <!-- Navbar Search-->
-         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Procurar por..." />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+                    <img class="logo" src="../resources/assets/img/logo/VL sem fundo sem nome2.png" alt="">
+                    <div class="collapse navbar-collapse" id="navbar">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="../index.html" class="nav-link">HOME</a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a href="../general/criadores.html" class="nav-link">CRIADORES</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a href="../livro/acervo.html" class="nav-link">ACERVO</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                    <!-- Navbar Search-->
+                    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Procurar por..." />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Navbar-->
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user fa-fw"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../usuario/perfil-usuario.html">Perfil</a>
+                            <a class="dropdown-item" href="../usuario/editar-perfil.html">Editar Perfil</a>
+                            <a class="dropdown-item" href="../usuario/notificacao.html">Notificação <span
+                                    class="badge  badge-pill badge-danger">1</span></a>
+                            <a class="dropdown-item" href="../index.html">Sair</a>
+                        </div>
+                    </div>
+
+
+
+                </nav>
+
             </div>
-        </form>
-    
-            <!-- Navbar-->
-            <div class="btn-group dropleft">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="../usuario/perfil-usuario.html">Perfil</a>
-                    <a class="dropdown-item" href="../usuario/editar-perfil.html">Editar Perfil</a>
-                    <a class="dropdown-item" href="../usuario/notificacao.html">Notificação <span class="badge  badge-pill badge-danger">1</span></a>
-                    <a class="dropdown-item" href="../index.html">Sair</a>
-                  </div>
-              </div>
-        
-            </nav>
 
 
+            <br><br><br><br><br>
             <main>
                 <div class="container-fluid">
                     <h1 class="mt-4">Adicionar Livro</h1>
-                    
+
 
                     <div class="row">
 
@@ -82,7 +96,8 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <label for="nome">Nome</label></div>
+                                            <label for="nome">Nome</label>
+                                        </div>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" value="Livro X">
                                         </div>
@@ -93,14 +108,14 @@
                                             <label for="desenvolvidoPor">Autor</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control"
-                                                value="Zezinho Capixaba">
+                                            <input type="text" class="form-control" value="Zezinho Capixaba">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <label for="genero">Gênero</label></div>
+                                            <label for="genero">Gênero</label>
+                                        </div>
                                         <div class="col-sm-9">
 
                                             <select class="form-control" id="genero">
@@ -113,11 +128,12 @@
 
                                         </div>
                                     </div>
-                                    
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <label for="descricao">Descrição</label></div>
+                                            <label for="descricao">Descrição</label>
+                                        </div>
                                         <div class="col-sm-9">
                                             <textarea class="form-control" rows="3"></textarea>
                                         </div>
@@ -136,7 +152,8 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <p class="p-criar"><strong>OBS: O tamanho da imagem deve ser 350px por 450px</strong></p>
+                                    <p class="p-criar"><strong>OBS: O tamanho da imagem deve ser 350px por
+                                            450px</strong></p>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -145,7 +162,8 @@
                                         <div class="col-sm-9">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="imagemPrincipal">
-                                                <label class="custom-file-label" for="imagemPrincipal">Escolha o arquivo</label>
+                                                <label class="custom-file-label" for="imagemPrincipal">Escolha o
+                                                    arquivo</label>
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +171,8 @@
                             </div>
 
                             <div class="mb-2">
-                                <a href="../usuario/perfil-usuario.html" class="btn btn-primary col-12 btn-lg"><strong>ENCAMINHAR PARA ANÁLISE</strong></a>
+                                <a href="../usuario/perfil-usuario.html"
+                                    class="btn btn-primary col-12 btn-lg"><strong>ENCAMINHAR PARA ANÁLISE</strong></a>
                             </div>
 
                         </div>
@@ -164,23 +183,25 @@
                 </div>
             </main>
 
-        </div>
-        <div id="layoutAuthentication_footer">
-            <footer class="py-4 mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div>Copyright &copy; Virtual Library - 2021</div>
-                        <div>
-                            <a href="#">Política de privacidade</a>
-                            &middot;
-                            <a href="#">Termos &amp; Condições</a>
+
+
+
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div>Copyright &copy; Virtual Library - 2021</div>
+                            <div>
+                                <a href="#">Política de privacidade</a>
+                                &middot;
+                                <a href="#">Termos &amp; Condições</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
+            </div>
         </div>
-    </div>
 
-    <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../resources/js/scripts.js"></script>
-</body>
+        <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="../resources/js/scripts.js"></script>
+    </body>
