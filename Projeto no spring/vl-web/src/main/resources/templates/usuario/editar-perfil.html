@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Editar Perfil</title>
+</head>
+<body>
+	<div layout:fragment="body">
+
+
+		<br> <br> <br>
+
+
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Editar Perfil</h1>
+
+
+				<div class="row">
+
+					<div class="mb-2 col-12 col-sm-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="mb-3 text-center">
+									<img
+										src="../resources/assets/img/logo/VL com fundo sem nome2.png"
+										width="200" class="rounded-circle img-fluid" />
+								</div>
+								<div class="mb-2">
+									<div class="col-sm-12">Trocar</div>
+									<hr>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input"
+											id="imagemPrincipal"> <label
+											class="custom-file-label" for="imagemPrincipal"></label>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<form class="mb-2 col-12 col-sm-9">
+
+						<div class="mb-2 card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-3">Nome</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="Zézinho">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Sobrenome</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="Capixaba">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">CPF</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="12312312312">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Email</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control"
+											value="zezinho-capixaba3301@gmail.com">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Telefone</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="(35)91234-1234">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Estado</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="Minas Gerais">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Cidade</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control"
+											value="Santa Rita do Sapucaí">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Rua</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="Rua Teste">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Bairro</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="Bairro Teste">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Número</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="123">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<a th:href="@{/usuario/perfil-usuario}"
+								class="btn btn-primary col-12">Atualizar</a>
+						</div>
+
+					</form>
+
+
+
+				</div>
+
+
+
+			</div>
+		</main>
+
+
+
+
+	</div>
+</body>
+</html>

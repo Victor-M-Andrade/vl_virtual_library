@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Notificações</title>
+</head>
+<body>
+	<div layout:fragment="body">
+
+
+
+
+		<br>
+		<br>
+		<br>
+
+
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Pedidos de Empréstimo</h1>
+
+				<div class="row">
+
+					
+
+					<div class="mb-2 col-12 col-sm-12">
+
+						<div class="mb-2 card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-8">PEDIDOS A SEREM APROVADOS</div>
+									<form
+										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+										<div class="input-group">
+											<input class="form-control" type="text"
+												placeholder="Procurar por..." />
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<hr>
+
+
+								<div class="table-responsive">
+
+									<table class="table table-bordered" id="dataTable" width="100%"
+										cellspacing="0">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Nome</th>
+												<th>Email</th>
+												<th>Livro</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Id</th>
+												<th>Nome</th>
+												<th>Email</th>
+												<th>Livro</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>Tiburssinho Tiburrsius</td>
+												<td>tiburssinho@gmail.com</td>
+												<td>O Senhor dos Áneis</td>
+												<td>
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success"> <i
+																class="fas fa-check"></i> Aprovar
+															</a>
+														</div>
+														<div class="col-6">
+															<button class="btn btn-danger">
+																<i class="fas fa-times"></i> Recusar
+															</button>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>2</td>
+												<td>Zezinho Capixaba</td>
+												<td>teste@teste.com</td>
+												<td>Coraline</td>
+												<td>
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success"> <i
+																class="fas fa-check"></i> Aprovar
+															</a>
+														</div>
+														<div class="col-6">
+															<button class="btn btn-danger">
+																<i class="fas fa-times"></i> Recusar
+															</button>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>3</td>
+												<td>Victor Andrade</td>
+												<td>teste@teste.com</td>
+												<td>O Hobbit</td>
+												<td>
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success"> <i
+																class="fas fa-check"></i> Aprovar
+															</a>
+														</div>
+														<div class="col-6">
+															<button class="btn btn-danger">
+																<i class="fas fa-times"></i> Recusar
+															</button>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>4</td>
+												<td>Lucas Lima</td>
+												<td>teste@teste.com</td>
+												<td>IT A Coisa</td>
+												<td>
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success"> <i
+																class="fas fa-check"></i> Aprovar
+															</a>
+														</div>
+														<div class="col-6">
+															<button class="btn btn-danger">
+																<i class="fas fa-times"></i> Recusar
+															</button>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>William de Paula</td>
+												<td>teste@tes.com</td>
+												<td>A Arte da Guerra</td>
+												<td>
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success"> <i
+																class="fas fa-check"></i> Aprovar
+															</a>
+														</div>
+														<div class="col-6">
+															<button class="btn btn-danger">
+																<i class="fas fa-times"></i> Recusar
+															</button>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+									</table>
+
+								</div>
+
+								<hr>
+
+								<div class="row">
+									<div class="col-6">
+										<a href="#" class="btn btn-success col-12"><i
+											class="fas fa-check"></i> APROVAR TODOS</a>
+									</div>
+									<div class="col-6">
+										<a href="#" class="btn btn-danger col-12"><i
+											class="fas fa-times"></i> RECUSAR TODOS</a>
+									</div>
+								</div>
+								<br> <br>
+
+								<!-- ---------PEDIDOS APROVADOS--------- -->
+
+								<hr>
+
+								<div class="row">
+									<div class="col-sm-8">PEDIDOS APROVADOS</div>
+									<form
+										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+										<div class="input-group">
+											<input class="form-control" type="text"
+												placeholder="Procurar por..." />
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<hr>
+
+
+								<div class="table-responsive">
+
+									<table class="table table-bordered" id="dataTable" width="100%"
+										cellspacing="0">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Nome</th>
+												<th>Email</th>
+												<th>Livro</th>
+												<th>Status</th>
+												<th>Recebimento</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Id</th>
+												<th>Nome</th>
+												<th>Email</th>
+												<th>Livro</th>
+												<th>Status</th>
+												<th>Recebimento</th>
+											</tr>
+										</tfoot>
+
+										<tbody>
+											<tr>
+												<td>6</td>
+												<td>Teste Teste</td>
+												<td>teste@teste.com</td>
+												<td>O Senhor dos Áneis</td>
+												<td>
+													<button class="btn btn-success">
+														<i class="fas fa-check"></i> Aprovado
+													</button>
+												</td>
+												<td>
+													<button class="btn btn-warning">
+														<i class="fas fa-exclamation-triangle"></i> A Caminho
+													</button>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>7</td>
+												<td>Teste Teste</td>
+												<td>teste@teste.com</td>
+												<td>O Senhor dos Áneis</td>
+												<td>
+													<button class="btn btn-danger">
+														<i class="fas fa-times"></i> Recusado
+													</button>
+												</td>
+												<td>
+													<button class="btn btn-danger">
+														<i class="fas fa-times"></i> Recusado
+													</button>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>8</td>
+												<td>Teste Teste</td>
+												<td>teste@teste.com</td>
+												<td>O Senhor dos Áneis</td>
+												<td>
+													<button class="btn btn-success">
+														<i class="fas fa-check"></i> Aprovado
+													</button>
+												</td>
+												<td>
+													<button class="btn btn-info">
+														<i class="fas fa-truck"></i> Entregue
+													</button>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>9</td>
+												<td>Teste Teste</td>
+												<td>teste@teste.com</td>
+												<td>O Senhor dos Áneis</td>
+												<td>
+													<button class="btn btn-success">
+														<i class="fas fa-check"></i> Aprovado
+													</button>
+												</td>
+												<td>
+													<button class="btn btn-info">
+														<i class="fas fa-truck"></i> Entregue
+													</button>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>10</td>
+												<td>Teste Teste</td>
+												<td>teste@teste.com</td>
+												<td>O Senhor dos Áneis</td>
+												<td>
+													<button class="btn btn-success">
+														<i class="fas fa-check"></i> Aprovado
+													</button>
+												</td>
+												<td>
+													<button class="btn btn-warning">
+														<i class="fas fa-exclamation-triangle"></i> A Caminho
+													</button>
+												</td>
+											</tr>
+
+										</tbody>
+
+									</table>
+
+								</div>
+
+
+							</div>
+						</div>
+
+
+
+
+
+						<!-- --------------------------------------- -->
+
+
+					</div>
+
+					<hr>
+
+
+
+
+
+				</div>
+
+
+
+			</div>
+		</main>
+
+
+	</div>
+</body>
+</html>
