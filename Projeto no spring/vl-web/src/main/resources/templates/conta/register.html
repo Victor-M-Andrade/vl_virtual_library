@@ -7,7 +7,9 @@
 <body>
 	<div layout:fragment="body">
 
-<br><br><br>
+		<br>
+		<br>
+		<br>
 
 		<main>
 			<div class="container">
@@ -39,18 +41,29 @@
 
 
 									<div class="form-row">
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<div class="form-group">
 												<label class="small mb-1" for="inputCpf">CPF</label><input
 													class="form-control py-4" id="inputCpf" type="text"
 													placeholder="Ex: 12312312312" />
 											</div>
 										</div>
-										<div class="col-md-8">
+										<div class="col-md-6">
 											<div class="form-group">
 												<label class="small mb-1" for="inputEmail">Email</label><input
 													class="form-control py-4" id="inputEmail" type="text"
 													placeholder="Ex: teste@teste.com" />
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="small mb-1" for="exampleFormControlSelect1">Tipo de Conta</label> <select class="form-control small mb-1"
+													id="exampleFormControlSelect1">
+													<option>Escolha...</option>
+													<option>Administrador</option>
+													<option>Bibliotecário</option>
+													<option>Leitor</option>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -131,7 +144,8 @@
 							</div>
 							<div class="card-footer text-center">
 								<div class="small">
-									<a th:href="@{/conta/login}">Já possui uma conta? Faça o login</a>
+									<a th:href="@{/conta/login}">Já possui uma conta? Faça o
+										login</a>
 								</div>
 							</div>
 						</div>
@@ -139,7 +153,10 @@
 				</div>
 			</div>
 		</main>
-		<br> <br><br><br><br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
 
 
 

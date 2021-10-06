@@ -28,4 +28,9 @@ public class UsuarioController {
 		return "usuario/notificacao-adm";
 	}
 
+	@GetMapping("/carrinho")
+	public String getCarrinho() {
+		return "usuario/carrinho";
+	}
+
 }
