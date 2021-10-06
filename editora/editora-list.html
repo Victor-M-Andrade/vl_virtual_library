@@ -84,7 +84,7 @@
 
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Carrinho</h1>
+                    <h1 class="mt-4">Lista de Editoras</h1>
 
                     <div class="row">
 
@@ -111,19 +111,27 @@
                                     <div class="table-responsive">
 
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                            <div class="col-12">
+                                                <a href="editora-create.html" class="btn btn-info col-12"><i class="fas fa-address-book"></i>
+                                                    ADICIONAR EDITORA</a>
+                                            </div>
+
+                                            <hr>
+
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Capa</th>
-                                                    <th>Livro</th>
+                                                    <th>Editora</th>
+                                                    <th>CNPJ</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Capa</th>
-                                                    <th>Livro</th>
+                                                    <th>Editora</th>
+                                                    <th>CNPJ</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </tfoot>
@@ -132,16 +140,23 @@
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td><img src="../resources/assets/img/capa-livros/a-arte-da-guerra.png"
-                                                            alt="capa" width="100px"></td>
-                                                    <td>A Arte da Guerra</td>
+                                                    <td>Abril</td>
+                                                    <td>123.123.123-12</td>
                                                     <td>
-                                                        <div class="col-12">
-                                                            <button class="btn btn-danger">
-                                                                <i class="fas fa-times"></i>
-                                                                Retirar do Carrinho
-                                                            </button>
+                                                        <div class="row col-12">
+                                                        <div class="col-6">
+                                                            <a href="editora-edit.html" class="btn btn-warning col-9">
+                                                                <i class="fas fa-edit"></i>
+                                                                Editar Editora
+                                                            </a>
                                                         </div>
+                                                        <div class="col-6">
+                                                            <a href="#" class="btn btn-danger col-9">
+                                                                <i class="fas fa-times"></i>
+                                                                Remover Editora
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -149,15 +164,22 @@
                                             <tbody>
                                                 <tr>
                                                     <td>2</td>
-                                                    <td><img src="../resources/assets/img/capa-livros/senhor-dos-aneis.png"
-                                                            alt="capa" width="100px"></td>
-                                                    <td>O Senhor dos Anéis</td>
+                                                    <td>Nova Era</td>
+                                                    <td>123.123.123-13</td>
                                                     <td>
-                                                        <div class="col-12">
-                                                            <button class="btn btn-danger">
-                                                                <i class="fas fa-times"></i>
-                                                                Retirar do Carrinho
-                                                            </button>
+                                                        <div class="row col-12">
+                                                            <div class="col-6">
+                                                                <a href="editora-edit.html" class="btn btn-warning col-9">
+                                                                    <i class="fas fa-edit"></i>
+                                                                    Editar Editora
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <a href="#" class="btn btn-danger col-9">
+                                                                    <i class="fas fa-times"></i>
+                                                                    Remover Editora
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -174,16 +196,7 @@
                                     <br>
 
 
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <a href="#" class="btn btn-success col-12"><i class="fas fa-check"></i>
-                                                FINALIZAR COMPRA</a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="#" class="btn btn-danger col-12"><i class="fas fa-times"></i>
-                                                CANCELAR COMPRA</a>
-                                        </div>
-                                    </div>
+                                    
 
                                 </div>
                             </div>
