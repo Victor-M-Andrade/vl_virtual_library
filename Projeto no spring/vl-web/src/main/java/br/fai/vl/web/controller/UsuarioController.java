@@ -33,4 +33,14 @@ public class UsuarioController {
 		return "usuario/carrinho";
 	}
 
+	@GetMapping("/list")
+	public String getList() {
+		return "usuario/list";
+	}
+
+	@GetMapping("/detail")
+	public String getDetail() {
+		return "usuario/detail";
+	}
+
 }

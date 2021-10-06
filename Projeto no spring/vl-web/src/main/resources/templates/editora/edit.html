@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html>
-
+<html layout:decorate="~{login-layout}">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <title>Criar conta</title>
-
-    <script src="../resources/js/jquery/jquery-3.4.1.min.js"></script>
-
-    <link rel="shortcut icon" href="../resources/assets/img/logo/VL com fundo sem nome2.png">
-    <link href="../resources/css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../resources/css/conta-user.css">
-    <script src="../resources/js/font-awesome/all.min.js"></script>
+<meta charset="UTF-8">
+<title>Editar Editora</title>
 </head>
-
 <body>
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            <main>
+	<div layout:fragment="body">
+
+		<br>
+		<br>
+		<br>
+
+		<main>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
@@ -33,14 +26,14 @@
                                                 <div class="form-group"><label class="small mb-1"
                                                         for="inputEditoraRazaoSocial">Razão Social</label><input
                                                         class="form-control py-4" id="inputEditoraRazaoSocial"
-                                                        type="text" placeholder="Insira o nome completo da editora" />
+                                                        type="text" value="EDITORA ABRIL S.A" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group"><label class="small mb-1"
                                                         for="inputEditoraFantasia">Nome Fantasia</label><input
                                                         class="form-control py-4" id="inputEditoraFantasia" type="text"
-                                                        placeholder="Insira o nome comercial da editora" /></div>
+                                                        value="Abril" /></div>
                                             </div>
                                         </div>
 
@@ -49,22 +42,21 @@
                                             <div class="col-md-4">
                                                 <div class="form-group"><label class="small mb-1"
                                                         for="inputCnpj">CNPJ</label><input class="form-control py-4"
-                                                        id="inputCnpj" type="text"
-                                                        placeholder="Ex: 12.123.123/1234-12" />
+                                                        id="inputCnpj" type="text" value="02.183.757/0001-93" />
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group"><label class="small mb-1"
                                                         for="inputEmail">Email</label><input class="form-control py-4"
                                                         id="inputEmail" type="text"
-                                                        placeholder="Insira um email para contato" /></div>
+                                                        value="vendas_abril@abril.com.br" /></div>
                                             </div>
                                         </div>
 
 
 
                                         <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block"
-                                                href="editora-list.html">Criar Editora</a></div>
+                                                th:href="@{/editora/list}">Atualizar Editora</a></div>
 
                                 </div>
 
@@ -76,27 +68,13 @@
                 </div>
 
             </main>
-            <br>
-            <br>
-        </div>
-        <div id="layoutAuthentication_footer">
-            <footer class="py-4 mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="">Copyright &copy; FAI - 2020</div>
-                        <div>
-                            <a href="#">Política de privacidade</a>
-                            &middot;
-                            <a href="#">Termos &amp; Condições</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
+		
+		<br>
+		<br>
+		<br>
 
-    <script src="../resources/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../resources/js/scripts.js"></script>
+
+
+	</div>
 </body>
-
 </html>
