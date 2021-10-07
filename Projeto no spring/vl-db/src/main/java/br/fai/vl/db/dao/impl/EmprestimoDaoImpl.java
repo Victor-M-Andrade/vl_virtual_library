@@ -226,7 +226,6 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 			prepareStatement.setInt(1, livroId);
 
 			resultSet = prepareStatement.executeQuery();
-			System.out.println(resultSet);
 
 			while (resultSet.next()) {
 				exemplaresDisponiveis = Arrays.asList(resultSet.getInt("id"));
