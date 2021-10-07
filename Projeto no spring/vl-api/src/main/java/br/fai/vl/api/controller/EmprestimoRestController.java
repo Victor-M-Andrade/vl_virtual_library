@@ -40,10 +40,9 @@ public class EmprestimoRestController {
 	// - livroId
 	// - lalaId
 	@PostMapping("/create/{id}")
-	public ResponseEntity<Integer> create(@RequestBody final Emprestimo entity,
-			@PathVariable("id") final int idLivroSolicita) {
+	public ResponseEntity<Integer> create(@PathVariable("id") final int idLivroSolicitado) {
 
-		return ResponseEntity.ok(service.create(entity, idLivroSolicita));
+		return ResponseEntity.ok(service.create(idLivroSolicitado));
 	}
 
 	@PutMapping("/update")

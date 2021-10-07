@@ -37,7 +37,7 @@ public class LeitorServiceImpl implements LeitorService {
 
 	@Override
 	public Leitor readById(final int id) {
-		final String endpoint = "http://localhost:8085/api/v1/leitor/read-all";
+		final String endpoint = "http://localhost:8085/api/v1/leitor/read-by-id";
 		Leitor response = null;
 
 		try {
