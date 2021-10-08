@@ -149,7 +149,7 @@ public class LeitorDaoImpl implements LeitorDao {
 				preparedStatement.execute();
 				result = true;
 			}
-			;
+
 			if (result) {
 				connection.commit();
 			} else {

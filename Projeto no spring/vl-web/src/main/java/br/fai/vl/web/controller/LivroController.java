@@ -23,9 +23,9 @@ public class LivroController {
 		return "livro/descricao-livro";
 	}
 
-	@GetMapping("/livro-escolhido")
-	public String getLivroEscolhido() {
-		return "livro/livro-escolhido";
+	@GetMapping("/finalizar-emprestimo")
+	public String getFinalizarEmprestimo() {
+		return "livro/finalizar-emprestimo";
 	}
 
 	@GetMapping("/create")

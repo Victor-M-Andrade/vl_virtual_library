@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Usuários</title>
+</head>
+<body>
+	<div layout:fragment="body">
+
+<br><br><br>
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Lista de Usuários</h1>
+
+				<div class="row">
+
+					
+
+					<div class="mb-2 col-12 col-sm-12">
+
+						<div class="mb-2 card">
+							<div class="card-body">
+
+
+								<div class="table-responsive">
+
+									<table class="table table-bordered" id="dataTable" width="100%"
+										cellspacing="0">
+
+										
+										<div class="row col-12">
+									<div class="col-sm-8">Usuários no sistema</div>
+									<form
+										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+										<div class="input-group col-3">
+											<input class="form-control" type="text"
+												placeholder="Procurar por..." />
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+									
+								</div>
+								
+								<br>
+
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Nome</th>
+												<th>CPF</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Id</th>
+												<th>Nome</th>
+												<th>CPF</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
+
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>Victor</td>
+												<td>123.123.123-12</td>
+												<td>
+													<div class="row col-12">
+														<div class="col-6">
+															<a th:href="@{/usuario/detail}" class="btn btn-info col-9">
+																<i class="fas fa-id-card"></i> Perfil
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-danger col-9"> <i
+																class="fas fa-times"></i> Remover Usuário
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+										
+										
+										<tbody>
+											<tr>
+												<td>2</td>
+												<td>William</td>
+												<td>123.123.123-13</td>
+												<td>
+													<div class="row col-12">
+														<div class="col-6">
+															<a th:href="@{/usuario/detail}" class="btn btn-info col-9">
+																<i class="fas fa-id-card"></i> Perfil
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-danger col-9"> <i
+																class="fas fa-times"></i> Remover Usuário
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+										
+										<tbody>
+											<tr>
+												<td>3</td>
+												<td>Lucas</td>
+												<td>123.123.123-14</td>
+												<td>
+													<div class="row col-12">
+														<div class="col-6">
+															<a th:href="@{/usuario/detail}" class="btn btn-info col-9">
+																<i class="fas fa-id-card"></i> Perfil
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-danger col-9"> <i
+																class="fas fa-times"></i> Remover Usuário
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+
+										
+
+									</table>
+
+								</div>
+
+
+								
+
+
+
+
+							</div>
+						</div>
+
+
+
+
+
+
+
+					</div>
+
+					<hr>
+
+
+
+
+
+				</div>
+
+
+
+			</div>
+		</main>
+		
+		<br> <br>
+
+	</div>
+</body>
+</html>

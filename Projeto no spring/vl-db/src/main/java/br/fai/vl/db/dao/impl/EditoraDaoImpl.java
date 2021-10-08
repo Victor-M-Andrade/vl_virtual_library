@@ -36,7 +36,6 @@ public class EditoraDaoImpl implements EditoraDao {
 			while (resultSet.next()) {
 				final Editora editora = new Editora();
 				editora.setId(resultSet.getInt("id"));
-				editora.setCnpj(resultSet.getString("cnpj"));
 				editora.setEmail(resultSet.getString("email"));
 				editora.setRazaoSocial(resultSet.getString("razaosocial"));
 				editora.setNomeFastasia(resultSet.getString("nomefantasia"));
@@ -72,7 +71,6 @@ public class EditoraDaoImpl implements EditoraDao {
 			while (resultSet.next()) {
 				editora = new Editora();
 				editora.setId(resultSet.getInt("id"));
-				editora.setCnpj(resultSet.getString("cnpj"));
 				editora.setEmail(resultSet.getString("email"));
 				editora.setRazaoSocial(resultSet.getString("razaosocial"));
 				editora.setNomeFastasia(resultSet.getString("nomefantasia"));
@@ -94,7 +92,7 @@ public class EditoraDaoImpl implements EditoraDao {
 		String sql = "";
 
 		// sql
-		sql = "INSERT INTO editora(cnpj, email, razaosocial, nomefantasia) " + "VALUES(?, ?, ?, ?);";
+		sql = "INSERT INTO editora(email, razaosocial, nomefantasia) " + "VALUES( ?, ?, ?);";
 		int id = Integer.valueOf(-1);
 
 		try {
@@ -106,10 +104,9 @@ public class EditoraDaoImpl implements EditoraDao {
 			connection.setAutoCommit(false);
 			// prepara a query
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setString(1, entity.getCnpj());
-			preparedStatement.setString(2, entity.getEmail());
-			preparedStatement.setString(3, entity.getRazaoSocial());
-			preparedStatement.setString(4, entity.getNomeFastasia());
+			preparedStatement.setString(1, entity.getEmail());
+			preparedStatement.setString(2, entity.getRazaoSocial());
+			preparedStatement.setString(3, entity.getNomeFastasia());
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();

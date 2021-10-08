@@ -26,10 +26,21 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	}
 
 	@Override
-	public int create(final Emprestimo entity, final int idLivro) {
+	public int create(final int idLivro) {
 
-		return dao.create(entity, idLivro);
+		List<Integer> emprestimoList = null;
+		emprestimoList = dao.readByCriteria(idLivro);
 
+		if (emprestimoList != null) {
+			if (emprestimoList.get(0) == 1) {
+				return dao.create(emprestimoList.get(0));
+			} else {
+				return 1;
+			}
+
+		} else {
+			return -1;
+		}
 	}
 
 	@Override

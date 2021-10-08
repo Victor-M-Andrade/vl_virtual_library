@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -53,7 +55,6 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-
 		Emprestimo emprestimo = null;
 
 		try {
@@ -81,25 +82,51 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		return emprestimo;
 	}
 
-	public int create(final Emprestimo entity, final int idLivro) {
+	public int create(final int idExemplar) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		int id = Integer.valueOf(10);
+		int id = Integer.valueOf(-1);
 		final Gson gson = new Gson();
+		final boolean result = false;
+		String sql = "";
 
 		try {
-			final String sql = "select borrowbook(?, ?::json) as newid";
+			sql = "insert into emprestimo(codigo, datarealizacao, leitor_id) " + " values (default, default, ?)";
 
 			connection = ConnectionFactory.getConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, idLivro);
-			preparedStatement.setString(2, gson.toJson(entity));
+			connection.setAutoCommit(false);
 
-			resultSet = preparedStatement.executeQuery();
+			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setInt(1, idExemplar);
+
+			preparedStatement.execute();
+			resultSet = preparedStatement.getGeneratedKeys();
 
 			if (resultSet.next()) {
-				id = resultSet.getInt("newid");
+				id = resultSet.getInt("id");
+				preparedStatement.close();
+
+				sql = "insert into emprestimo_exemplar(datadevolucao, devolvido, dataefetivadevolucao,"
+						+ "multa, emprestimo_id, exemplar_id) "
+						+ "values(default, default, null, default, ?, exemplar);";
+
+				connection = ConnectionFactory.getConnection();
+				preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, idExemplar);
+
+				preparedStatement.execute();
+				resultSet = preparedStatement.getGeneratedKeys();
+
+				if (!resultSet.next()) {
+					id = -10;
+				}
+			}
+
+			if (id != -1) {
+				connection.commit();
+			} else {
+				connection.rollback();
 			}
 
 		} catch (final Exception e) {
@@ -186,13 +213,13 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 
-		final List<Integer> exemplaresDisponiveis = null;
+		List<Integer> exemplaresDisponiveis = null;
 
 		try {
-			final String sql = "select Ex.id from livro join exemplar Ex on Ex.livro_id = L.id "
-					+ "where Ex.id not in ( select distinct EE.exemplar_id from emprestimo E "
+			final String sql = "select Ex.id from livro L join exemplar Ex on Ex.livro_id = L.id "
+					+ "where Ex.id not in (select distinct EE.exemplar_id from emprestimo E "
 					+ "join emprestimo_exemplar EE on EE.emprestimo_id = E.id "
-					+ "where EE.devolvido = false ) and L.id = 1;";
+					+ "where EE.devolvido = false ) and L.id = ?;";
 
 			connection = ConnectionFactory.getConnection();
 			prepareStatement = connection.prepareStatement(sql);
@@ -201,10 +228,8 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 			resultSet = prepareStatement.executeQuery();
 
 			while (resultSet.next()) {
-				System.out.println(resultSet.getInt("id"));
-				exemplaresDisponiveis.add(resultSet.getInt("id"));
+				exemplaresDisponiveis = Arrays.asList(resultSet.getInt("id"));
 			}
-
 		} catch (final Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
