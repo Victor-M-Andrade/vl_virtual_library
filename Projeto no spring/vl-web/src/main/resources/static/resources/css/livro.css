@@ -15,9 +15,12 @@ footer{
     height:100px;
 }
 
+<<<<<<< HEAD
 .nav-link{
     font-size: 25px;
 }
+=======
+>>>>>>> 295840394d55732a30fe91961e8320bee202525f
 
 
 .logo{
@@ -135,7 +138,11 @@ h4{
     display: block;
     margin-left: auto;
     margin-right: auto;
+<<<<<<< HEAD
     height: 700px;
+=======
+    height: 480px;
+>>>>>>> 295840394d55732a30fe91961e8320bee202525f
 }
 
 p{

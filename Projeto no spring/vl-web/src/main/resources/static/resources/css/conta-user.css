@@ -1,5 +1,28 @@
 body{
     background-color: #373B69;
+<<<<<<< HEAD
+=======
+    
+}
+
+footer{
+    height: 65px;
+    background-color: #262950;
+    color: white;
+    text-align: center;
+}
+
+
+.navbar {
+    height:100px;
+}
+
+
+
+.logo1{
+    width: 160px;
+    margin-right: 50px;
+>>>>>>> 295840394d55732a30fe91961e8320bee202525f
 }
 
 .logo{

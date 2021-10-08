@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Livro Escolhido</title>
+</head>
+<body>
+	<div layout:fragment="body">
+
+
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<h1>VERIFIQUE SEUS DADOS</h1>
+
+		<section class="preencher-envio">
+			<form class="formulario" action="">
+				<div class="formulario-a">
+					<img src="../resources/assets/img/capa-livros/senhor-dos-aneis.png"
+						alt="">
+				</div>
+				<div class="formulario-b">
+					<form>
+						<div class="form-row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="small mb-1" for="staticEmail">Nome</label><input
+										readonly class="form-control py-4" id="inputFirstName"
+										type="text" value="Zézinho" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="small mb-1" for="inputLastName">Sobrenome</label><input
+										readonly class="form-control py-4" id="inputLastName"
+										type="text" value="Capixaba" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="small mb-1" for="inputEmailAddress">Email</label><input
+								readonly class="form-control py-4" id="inputEmailAddress"
+								type="email" aria-describedby="emailHelp"
+								value="zezinho-capixaba3301@gmail.com" />
+						</div>
+
+
+						<div class="form-row">
+							<div class="col-md-5">
+								<div class="form-group">
+									<label class="small mb-1" for="inputTelefone">Telefone</label><input
+										readonly class="form-control py-4" id="inputTelefone"
+										type="text" value="(35) 91234-1234" />
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="small mb-1" for="inputEstado">Estado</label><input
+										readonly class="form-control py-4" id="inputLastName"
+										type="text" value="MG" />
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<div class="form-group">
+									<label class="small mb-1" for="inputCidade">Cidade</label><input
+										readonly class="form-control py-4" id="inputCidade"
+										type="text" value="Santa Rita do Sapucaí" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="col-md-5">
+								<div class="form-group">
+									<label class="small mb-1" for="inputRua">Rua</label><input
+										readonly class="form-control py-4" id="inputRua" type="text"
+										value="Rua Teste" />
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group">
+									<label class="small mb-1" for="inputBairro">Bairro</label><input
+										readonly class="form-control py-4" id="inputBairro"
+										type="text" value="Bairro Teste" />
+								</div>
+							</div>
+
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="small mb-1" for="inputNúmero">Número</label><input
+										readonly class="form-control py-4" id="inputNúmero"
+										type="text" value="123" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group mt-4 mb-0 btn-preencher-envio">
+							<a class="btn btn-primary btn-block" th:href="@{/livro/list}">Confirmar
+								pedido</a>
+						</div>
+					</form>
+				</div>
+			</form>
+		</section>
+
+
+
+
+	</div>
+</body>
+</html>

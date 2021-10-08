@@ -8,6 +8,12 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String getHomePage() {
-		return "index";
+		return "home";
 	}
+
+	@GetMapping("/criadores")
+	public String getCriadores() {
+		return "general/criadores";
+	}
+
 }
