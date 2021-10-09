@@ -24,7 +24,7 @@
 							<div class="card-body">
 								<div class="mb-3 text-center">
 									<img
-										src="../resources/assets/img/logo/VL com fundo sem nome2.png"
+										src="../../resources/assets/img/logo/VL com fundo sem nome2.png"
 										width="200" class="rounded-circle img-fluid" />
 								</div>
 								<div class="mb-2">
@@ -35,42 +35,39 @@
 
 					
 					</div>
-
 					<div class="mb-2 col-12 col-sm-7">
-
-						<div class="mb-2 card">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-sm-3">Nome</div>
-									<div class="col-sm-9">Zézinho Capixaba</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Email</div>
-									<div class="col-sm-9">zezinho-capixaba3301@gmail.com</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Telefone</div>
-									<div class="col-sm-9">(35) 91234-1234</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Estado</div>
-									<div class="col-sm-9">Minas Gerais</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Cidade</div>
-									<div class="col-sm-9">Santa Rita do Sapucaí</div>
+							<div class="mb-2 card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-3">Nome</div>
+										<div class="col-sm-9" th:text="${usuario.nome}" th:name="nome">Zézinho Capixaba</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">Telefone</div>
+										<div class="col-sm-9" th:text="${usuario.telefone}" th:name="telefone">(35) 91234-1234</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">Estado</div>
+										<div class="col-sm-9" th:text="${usuario.estado}" th:name="estado">Minas Gerais</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">Cidade</div>
+										<div class="col-sm-9" th:text="${usuario.cidade}" th:name="cidade">Santa Rita do Sapucaí</div>
+									</div>
 								</div>
 							</div>
-						</div>
+							<div class="mb-2">
+								<a th:href="@{/leitor/edit/{id} (id = ${ usuario.id})}" th:if="${tipoUsuario == 'leitor'}" class="btn btn-primary col-12">Editar usuario</a>
+								<a th:href="@{/leitor/edit/{id} (id = ${ usuario.id})}" th:if="${tipoUsuario == 'bibliotecario'}" class="btn btn-primary col-12">Editar usuario</a>
+							</div>
 
 						
-
+						</form>
 					</div>
-
+				
 
 
 				</div>

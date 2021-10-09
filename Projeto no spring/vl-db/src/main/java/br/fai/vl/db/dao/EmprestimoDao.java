@@ -19,4 +19,6 @@ public interface EmprestimoDao {
 	List<Integer> checkAvaliableCopies(int livroId);
 
 	List<Integer> checkOpenReaderLoads(int leitoId);
+
+	int addToCart(int emprestimoId, int exemplarId);
 }

@@ -37,7 +37,7 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 
 	@Override
 	public Bibliotecario readById(final int id) {
-		final String endpoint = "http://localhost:8085/api/v1/bibliotecario/read-all";
+		final String endpoint = "http://localhost:8085/api/v1/bibliotecario/read-by-id/" + id;
 		Bibliotecario response = null;
 
 		try {

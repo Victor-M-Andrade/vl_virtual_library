@@ -87,6 +87,7 @@ public class LeitorDaoImpl implements LeitorDao {
 				leitor.setBairro(resultSet.getString("bairro"));
 				leitor.setCidade(resultSet.getString("cidade"));
 				leitor.setEstado(resultSet.getString("estado"));
+				leitor.setId(resultSet.getInt("id"));
 				leitor.setTelefone(resultSet.getString("telefone"));
 				leitor.setMatricula(resultSet.getInt("matricula"));
 				leitor.setEmail(resultSet.getString("email"));
@@ -174,7 +175,7 @@ public class LeitorDaoImpl implements LeitorDao {
 		PreparedStatement preparedStatement = null;
 
 		// sql
-		final String sql = "UPDATE leitor SET matricula = ?, email = ?, senha = ?" + " WHERE id = ?;";
+		final String sql = "UPDATE leitor SET, email = ?, senha = ?" + " WHERE id = ?;";
 
 		try {
 			// prepara a query
@@ -183,10 +184,9 @@ public class LeitorDaoImpl implements LeitorDao {
 			// inserido lixo no BD
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, entity.getMatricula());
-			preparedStatement.setString(2, entity.getEmail());
-			preparedStatement.setString(3, entity.getSenha());
-			preparedStatement.setLong(4, entity.getId());
+			preparedStatement.setString(1, entity.getEmail());
+			preparedStatement.setString(2, entity.getSenha());
+			preparedStatement.setLong(3, entity.getId());
 
 			// executa a query
 			preparedStatement.execute();

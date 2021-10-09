@@ -49,37 +49,45 @@
 
 										<thead>
 											<tr>
-												<th>Id</th>
 												<th>Nome</th>
 												<th>CPF</th>
-												<th>Status</th>
+												<th>Telefone</th>
+												<th>Email</th>
+												<th>ações<th>
 											</tr>
 										</thead>
 										<tfoot>
 											<tr>
-												<th>Id</th>
 												<th>Nome</th>
 												<th>CPF</th>
-												<th>Status</th>
+												<th>Telefone</th>
+												<th>Email</th>
+												<th>ações<th>
 											</tr>
 										</tfoot>
 
 
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>Victor</td>
-												<td>123.123.123-12</td>
+											<tr th:each="leitor : ${listaDeLeitores}">
+												<td th:text="${leitor.nome}">Victor</td>
+												<td th:text="${leitor.cpf}">123.123.123-12</td>
+												<td th:text="${leitor.telefone}">(00)00000-0000</td>
+												<td th:text="${leitor.email}">teste@email.com</td>
 												<td>
 													<div class="row col-12">
-														<div class="col-6">
-															<a th:href="@{/usuario/detail}" class="btn btn-info col-9">
-																<i class="fas fa-id-card"></i> Perfil
+														<div class="col-4">
+															<a th:href="@{/leitor/detail/{id} (id = ${leitor.id})}" class="btn btn-info col-9">
+																<i class="fas fa-id-card"></i>
 															</a>
 														</div>
-														<div class="col-6">
-															<a href="#" class="btn btn-danger col-9"> <i
-																class="fas fa-times"></i> Remover Usuário
+														<div class="col-4">
+															<a th:href="@{/leitor/edit/{id} (id = ${leitor.id})}" class="btn btn-warning col-9">
+																<i class="fas fa-edit"></i>
+															</a>
+														</div>
+														<div class="col-4">
+															<a th:href="@{/leitor/delete/{id} (id = ${leitor.id})}" class="btn btn-danger col-9"> <i
+																class="fas fa-times"></i>
 															</a>
 														</div>
 													</div>
@@ -89,82 +97,41 @@
 										
 										
 										<tbody>
-											<tr>
-												<td>2</td>
-												<td>William</td>
-												<td>123.123.123-13</td>
+											<tr th:each="bibliotecario : ${listaDeBibliotecarios}">
+												<td th:text="${bibliotecario.nome}">Victor</td>
+												<td th:text="${bibliotecario.cpf}">123.123.123-12</td>
+												<td th:text="${bibliotecario.telefone}">(00)00000-0000</td>
+												<td th:text="${bibliotecario.email}">teste@email.com</td>
 												<td>
 													<div class="row col-12">
-														<div class="col-6">
-															<a th:href="@{/usuario/detail}" class="btn btn-info col-9">
-																<i class="fas fa-id-card"></i> Perfil
+														<div class="col-4">
+															<a th:href="@{/bibliotecario/detail/{id} (id = ${bibliotecario.id})}" class="btn btn-info col-9">
+																<i class="fas fa-id-card"></i>
 															</a>
 														</div>
-														<div class="col-6">
-															<a href="#" class="btn btn-danger col-9"> <i
-																class="fas fa-times"></i> Remover Usuário
+														<div class="col-4">
+															<a th:href="@{/bibliotecario/edit/{id} (id = ${bibliotecario.id})}" class="btn btn-warning col-9">
+																<i class="fas fa-edit"></i>
 															</a>
+														</div>
+														<div class="col-4">
+															<a th:href="@{/bibliotecario/delete/{id} (id = ${bibliotecario.id})}" class="btn btn-danger col-9"> <i
+																class="fas fa-times"></i>
+															</a>
+														</div>
 														</div>
 													</div>
 												</td>
 											</tr>
 										</tbody>
-										
-										<tbody>
-											<tr>
-												<td>3</td>
-												<td>Lucas</td>
-												<td>123.123.123-14</td>
-												<td>
-													<div class="row col-12">
-														<div class="col-6">
-															<a th:href="@{/usuario/detail}" class="btn btn-info col-9">
-																<i class="fas fa-id-card"></i> Perfil
-															</a>
-														</div>
-														<div class="col-6">
-															<a href="#" class="btn btn-danger col-9"> <i
-																class="fas fa-times"></i> Remover Usuário
-															</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-										</tbody>
-
-										
-
 									</table>
-
+									
 								</div>
-
-
-								
-
-
-
-
 							</div>
 						</div>
-
-
-
-
-
-
-
 					</div>
-
 					<hr>
-
-
-
-
-
 				</div>
-
-
-
 			</div>
 		</main>
 		

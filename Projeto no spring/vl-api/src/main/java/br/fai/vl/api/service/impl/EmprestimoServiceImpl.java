@@ -29,18 +29,17 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	public int create(final int livroId, final int leitorId) {
 
 		List<Integer> emprestimoList = null;
-		int emprestimoAberto = -1;
+		List<Integer> emprestimoAberto = null;
 
 		emprestimoList = dao.checkAvaliableCopies(livroId);
 
 		if (emprestimoList != null && emprestimoList.size() >= 1) {
 
-			emprestimoAberto = dao.checkOpenReaderLoads(leitorId).get(0);
-			if (emprestimoAberto != -1) {
-				return 10;
-				// return dao.create(emprestimoList.get(0));
+			emprestimoAberto = dao.checkOpenReaderLoads(leitorId);
+			if (emprestimoAberto == null || emprestimoAberto.size() == 0) {
+				return dao.create(emprestimoList.get(0));
 			} else {
-				return 1;
+				return dao.addToCart(emprestimoAberto.get(0), emprestimoList.get(0));
 			}
 
 		} else {

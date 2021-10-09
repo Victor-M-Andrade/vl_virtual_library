@@ -60,7 +60,7 @@ public class LivroController {
 	}
 
 	@GetMapping("/register")
-	public String getRegisterLivro(final Model model) {
+	public String getRegisterLivro(final Model model, final Livro livro) {
 
 		final List<Genero> generos = generoService.readAll();
 		model.addAttribute("generoList", generos);
@@ -81,13 +81,41 @@ public class LivroController {
 		if (id != -1) {
 			return "redirect:/livro/detail/" + id;
 		} else {
-			return "/livro/criar-livro";
+			return "redirect:/livro/register";
 		}
 	}
 
-	@GetMapping("/edit")
-	public String getEditarLivro() {
+	@GetMapping("/edit/{id}")
+	public String getEditarLivro(@PathVariable final int id, final Model model) {
+
+		final List<Genero> generos = generoService.readAll();
+		model.addAttribute("generoList", generos);
+
+		final List<Autor> autores = autorService.readAll();
+		model.addAttribute("autorList", autores);
+
+		final List<Editora> editoras = editoraService.readAll();
+		model.addAttribute("editoraList", editoras);
+
+		final Livro livro = service.readById(id);
+		model.addAttribute("livro", livro);
+
 		return "livro/editar-livro";
+	}
+
+	@PostMapping("/update")
+	private String update(final Livro livro, final Model model) {
+		service.update(livro);
+
+		return "redirect:/livro/detail/" + livro.getId();
+	}
+
+	@GetMapping("/delete/{id}")
+	private String delete(@PathVariable final int id, final Model model) {
+
+		service.delete(id);
+
+		return "redirect:/livro/list-adm";
 	}
 
 	@GetMapping("/enviar-livro")

@@ -42,8 +42,8 @@
 					alt="Card image cap">
 				<div class="card-body">
 					<label class="card-text nome-livro" th:text="${livro.titulo}">O SENHOR DOS ANÉIS</label>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
+					<a th:href="@{/livro/edit/{id} (id = ${livro.id})}" class="btn btn-info">Editar</a> 
+					<a th:href="@{/livro/delete/{id} (id = ${livro.id})}" class="btn btn-danger">Deletar</a>
 				</div>
 				</a>
 			</div>

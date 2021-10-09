@@ -1,12 +1,26 @@
 package br.fai.vl.web.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.fai.vl.model.Bibliotecario;
+import br.fai.vl.model.Leitor;
+import br.fai.vl.web.service.BibliotecarioService;
+import br.fai.vl.web.service.LeitorService;
 
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
+
+	@Autowired
+	private LeitorService leitorService;
+	@Autowired
+	private BibliotecarioService bibliotecarioService;
 
 	@GetMapping("/editar-perfil")
 	public String getEditar() {
@@ -34,7 +48,14 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/list")
-	public String getList() {
+	public String getList(final Model model) {
+
+		final List<Leitor> leitores = leitorService.readAll();
+		model.addAttribute("listaDeLeitores", leitores);
+
+		final List<Bibliotecario> bibliotecarios = bibliotecarioService.readAll();
+		model.addAttribute("listaDeBibliotecarios", bibliotecarios);
+
 		return "usuario/list";
 	}
 

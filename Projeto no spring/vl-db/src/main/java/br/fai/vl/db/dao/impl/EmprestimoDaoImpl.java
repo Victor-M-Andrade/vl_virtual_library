@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.google.gson.Gson;
-
 import br.fai.vl.db.connection.ConnectionFactory;
 import br.fai.vl.db.dao.EmprestimoDao;
 import br.fai.vl.model.Emprestimo;
@@ -87,8 +85,6 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		int id = Integer.valueOf(-1);
-		final Gson gson = new Gson();
-		final boolean result = false;
 		String sql = "";
 
 		try {
@@ -108,12 +104,12 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 				preparedStatement.close();
 
 				sql = "insert into emprestimo_exemplar(datadevolucao, devolvido, dataefetivadevolucao,"
-						+ "multa, emprestimo_id, exemplar_id) "
-						+ "values(default, default, null, default, ?, exemplar);";
+						+ "multa, emprestimo_id, exemplar_id) " + "values(default, default, null, default, ?, ?);";
 
 				connection = ConnectionFactory.getConnection();
 				preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setInt(1, idExemplar);
+				preparedStatement.setInt(1, id);
+				preparedStatement.setInt(2, idExemplar);
 
 				preparedStatement.execute();
 				resultSet = preparedStatement.getGeneratedKeys();
@@ -265,6 +261,50 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		}
 
 		return emprestimosAbertos;
+	}
+
+	public int addToCart(final int emprestimoId, final int exemplarId) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int id = Integer.valueOf(-1);
+		String sql = "";
+
+		try {
+			sql = "insert into emprestimo_exemplar(datadevolucao, devolvido, dataefetivadevolucao,"
+					+ "multa, emprestimo_id, exemplar_id) " + "values(default, default, null, default, ?, ?);";
+
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+
+			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setInt(1, emprestimoId);
+			preparedStatement.setInt(2, exemplarId);
+
+			preparedStatement.execute();
+			resultSet = preparedStatement.getGeneratedKeys();
+
+			if (resultSet.next()) {
+				id = resultSet.getInt("id");
+			}
+
+			if (id != -1) {
+				connection.commit();
+			} else {
+				connection.rollback();
+			}
+
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return id;
 	}
 
 }

@@ -23,7 +23,7 @@
 							<div class="card-body">
 								<div class="mb-3 text-center">
 									<img
-										src="../resources/assets/img/logo/VL com fundo sem nome2.png"
+										src="../../resources/assets/img/logo/VL com fundo sem nome2.png"
 										width="200" class="rounded-circle img-fluid" />
 								</div>
 								<div class="mb-2">
@@ -40,28 +40,21 @@
 						</div>
 					</div>
 
-					<form class="mb-2 col-12 col-sm-9">
+					<form th:action="@{/leitor/update}" method="POST" class="mb-2 col-12 col-sm-9" th:object="${user}">
 
 						<div class="mb-2 card">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-3">Nome</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="Zézinho">
-									</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Sobrenome</div>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" value="Capixaba">
+										<input type="text" class="form-control" th:field="${user.nome}">
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">CPF</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="12312312312">
+										<input type="text" class="form-control" th:field="${user.cpf}">
 									</div>
 								</div>
 								<hr>
@@ -69,21 +62,21 @@
 									<div class="col-sm-3">Email</div>
 									<div class="col-sm-9">
 										<input type="text" class="form-control"
-											value="zezinho-capixaba3301@gmail.com">
+											th:field="${user.email}">
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">Telefone</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="(35)91234-1234">
+										<input type="text" class="form-control" th:field="${user.telefone}">
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">Estado</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="Minas Gerais">
+										<input type="text" class="form-control" th:field="${user.estado}" placeholder="Sigla: MG, SP, etc...">
 									</div>
 								</div>
 								<hr>
@@ -91,36 +84,37 @@
 									<div class="col-sm-3">Cidade</div>
 									<div class="col-sm-9">
 										<input type="text" class="form-control"
-											value="Santa Rita do Sapucaí">
+											th:field="${user.cidade}">
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">Rua</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="Rua Teste">
+										<input type="text" class="form-control" th:field="${user.rua}">
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">Bairro</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="Bairro Teste">
+										<input type="text" class="form-control" th:field="${user.bairro}">
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">Número</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" value="123">
+										<input type="text" class="form-control" th:field="${user.numero}">
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="mb-2">
-							<a th:href="@{/usuario/perfil-usuario}"
-								class="btn btn-primary col-12">Atualizar</a>
+						<div class="form-group mt-4 mb-0">
+							<input th:field="${user.id}" type="hidden" />
+							<input th:field="${user.senha}" type="hidden" />
+							<button class="btn btn-primary btn-block" type="submit">Atualizar dados do Usuario</button>
 						</div>
 
 					</form>

@@ -81,9 +81,9 @@ public class LivroServiceImpl implements LivroService {
 		boolean response = false;
 
 		try {
-			// faz a chamada da API
+
 			final RestTemplate restTemplace = new RestTemplate();
-			// receber minha entidade
+
 			final HttpEntity<Livro> httpEntity = new HttpEntity<Livro>(entity);
 			final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.PUT, httpEntity,
 					Boolean.class);
