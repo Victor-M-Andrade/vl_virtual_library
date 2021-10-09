@@ -208,7 +208,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 	}
 
-	public List<Integer> readByCriteria(final int livroId) {
+	public List<Integer> checkAvaliableCopies(final int livroId) {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
@@ -237,6 +237,34 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		}
 
 		return exemplaresDisponiveis;
+	}
+
+	public List<Integer> checkOpenReaderLoads(final int leitoId) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+
+		List<Integer> emprestimosAbertos = null;
+
+		try {
+			final String sql = "select E.* from emprestimo E where E.datarealizacao is null and E.leitor_id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+			prepareStatement = connection.prepareStatement(sql);
+			prepareStatement.setInt(1, leitoId);
+
+			resultSet = prepareStatement.executeQuery();
+
+			while (resultSet.next()) {
+				emprestimosAbertos = Arrays.asList(resultSet.getInt("id"));
+			}
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, prepareStatement, connection);
+		}
+
+		return emprestimosAbertos;
 	}
 
 }

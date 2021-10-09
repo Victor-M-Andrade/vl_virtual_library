@@ -1,25 +1,56 @@
 package br.fai.vl.web.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.fai.vl.model.Autor;
+import br.fai.vl.model.Editora;
+import br.fai.vl.model.Genero;
+import br.fai.vl.model.Livro;
+import br.fai.vl.web.service.AutorService;
+import br.fai.vl.web.service.EditoraService;
+import br.fai.vl.web.service.GeneroService;
+import br.fai.vl.web.service.LivroService;
 
 @Controller
 @RequestMapping("/livro")
 public class LivroController {
 
+	@Autowired
+	private LivroService service;
+	@Autowired
+	private GeneroService generoService;
+	@Autowired
+	private AutorService autorService;
+	@Autowired
+	private EditoraService editoraService;
+
 	@GetMapping("/list")
-	public String getAcervo() {
+
+	public String getAcervo(final Model model) {
+		final List<Livro> livroList = service.readAll();
+		model.addAttribute("listaDeLivros", livroList);
 		return "livro/acervo";
 	}
 
 	@GetMapping("/list-adm")
-	public String getAcervoAdm() {
+	public String getAcervoAdm(final Model model) {
+		final List<Livro> livroList = service.readAll();
+		model.addAttribute("listaDeLivros", livroList);
 		return "livro/acervo-adm";
 	}
 
-	@GetMapping("/detail")
-	public String getDescricaoLivro() {
+	@GetMapping("/detail/{id}")
+	public String getDescricaoLivro(@PathVariable final int id, final Model model) {
+		final Livro livro = service.readById(id);
+		model.addAttribute("detalheDoLivro", livro);
 		return "livro/descricao-livro";
 	}
 
@@ -28,9 +59,30 @@ public class LivroController {
 		return "livro/finalizar-emprestimo";
 	}
 
-	@GetMapping("/create")
-	public String getCriarLivro() {
+	@GetMapping("/register")
+	public String getRegisterLivro(final Model model) {
+
+		final List<Genero> generos = generoService.readAll();
+		model.addAttribute("generoList", generos);
+
+		final List<Autor> autores = autorService.readAll();
+		model.addAttribute("autorList", autores);
+
+		final List<Editora> editoras = editoraService.readAll();
+		model.addAttribute("editoraList", editoras);
+
 		return "livro/criar-livro";
+	}
+
+	@PostMapping("/create")
+	private String create(final Livro livro, final Model model) {
+		final int id = service.create(livro);
+
+		if (id != -1) {
+			return "redirect:/livro/detail/" + id;
+		} else {
+			return "/livro/criar-livro";
+		}
 	}
 
 	@GetMapping("/edit")

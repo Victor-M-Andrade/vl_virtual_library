@@ -97,8 +97,8 @@ public class LivroDaoImpl implements LivroDao {
 		int id = Integer.valueOf(-1);
 
 		try {
-			final String sql = "INSERT INTO livro(isbn ,titulo, sinopse, numpaginas, ativo, editora_id, genero_id, autor_id) "
-					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+			final String sql = "INSERT INTO livro(isbn ,titulo, sinopse, numPaginas, ativo, editora_id, genero_id, autor_id) "
+					+ "VALUES(?, ?, ?, ?, default, ?, ?, ?);";
 
 			connection = ConnectionFactory.getConnection();
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -106,10 +106,9 @@ public class LivroDaoImpl implements LivroDao {
 			preparedStatement.setString(2, entity.getTitulo());
 			preparedStatement.setString(3, entity.getSinopse());
 			preparedStatement.setInt(4, entity.getNumPaginas());
-			preparedStatement.setBoolean(5, entity.isAtivo());
-			preparedStatement.setInt(6, entity.getEditoraId());
-			preparedStatement.setInt(7, entity.getGeneroId());
-			preparedStatement.setInt(8, entity.getAutorId());
+			preparedStatement.setInt(5, entity.getEditoraId());
+			preparedStatement.setInt(6, entity.getGeneroId());
+			preparedStatement.setInt(7, entity.getAutorId());
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -176,7 +175,7 @@ public class LivroDaoImpl implements LivroDao {
 		PreparedStatement preparedStatement = null;
 
 		try {
-			final String sql = "DELETE FROM leitor WHERE id = ?;";
+			final String sql = "DELETE FROM livro WHERE id = ?;";
 
 			connection = ConnectionFactory.getConnection();
 			connection.setAutoCommit(false);

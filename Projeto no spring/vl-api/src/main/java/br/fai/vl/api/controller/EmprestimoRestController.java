@@ -38,10 +38,11 @@ public class EmprestimoRestController {
 	// EmprestimoDTO
 	// - livroId
 	// - lalaId
-	@GetMapping("/create/{id}")
-	public ResponseEntity<Integer> create(@PathVariable("id") final int idLivroSolicitado) {
+	@GetMapping("/create/{idLivro}-{idUsuario}")
+	public ResponseEntity<Integer> create(@PathVariable("idLivro") final int idLivroSolicitado,
+			@PathVariable("idUsuario") final int userId) {
 
-		return ResponseEntity.ok(service.create(idLivroSolicitado));
+		return ResponseEntity.ok(service.create(idLivroSolicitado, userId));
 	}
 
 	@PutMapping("/update")

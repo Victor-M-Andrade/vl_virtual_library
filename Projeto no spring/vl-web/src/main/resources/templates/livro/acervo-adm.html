@@ -8,20 +8,20 @@
 	<div layout:fragment="body">
 
 
-		<br> <br> <br> <br> <br>
+		<br> <br>
 
-		<h1>Livros em Destaque</h1>
+		<h1>Acervo de Livros</h1>
 
 
 		<div class="row col-12">
 			<div class="col-12">
-				<a th:href="@{/livro/create}" class="btn btn-success col-12">Adicionar
+				<a th:href="@{/livro/register}" class="btn btn-success col-12">Adicionar
 					novo livro</a>
 			</div>
 			
 		</div>
 
-		<br>
+		<hr>
 		
 
 		<!-- Livros -->
@@ -35,97 +35,19 @@
                 Extra large     >=1200  .col-xl-
             -->
 
-			<div class="card livro">
+			<div class="card livro" th:each="livro : ${listaDeLivros}">
 
 				<img class="card-img-top img-livro"
 					src="../resources/assets/img/capa-livros/senhor-dos-aneis.png"
 					alt="Card image cap">
 				<div class="card-body">
-					<p class="card-text nome-livro">O SENHOR DOS ANÉIS</p>
+					<label class="card-text nome-livro" th:text="${livro.titulo}">O SENHOR DOS ANÉIS</label>
 					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
 						href="#" class="btn btn-danger">Deletar</a>
 				</div>
 				</a>
 			</div>
-
-			<div class="card livro">
-
-				<img class="card-img-top img-livro"
-					src="../resources/assets/img/capa-livros/a-arte-da-guerra.png"
-					alt="Card image cap">
-				<div class="card-body">
-					<p class="card-text nome-livro">A ARTE DA GUERRA</p>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
-				</div>
-				</a>
-			</div>
-
-
-			<div class="card livro">
-
-				<img class="card-img-top img-livro"
-					src="../resources/assets/img/capa-livros/coraline.png"
-					alt="Card image cap">
-				<div class="card-body">
-					<p class="card-text nome-livro">CORALINE</p>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
-				</div>
-				</a>
-			</div>
-
-			<div class="card livro">
-
-				<img class="card-img-top img-livro"
-					src="../resources/assets/img/capa-livros/harry-potter.png"
-					alt="Card image cap">
-				<div class="card-body">
-					<p class="card-text nome-livro">HARRY POTTER</p>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
-				</div>
-				</a>
-			</div>
-
-			<div class="card livro">
-
-				<img class="card-img-top img-livro"
-					src="../resources/assets/img/capa-livros/hobbit.png"
-					alt="Card image cap">
-				<div class="card-body">
-					<p class="card-text nome-livro">O HOBBIT</p>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
-				</div>
-				</a>
-			</div>
-
-			<div class="card livro">
-
-				<img class="card-img-top img-livro"
-					src="../resources/assets/img/capa-livros/it.png"
-					alt="Card image cap">
-				<div class="card-body">
-					<p class="card-text nome-livro">IT A COISA</p>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
-				</div>
-				</a>
-			</div>
-
-			<div class="card livro">
-
-				<img class="card-img-top img-livro"
-					src="../resources/assets/img/capa-livros/o-gigante-feliz.png"
-					alt="Card image cap">
-				<div class="card-body">
-					<p class="card-text nome-livro">O GIGANTE FELIZ</p>
-					<a th:href="@{/livro/edit}" class="btn btn-info">Editar</a> <a
-						href="#" class="btn btn-danger">Deletar</a>
-				</div>
-				</a>
-			</div>
+		</select>
 	</div>
 </body>
 </html>

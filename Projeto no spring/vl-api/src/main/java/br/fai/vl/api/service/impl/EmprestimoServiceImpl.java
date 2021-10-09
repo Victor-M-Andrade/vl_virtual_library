@@ -26,14 +26,19 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	}
 
 	@Override
-	public int create(final int idLivro) {
+	public int create(final int livroId, final int leitorId) {
 
 		List<Integer> emprestimoList = null;
-		emprestimoList = dao.readByCriteria(idLivro);
+		int emprestimoAberto = -1;
 
-		if (emprestimoList != null) {
-			if (emprestimoList.get(0) == 1) {
-				return dao.create(emprestimoList.get(0));
+		emprestimoList = dao.checkAvaliableCopies(livroId);
+
+		if (emprestimoList != null && emprestimoList.size() >= 1) {
+
+			emprestimoAberto = dao.checkOpenReaderLoads(leitorId).get(0);
+			if (emprestimoAberto != -1) {
+				return 10;
+				// return dao.create(emprestimoList.get(0));
 			} else {
 				return 1;
 			}

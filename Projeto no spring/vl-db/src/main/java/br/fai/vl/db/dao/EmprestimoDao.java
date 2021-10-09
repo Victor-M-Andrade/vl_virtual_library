@@ -16,5 +16,7 @@ public interface EmprestimoDao {
 
 	boolean delete(int id);
 
-	List<Integer> readByCriteria(int livroId);
+	List<Integer> checkAvaliableCopies(int livroId);
+
+	List<Integer> checkOpenReaderLoads(int leitoId);
 }

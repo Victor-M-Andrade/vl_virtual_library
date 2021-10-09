@@ -37,7 +37,7 @@ public class LivroServiceImpl implements LivroService {
 
 	@Override
 	public Livro readById(final int id) {
-		final String endpoint = "http://localhost:8085/api/v1/livro/read-by-id";
+		final String endpoint = "http://localhost:8085/api/v1/livro/read-by-id/" + id;
 		Livro response = null;
 
 		try {

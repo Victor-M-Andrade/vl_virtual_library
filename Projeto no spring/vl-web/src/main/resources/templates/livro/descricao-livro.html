@@ -9,14 +9,16 @@
 
 		
 
-            <br><br><br><br><br>
+            <br><br>
 
             
 <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">O Senhor dos Anéis</h1>
+                	
+                	<img class="img-livro-descricao" src="../../resources/assets/img/capa-livros/senhor-dos-aneis.png" alt="">
+                    <h1 class="mt-4" th:text="${detalheDoLivro.titulo}">O Senhor dos Anéis</h1>
 
-                    <img class="img-livro-descricao" src="../resources/assets/img/capa-livros/senhor-dos-aneis.png" alt="">
+                    
 
                     <div class="row mt-4">
 
@@ -25,7 +27,7 @@
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
                                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-                                        href="#description-tab" role="tab">Descrição</a>
+                                        href="#description-tab" role="tab">Sinopse</a>
                                 </div>
                             </nav>
                         </div>
@@ -33,7 +35,7 @@
                             <div class="tab-content">
 
                                 <div class="mt-2 tab-pane fade show active" id="description-tab">
-                                    <p class="p-descricao">
+                                    <p class="p-descricao" th:text="${detalheDoLivro.sinopse}">
                                         O Senhor dos Anéis (The Lord of the Rings, no original) é um livro de alta fantasia, escrito pelo escritor britânico J.
                                         R. R. Tolkien. Escrita entre 1937 e 1949, com muitas partes criadas durante a Segunda Guerra Mundial, a saga é uma
                                         continuação de O Hobbit (1937). Embora Tolkien tenha planejado realizá-la em volume único, a obra foi originalmente
@@ -41,23 +43,6 @@
                                         cada volume contendo dois livros cada, e foi assim, em três volumes, que se tornou popular. Desde então, a obra foi
                                         reimpressa várias vezes e traduzida para mais de 40 línguas, vendendo mais 160 milhões de cópias, tornando-se um dos
                                         trabalhos mais populares da literatura do século XX.
-                                    </p>
-
-                                    <p class="p-descricao">
-                                        A história de O Senhor dos Anéis ocorre num tempo e espaço imaginário, a Terceira Era da Terra Média, que é um mundo
-                                        inspirado na Terra real, mais especificamente, segundo Tolkien, numa Europa mitológica, habitado por Humanos e por
-                                        outras raças: Elfos, Anãos (anteriormente "Anões"), Hobbits e Orques (anteriormente "Orcs"). Tolkien nomeou esse lugar
-                                        com uma palavra do inglês moderno, Middle-earth (Terra-Média), derivado do inglês antigo, Middangeard, o reino onde
-                                        humanos vivem na mitologia Nórdica e Germânica. O próprio Tolkien disse que pretendia ambientá-la na nossa Terra, há
-                                        aproximadamente 6 000 anos, embora a correspondência com a geografia e a história do mundo real fosse frágil.
-                                    </p>
-
-                                    <p class="p-descricao">
-                                        A história narra o conflito contra o mal que se alastra pela Terra-média, através da luta de várias raças - Humanos,
-                                        Anãos, Elfos, Ents e Hobbits - contra Orques, para evitar que o "Anel do Poder" volte às mãos de seu criador Sauron, o
-                                        Senhor Sombrio. Partindo dos primórdios tranquilos do Condado, a história muda através da Terra-média e segue o curso da
-                                        Guerra do Anel através dos olhos de seus personagens, especialmente do protagonista, Frodo Bolseiro. A história
-                                        principal é seguida por seis apêndices que fornecem uma riqueza do material de fundo histórico e linguístico.
                                     </p>
                                 </div>
 
