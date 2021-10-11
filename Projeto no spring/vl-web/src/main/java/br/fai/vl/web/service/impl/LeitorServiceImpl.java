@@ -77,8 +77,10 @@ public class LeitorServiceImpl implements LeitorService {
 
 	@Override
 	public boolean update(final Leitor entity) {
-		final String endpoint = "http://localhost:8085//api/v1/leitor/update";
+		final String endpoint = "http://localhost:8085/api/v1/leitor/update";
 		boolean response = false;
+
+		System.out.println("passou no service web: " + entity.getId());
 
 		try {
 			// faz a chamada da API

@@ -31,6 +31,8 @@ public class LeitorController {
 	@GetMapping("/edit/{id}")
 	private String getLeitorEdit(@PathVariable final int id, final Model model) {
 
+		model.addAttribute("url", "/leitor/update");
+
 		final Leitor leitor = service.readById(id);
 		model.addAttribute("user", leitor);
 
@@ -41,7 +43,7 @@ public class LeitorController {
 	private String update(final Leitor leitor, final Model model) {
 		service.update(leitor);
 
-		return getLeitorDetail(leitor.getId(), model);
+		return this.getLeitorDetail(leitor.getId(), model);
 	}
 
 	@PostMapping("/create")

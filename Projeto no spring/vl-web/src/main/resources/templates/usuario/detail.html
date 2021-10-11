@@ -49,6 +49,11 @@
 									</div>
 									<hr>
 									<div class="row">
+										<div class="col-sm-3">Telefone</div>
+										<div class="col-sm-9" th:text="${usuario.email}" th:name="email">lucas@123.com</div>
+									</div>
+									<hr>
+									<div class="row">
 										<div class="col-sm-3">Estado</div>
 										<div class="col-sm-9" th:text="${usuario.estado}" th:name="estado">Minas Gerais</div>
 									</div>
@@ -60,8 +65,8 @@
 								</div>
 							</div>
 							<div class="mb-2">
-								<a th:href="@{/leitor/edit/{id} (id = ${ usuario.id})}" th:if="${tipoUsuario == 'leitor'}" class="btn btn-primary col-12">Editar usuario</a>
-								<a th:href="@{/leitor/edit/{id} (id = ${ usuario.id})}" th:if="${tipoUsuario == 'bibliotecario'}" class="btn btn-primary col-12">Editar usuario</a>
+								<a th:href="@{/leitor/edit/{id} (id = ${ usuario.id})}" th:if="${tipoUsuario == 'leitor'}" class="btn btn-primary col-12">Editar dados do Leitor</a>
+								<a th:href="@{/bibliotecario/edit/{id} (id = ${ usuario.Id})}" th:if="${tipoUsuario == 'bibliotecario'}" class="btn btn-primary col-12">Editar dados do Bibliotecario(a)</a>
 							</div>
 
 						

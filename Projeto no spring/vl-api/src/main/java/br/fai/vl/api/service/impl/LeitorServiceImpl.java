@@ -28,13 +28,12 @@ public class LeitorServiceImpl implements LeitorService {
 
 	@Override
 	public int create(final Leitor entity) {
-		// TODO Auto-generated method stub
+
 		return dao.create(entity);
 	}
 
 	@Override
 	public boolean update(final Leitor entity) {
-		// TODO Auto-generated method stub
 		return dao.update(entity);
 	}
 

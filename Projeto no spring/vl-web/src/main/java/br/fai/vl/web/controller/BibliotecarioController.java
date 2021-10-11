@@ -22,7 +22,7 @@ public class BibliotecarioController {
 	private String getBibliotecarioDetail(@PathVariable final int id, final Model model) {
 		final Bibliotecario bibliotecario = service.readById(id);
 
-		model.addAttribute("tipoUsuario", "biblioteca");
+		model.addAttribute("tipoUsuario", "bibliotecario");
 
 		model.addAttribute("usuario", bibliotecario);
 		return "usuario/detail";
@@ -30,6 +30,8 @@ public class BibliotecarioController {
 
 	@GetMapping("/edit/{id}")
 	private String getBibliotecarioEdit(@PathVariable final int id, final Model model) {
+
+		model.addAttribute("url", "/bibliotecario/update");
 
 		final Bibliotecario bibliotecario = service.readById(id);
 		model.addAttribute("user", bibliotecario);
@@ -39,7 +41,7 @@ public class BibliotecarioController {
 
 	@PostMapping("/update")
 	private String update(final Bibliotecario bibliotecario, final Model model) {
-		service.update(bibliotecario);
+		// service.update(bibliotecario);
 
 		return getBibliotecarioDetail(bibliotecario.getId(), model);
 	}

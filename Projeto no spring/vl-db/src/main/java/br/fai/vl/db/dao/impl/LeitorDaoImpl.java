@@ -26,7 +26,7 @@ public class LeitorDaoImpl implements LeitorDao {
 		try {
 			// faz a conexão
 			connection = ConnectionFactory.getConnection();
-			final String sql = "SELECT * FROM pessoa p inner join leitor l on p.id = l.pessoa_id;";
+			final String sql = "SELECT * FROM leitor L inner join pessoa P on L.pessoa_id = P.id;";
 			// prepara a query
 			preparedStatement = connection.prepareStatement(sql);
 			// executa a query
@@ -69,7 +69,7 @@ public class LeitorDaoImpl implements LeitorDao {
 		try {
 			// faz a conexão
 			connection = ConnectionFactory.getConnection();
-			final String sql = "SELECT * FROM leitor L INNER JOIN pessoa P on L.id = P.id WHERE L.id = ?;";
+			final String sql = "SELECT * FROM leitor L INNER JOIN pessoa P on L.pessoa_id = P.id WHERE L.id = ?;";
 			// prepara a query
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
@@ -175,8 +175,8 @@ public class LeitorDaoImpl implements LeitorDao {
 		PreparedStatement preparedStatement = null;
 
 		// sql
-		final String sql = "UPDATE leitor SET, email = ?, senha = ?" + " WHERE id = ?;";
-
+		final String sql = "UPDATE leitor SET email = ?, senha = ?" + " WHERE id = ?;";
+		System.out.println(entity.getId());
 		try {
 			// prepara a query
 			connection = ConnectionFactory.getConnection();
@@ -185,7 +185,7 @@ public class LeitorDaoImpl implements LeitorDao {
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, entity.getEmail());
-			preparedStatement.setString(2, entity.getSenha());
+			preparedStatement.setString(2, "");
 			preparedStatement.setLong(3, entity.getId());
 
 			// executa a query

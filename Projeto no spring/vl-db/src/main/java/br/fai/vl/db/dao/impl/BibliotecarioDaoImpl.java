@@ -26,7 +26,7 @@ public class BibliotecarioDaoImpl implements BibliotecarioDao {
 		try {
 			// faz a conexão
 			connection = ConnectionFactory.getConnection();
-			final String sql = "SELECT * FROM pessoa P inner join bibliotecario B on P.id = B.pessoa_id;";
+			final String sql = "SELECT * FROM bibliotecario B inner join pessoa P on B.pessoa_id = P.id;";
 			// prepara a query
 			preparedStatement = connection.prepareStatement(sql);
 			// executa a query
