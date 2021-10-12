@@ -46,17 +46,21 @@ public class LeitorController {
 		return "redirect:/leitor/detail/" + leitor.getId();
 	}
 
-	@PostMapping("/create")
-	private String create(final Leitor editora, final Model model) {
+	@GetMapping("/register")
+	public String getRegister(final Model model, final Leitor livro) {
+		return "conta/register";
+	}
 
-		final int id = service.create(editora);
+	@PostMapping("/create")
+	private String create(final Leitor leitor, final Model model) {
+
+		final int id = service.create(leitor);
 
 		if (id != -1) {
-			// return "redirect:/editora/list";
+			return "redirect:/leitor/detail/" + id;
 		} else {
-			// return "/editora/create";
+			return "/conta/register";
 		}
-		return "";
 	}
 
 	@GetMapping("/delete/{id}")

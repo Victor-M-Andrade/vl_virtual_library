@@ -42,7 +42,7 @@
 											<select class="form-control" id="autor" th:field="${livro.autorId}">
 												<option selected value="-1">Selecione...</option>
 												<option th:each="autor: ${autorList}" th:text="${autor.nome}" 
-												th:value="${autor.id}">Genero 1</option>
+												th:value="${autor.id}">Autor 1</option>
 											</select>
 										</div>
 									</div>
@@ -71,7 +71,7 @@
 											<select class="form-control" id="editora" th:field="${livro.editoraId}">
 												<option selected value="-1">Selecione...</option>
 												<option th:each="editora: ${editoraList}" th:text="${editora.nomeFastasia}"
-												th:value="${editora.id}">Genero 1</option>
+												th:value="${editora.id}">Editora 1</option>
 											</select>
 										</div>
 									</div>

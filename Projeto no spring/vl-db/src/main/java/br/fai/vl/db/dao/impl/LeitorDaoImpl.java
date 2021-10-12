@@ -139,13 +139,17 @@ public class LeitorDaoImpl implements LeitorDao {
 				preparedStatement.close();
 				sql = "INSERT INTO leitor(matricula, email, senha, pessoa_id)" + "VALUES(?, ?, ?, ?);";
 
-				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, entity.getMatricula());
 				preparedStatement.setString(2, entity.getEmail());
 				preparedStatement.setString(3, entity.getSenha());
 				preparedStatement.setInt(4, id);
 
 				preparedStatement.execute();
+				resultSet = preparedStatement.getGeneratedKeys();
+				if (resultSet.next()) {
+					id = resultSet.getInt("id");
+				}
 				result = true;
 			}
 
