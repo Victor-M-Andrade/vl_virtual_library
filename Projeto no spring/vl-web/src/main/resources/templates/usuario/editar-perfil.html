@@ -52,17 +52,17 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-3">CPF</div>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" th:field="${user.cpf}">
-									</div>
-								</div>
-								<hr>
-								<div class="row">
 									<div class="col-sm-3">Email</div>
 									<div class="col-sm-9">
 										<input type="text" class="form-control"
 											th:field="${user.email}">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">senha</div>
+									<div class="col-sm-9">
+										<input class="form-control" th:field="${user.senha}" type="password">
 									</div>
 								</div>
 								<hr>
@@ -74,9 +74,23 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-3">Estado</div>
+									<div class="col-sm-3">Rua</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" th:field="${user.estado}" placeholder="Sigla: MG, SP, etc...">
+										<input type="text" class="form-control" th:field="${user.rua}">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Número</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" th:field="${user.numero}">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Bairro</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" th:field="${user.bairro}">
 									</div>
 								</div>
 								<hr>
@@ -89,23 +103,9 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-3">Rua</div>
+									<div class="col-sm-3">Estado</div>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" th:field="${user.rua}">
-									</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Bairro</div>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" th:field="${user.bairro}">
-									</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-sm-3">Número</div>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" th:field="${user.numero}">
+										<input type="text" class="form-control" th:field="${user.estado}" placeholder="Sigla: MG, SP, etc...">
 									</div>
 								</div>
 							</div>
@@ -113,6 +113,7 @@
 
 						<div class="form-group mt-4 mb-0">
 							<input th:field="${user.id}" type="hidden" />
+							<input th:field="${user.pessoaId}" type="hidden" />
 							<button class="btn btn-primary btn-block" type="submit">Atualizar dados do Usuario</button>
 						</div>
 

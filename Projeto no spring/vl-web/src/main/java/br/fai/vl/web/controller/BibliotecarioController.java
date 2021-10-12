@@ -41,9 +41,9 @@ public class BibliotecarioController {
 
 	@PostMapping("/update")
 	private String update(final Bibliotecario bibliotecario, final Model model) {
-		// service.update(bibliotecario);
+		service.update(bibliotecario);
 
-		return getBibliotecarioDetail(bibliotecario.getId(), model);
+		return "redirect:/bibliotecario/detail/" + bibliotecario.getId();
 	}
 
 	@PostMapping("/create")

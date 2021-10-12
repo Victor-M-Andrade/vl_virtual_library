@@ -77,7 +77,7 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 
 	@Override
 	public boolean update(final Bibliotecario entity) {
-		final String endpoint = "http://localhost:8085//api/v1/bibliotecario/update";
+		final String endpoint = "http://localhost:8085/api/v1/bibliotecario/update";
 		boolean response = false;
 
 		try {

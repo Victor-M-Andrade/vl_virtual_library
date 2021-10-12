@@ -119,10 +119,8 @@ public class LeitorDaoImpl implements LeitorDao {
 			// faz a conexão
 			connection = ConnectionFactory.getConnection();
 
-			// para impedir que, caso for inserir dados em mais de uma tabela, não seja
-			// inserido lixo no BD
 			connection.setAutoCommit(false);
-			// prepara a query
+
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, entity.getCpf());
 			preparedStatement.setString(2, entity.getNome());
@@ -174,24 +172,41 @@ public class LeitorDaoImpl implements LeitorDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		// sql
-		final String sql = "UPDATE leitor SET email = ?, senha = ?" + " WHERE id = ?;";
-		System.out.println(entity.getId());
+		String sql = "UPDATE pessoa SET nome = ?, telefone = ?, rua = ?, numero = ?, bairro = ?, cidade = ?, estado = ?"
+				+ " WHERE id = ?;";
 		try {
-			// prepara a query
 			connection = ConnectionFactory.getConnection();
-			// para impedir que, caso for inserir dados em mais de uma tabela, não seja
-			// inserido lixo no BD
+
 			connection.setAutoCommit(false);
+
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, entity.getEmail());
-			preparedStatement.setString(2, "");
-			preparedStatement.setLong(3, entity.getId());
+			preparedStatement.setString(1, entity.getNome());
+			preparedStatement.setString(2, entity.getTelefone());
+			preparedStatement.setString(3, entity.getRua());
+			preparedStatement.setInt(4, entity.getNumero());
+			preparedStatement.setString(5, entity.getBairro());
+			preparedStatement.setString(6, entity.getCidade());
+			preparedStatement.setString(7, entity.getEstado());
+			preparedStatement.setInt(8, entity.getPessoaId());
 
-			// executa a query
 			preparedStatement.execute();
-			connection.commit();
+			if (preparedStatement.getUpdateCount() != -1) {
 
+				preparedStatement.close();
+				sql = "UPDATE leitor SET email = ?, senha = ?" + " WHERE id = ?;";
+
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, entity.getEmail());
+				preparedStatement.setString(2, entity.getSenha());
+				preparedStatement.setLong(3, entity.getId());
+
+				preparedStatement.execute();
+				if (preparedStatement.getUpdateCount() != -1) {
+					connection.commit();
+				} else {
+					connection.rollback();
+				}
+			}
 			return true;
 		} catch (final Exception e) {
 			try {

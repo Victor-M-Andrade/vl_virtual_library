@@ -43,7 +43,7 @@ public class LeitorController {
 	private String update(final Leitor leitor, final Model model) {
 		service.update(leitor);
 
-		return this.getLeitorDetail(leitor.getId(), model);
+		return "redirect:/leitor/detail/" + leitor.getId();
 	}
 
 	@PostMapping("/create")
