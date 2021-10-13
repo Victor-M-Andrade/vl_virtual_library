@@ -51,13 +51,13 @@
                             <i class="fas fa-user fa-fw"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" th:href="@{/usuario/perfil-usuario}"><i class="fas fa-user-alt icon-menu"></i>Perfil</a>
-                            <a class="dropdown-item" th:href="@{/usuario/editar-perfil}"><i class="fas fa-user-edit icon-menu"></i>Editar Perfil</a>
-                            <a class="dropdown-item" th:href="@{/usuario/notificacao}"><i class="fas fa-bell icon-menu"></i>Notificação <span
+                            <a class="dropdown-item" th:href="@{/account/perfil-usuario}"><i class="fas fa-user-alt icon-menu"></i>Perfil</a>
+                            <a class="dropdown-item" th:href="@{/account/editar-perfil}"><i class="fas fa-user-edit icon-menu"></i>Editar Perfil</a>
+                            <a class="dropdown-item" th:href="@{/account/notificacao}"><i class="fas fa-bell icon-menu"></i>Notificação <span
                                     class="badge  badge-pill badge-danger">1</span></a>
-                            <a class="dropdown-item" th:href="@{/usuario/carrinho}"><i class="fas fa-shopping-cart icon-menu"></i>Carrinho <span
+                            <a class="dropdown-item" th:href="@{/account/my-loans}"><i class="fas fa-shopping-cart icon-menu"></i>Finalizar Emprestimo<span
                                     class="badge  badge-pill badge-danger">5</span></a>
-                            <a class="dropdown-item" th:href="@{/}"><i class="fas fa-sign-out-alt icon-menu"></i>Sair</a>
+                            <a class="dropdown-item" th:href="@{/account/get-out}"><i class="fas fa-sign-out-alt icon-menu"></i>Sair</a>
                         </div>
                     </div>
 
@@ -93,18 +93,30 @@
                         <div class="collapse" id="collapseVLConta" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                            	<a class="nav-link" th:href="@{/conta/entrar}"><i class="fas fa-sign-in-alt icon-menu"></i>Logar</a>
+                            	<a class="nav-link" th:href="@{/leitor/entrar}"><i class="fas fa-sign-in-alt icon-menu"></i>Logar</a>
+                            </nav>
+                        </div>
+                        
+                         <div class="collapse" id="collapseVLConta" aria-labelledby="headingOne"
+                            data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                            	<a class="nav-link" th:href="@{/bibliotecario/entrar}"><i class="fas fa-sign-in-alt icon-menu"></i>Entrar como Bibliotecario</a>
                             </nav>
                         </div>
                         
                         <div class="collapse" id="collapseVLConta" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" th:href="@{/leitor/register}"><i class="fas fa-user-plus icon-menu"></i>Registrar-se</a>
+                                <a class="nav-link" th:href="@{/leitor/register}"><i class="fas fa-user-plus icon-menu"></i>Novo Leitor</a>
                             </nav>
                         </div>
                         
-                        
+                        <div class="collapse" id="collapseVLConta" aria-labelledby="headingOne"
+                            data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" th:href="@{/bibliotecario/register}"><i class="fas fa-user-plus icon-menu"></i>Novo Bibliotecario(a)</a>
+                            </nav>
+                        </div>
                         
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVLAdm"
                             aria-expanded="false">
@@ -120,7 +132,7 @@
                         <div class="collapse" id="collapseVLAdm" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" th:href="@{/usuario/list}"><i class="fas fa-address-book icon-menu"></i>Lista de Usuários</a>
+                                <a class="nav-link" th:href="@{/account/list}"><i class="fas fa-address-book icon-menu"></i>Lista de Usuários</a>
                             </nav>
                         </div>
                         

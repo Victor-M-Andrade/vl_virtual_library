@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.fai.vl.model.Leitor;
+import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.LeitorService;
 
 @Controller
@@ -18,25 +19,60 @@ public class LeitorController {
 	@Autowired
 	private LeitorService service;
 
+	@GetMapping("/entrar")
+	public String getLogin(final Leitor leitor) {
+		return "conta/login";
+	}
+
+	@PostMapping("/login")
+	private String login(final Leitor leitor, final Model model) {
+
+		if (service.login(leitor)) {
+			return "redirect:/leitor/detail/" + Account.getIdUser();
+		} else {
+			return "conta/login";
+		}
+
+	}
+
 	@GetMapping("/detail/{id}")
 	private String getLeitorDetail(@PathVariable final int id, final Model model) {
-		final Leitor leitor = service.readById(id);
 
-		model.addAttribute("tipoUsuario", "leitor");
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 2) {
 
-		model.addAttribute("usuario", leitor);
-		return "usuario/detail";
+				final Leitor leitor = service.readById(id);
+
+				model.addAttribute("tipoUsuario", "leitor");
+
+				model.addAttribute("usuario", leitor);
+				return "usuario/detail";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
 	}
 
 	@GetMapping("/edit/{id}")
 	private String getLeitorEdit(@PathVariable final int id, final Model model) {
 
-		model.addAttribute("url", "/leitor/update");
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 2) {
 
-		final Leitor leitor = service.readById(id);
-		model.addAttribute("user", leitor);
+				model.addAttribute("url", "/leitor/update");
 
-		return "usuario/editar-perfil";
+				final Leitor leitor = service.readById(id);
+				model.addAttribute("user", leitor);
+
+				return "usuario/editar-perfil";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
 	}
 
 	@PostMapping("/update")
@@ -66,7 +102,17 @@ public class LeitorController {
 	@GetMapping("/delete/{id}")
 	private String delete(@PathVariable final int id, final Model model) {
 
-		service.delete(id);
-		return "redirect:/usuario/list";
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 2) {
+
+				service.delete(id);
+				return "redirect:/usuario/list";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
+
 	}
 }

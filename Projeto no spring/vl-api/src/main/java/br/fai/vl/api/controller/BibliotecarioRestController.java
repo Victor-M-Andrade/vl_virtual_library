@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.fai.vl.api.service.BibliotecarioService;
 import br.fai.vl.model.Bibliotecario;
+import br.fai.vl.model.Leitor;
 
 @RestController
 @RequestMapping("/api/v1/bibliotecario")
@@ -51,5 +52,11 @@ public class BibliotecarioRestController {
 	public ResponseEntity<Boolean> delete(@PathVariable("id") final int id) {
 
 		return ResponseEntity.ok(service.delete(id));
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<Integer> login(@RequestBody final Leitor entity) {
+
+		return ResponseEntity.ok(service.login(entity.getEmail(), entity.getSenha()));
 	}
 }

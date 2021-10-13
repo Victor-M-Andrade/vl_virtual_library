@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.fai.vl.model.Bibliotecario;
 import br.fai.vl.model.Leitor;
+import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.BibliotecarioService;
 import br.fai.vl.web.service.LeitorService;
 
@@ -29,7 +30,12 @@ public class UsuarioController {
 
 	@GetMapping("/perfil-usuario")
 	public String getPerfil() {
-		return "usuario/perfil-usuario";
+
+		if (!Account.isLogin()) {
+			return "redirect:/leitor/entrar";
+		} else {
+			return "redirect:/leitor/detail/" + Account.getIdUser();
+		}
 	}
 
 	@GetMapping("/notificacao")

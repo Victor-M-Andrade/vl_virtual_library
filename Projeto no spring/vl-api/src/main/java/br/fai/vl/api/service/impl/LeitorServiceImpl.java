@@ -39,8 +39,21 @@ public class LeitorServiceImpl implements LeitorService {
 
 	@Override
 	public boolean delete(final int id) {
-		// TODO Auto-generated method stub
 		return dao.delete(id);
+	}
+
+	@Override
+	public int login(final String email, final String password) {
+		final int idLeitor = Integer.valueOf(-1);
+		final List<Leitor> leitores = dao.login();
+
+		for (final Leitor leitor : leitores) {
+			if (leitor.getEmail().equals(email) && leitor.getSenha().equals(password)) {
+				return leitor.getId();
+			}
+		}
+
+		return idLeitor;
 	}
 
 }

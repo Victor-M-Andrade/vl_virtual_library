@@ -14,6 +14,7 @@ import br.fai.vl.model.Autor;
 import br.fai.vl.model.Editora;
 import br.fai.vl.model.Genero;
 import br.fai.vl.model.Livro;
+import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.AutorService;
 import br.fai.vl.web.service.EditoraService;
 import br.fai.vl.web.service.GeneroService;
@@ -42,9 +43,18 @@ public class LivroController {
 
 	@GetMapping("/list-adm")
 	public String getAcervoAdm(final Model model) {
-		final List<Livro> livroList = service.readAll();
-		model.addAttribute("listaDeLivros", livroList);
-		return "livro/acervo-adm";
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 2) {
+				final List<Livro> livroList = service.readAll();
+				model.addAttribute("listaDeLivros", livroList);
+				return "livro/acervo-adm";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
+
 	}
 
 	@GetMapping("/detail/{id}")
@@ -56,22 +66,42 @@ public class LivroController {
 
 	@GetMapping("/finalizar-emprestimo")
 	public String getFinalizarEmprestimo() {
-		return "livro/finalizar-emprestimo";
+
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 1) {
+				return "leitor/finalizar-emprestimo";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
+
 	}
 
 	@GetMapping("/register")
 	public String getRegisterLivro(final Model model, final Livro livro) {
 
-		final List<Genero> generos = generoService.readAll();
-		model.addAttribute("generoList", generos);
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 1) {
 
-		final List<Autor> autores = autorService.readAll();
-		model.addAttribute("autorList", autores);
+				final List<Genero> generos = generoService.readAll();
+				model.addAttribute("generoList", generos);
 
-		final List<Editora> editoras = editoraService.readAll();
-		model.addAttribute("editoraList", editoras);
+				final List<Autor> autores = autorService.readAll();
+				model.addAttribute("autorList", autores);
 
-		return "livro/criar-livro";
+				final List<Editora> editoras = editoraService.readAll();
+				model.addAttribute("editoraList", editoras);
+
+				return "livro/criar-livro";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
+
 	}
 
 	@PostMapping("/create")
@@ -88,19 +118,28 @@ public class LivroController {
 	@GetMapping("/edit/{id}")
 	public String getEditarLivro(@PathVariable final int id, final Model model) {
 
-		final List<Genero> generos = generoService.readAll();
-		model.addAttribute("generoList", generos);
+		if (!Account.isLogin()) {
+			return "redirect:/bibliotecario/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 2) {
 
-		final List<Autor> autores = autorService.readAll();
-		model.addAttribute("autorList", autores);
+				final List<Genero> generos = generoService.readAll();
+				model.addAttribute("generoList", generos);
 
-		final List<Editora> editoras = editoraService.readAll();
-		model.addAttribute("editoraList", editoras);
+				final List<Autor> autores = autorService.readAll();
+				model.addAttribute("autorList", autores);
 
-		final Livro livro = service.readById(id);
-		model.addAttribute("livro", livro);
+				final List<Editora> editoras = editoraService.readAll();
+				model.addAttribute("editoraList", editoras);
 
-		return "livro/editar-livro";
+				final Livro livro = service.readById(id);
+				model.addAttribute("livro", livro);
+
+				return "livro/editar-livro";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
 	}
 
 	@PostMapping("/update")
@@ -112,14 +151,22 @@ public class LivroController {
 
 	@GetMapping("/delete/{id}")
 	private String delete(@PathVariable final int id, final Model model) {
+		if (!Account.isLogin()) {
+			return "redirect:/leitor/entrar";
+		} else {
+			if (Account.getPermissionLevel() >= 2) {
 
-		service.delete(id);
+				service.delete(id);
 
-		return "redirect:/livro/list-adm";
+				return "redirect:/livro/list-adm";
+			} else {
+				return "redirect:/bibliotecario/entrar";
+			}
+		}
 	}
 
-	@GetMapping("/enviar-livro")
-	public String getEnviarLivro() {
-		return "livro/enviar-livro";
-	}
+//	@GetMapping("/enviar-livro")
+//	public String getEnviarLivro() {
+//		return "livro/enviar-livro";
+//	}
 }

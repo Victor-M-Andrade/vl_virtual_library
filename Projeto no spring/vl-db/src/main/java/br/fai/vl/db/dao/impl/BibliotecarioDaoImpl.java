@@ -140,13 +140,18 @@ public class BibliotecarioDaoImpl implements BibliotecarioDao {
 				preparedStatement.close();
 				sql = "INSERT INTO bibliotecario(registro, email, senha, pessoa_id)" + "VALUES(?, ?, ?, ?);";
 
-				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, entity.getRegistro());
 				preparedStatement.setString(2, entity.getEmail());
 				preparedStatement.setString(3, entity.getSenha());
 				preparedStatement.setInt(4, id);
 
 				preparedStatement.execute();
+				resultSet = preparedStatement.getGeneratedKeys();
+
+				if (resultSet.next()) {
+					id = resultSet.getInt("id");
+				}
 				result = true;
 			}
 			;
@@ -255,5 +260,35 @@ public class BibliotecarioDaoImpl implements BibliotecarioDao {
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
+	}
+
+	public List<Bibliotecario> login() {
+		final List<Bibliotecario> bibliotecarios = new ArrayList<Bibliotecario>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "SELECT * FROM bibliotecario;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final Bibliotecario bibliotecario = new Bibliotecario();
+				bibliotecario.setId(resultSet.getInt("id"));
+				bibliotecario.setEmail(resultSet.getString("email"));
+				bibliotecario.setSenha(resultSet.getString("senha"));
+				bibliotecarios.add(bibliotecario);
+			}
+
+		} catch (final Exception e) {
+			System.out.println("Não foi possível resgatar os Leitores ou houve um erro interno no sistema");
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return bibliotecarios;
 	}
 }

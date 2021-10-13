@@ -10,6 +10,8 @@ public interface LeitorDao {
 
 	Leitor readById(int id);
 
+	List<Leitor> login();
+
 	int create(Leitor entity);
 
 	boolean update(Leitor entity);

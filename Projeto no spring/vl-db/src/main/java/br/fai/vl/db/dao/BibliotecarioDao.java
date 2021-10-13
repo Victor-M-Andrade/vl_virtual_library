@@ -7,12 +7,14 @@ import br.fai.vl.model.Bibliotecario;
 public interface BibliotecarioDao {
 
 	List<Bibliotecario> readAll();
-	
+
 	Bibliotecario readById(int id);
-	
+
+	List<Bibliotecario> login();
+
 	int create(Bibliotecario entity);
-	
+
 	boolean update(Bibliotecario entity);
-	
+
 	boolean delete(int id);
 }

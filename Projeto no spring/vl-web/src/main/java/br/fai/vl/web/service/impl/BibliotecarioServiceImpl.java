@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import br.fai.vl.model.Bibliotecario;
+import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.BibliotecarioService;
 
 @Service
@@ -114,6 +115,32 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public boolean login(final Bibliotecario entity) {
+		final String endpoint = "http://localhost:8085//api/v1/bibliotecario/login";
+		int id = Integer.valueOf(-1);
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<Bibliotecario> httpEntity = new HttpEntity<Bibliotecario>(entity);
+			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Integer.class);
+			id = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		if (id != -1) {
+			Account.setIdUser(id);
+			Account.setLogin(true);
+			Account.setPermissionLevel(2);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

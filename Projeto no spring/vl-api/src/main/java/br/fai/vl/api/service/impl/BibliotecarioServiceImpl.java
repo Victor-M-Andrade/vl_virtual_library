@@ -34,14 +34,26 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 
 	@Override
 	public boolean update(final Bibliotecario entity) {
-		// TODO Auto-generated method stub
 		return dao.update(entity);
 	}
 
 	@Override
 	public boolean delete(final int id) {
-		// TODO Auto-generated method stub
 		return dao.delete(id);
+	}
+
+	@Override
+	public int login(final String email, final String password) {
+		final int idBibliotecario = Integer.valueOf(-1);
+		final List<Bibliotecario> bibliotecarios = dao.login();
+
+		for (final Bibliotecario bibliotecario : bibliotecarios) {
+			if (bibliotecario.getEmail().equals(email) && bibliotecario.getSenha().equals(password)) {
+				return bibliotecario.getId();
+			}
+		}
+
+		return idBibliotecario;
 	}
 
 }

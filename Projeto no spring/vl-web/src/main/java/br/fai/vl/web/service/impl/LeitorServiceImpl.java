@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import br.fai.vl.model.Leitor;
+import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.LeitorService;
 
 @Service
@@ -60,9 +61,7 @@ public class LeitorServiceImpl implements LeitorService {
 		int id = Integer.valueOf(-1);
 
 		try {
-			// faz a chamada da API
 			final RestTemplate restTemplace = new RestTemplate();
-			// receber minha entidade
 			final HttpEntity<Leitor> httpEntity = new HttpEntity<Leitor>(entity);
 			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
 					Integer.class);
@@ -116,6 +115,32 @@ public class LeitorServiceImpl implements LeitorService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public boolean login(final Leitor entity) {
+		final String endpoint = "http://localhost:8085//api/v1/leitor/login";
+		int id = Integer.valueOf(-1);
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<Leitor> httpEntity = new HttpEntity<Leitor>(entity);
+			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Integer.class);
+			id = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		if (id != -1) {
+			Account.setIdUser(id);
+			Account.setLogin(true);
+			Account.setPermissionLevel(1);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

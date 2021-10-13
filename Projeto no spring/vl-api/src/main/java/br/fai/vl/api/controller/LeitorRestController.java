@@ -52,4 +52,10 @@ public class LeitorRestController {
 
 		return ResponseEntity.ok(service.delete(id));
 	}
+
+	@PostMapping("/login")
+	public ResponseEntity<Integer> login(@RequestBody final Leitor entity) {
+
+		return ResponseEntity.ok(service.login(entity.getEmail(), entity.getSenha()));
+	}
 }

@@ -15,4 +15,6 @@ public interface BibliotecarioService {
 	boolean update(Bibliotecario entity);
 
 	boolean delete(int id);
+
+	boolean login(Bibliotecario entity);
 }

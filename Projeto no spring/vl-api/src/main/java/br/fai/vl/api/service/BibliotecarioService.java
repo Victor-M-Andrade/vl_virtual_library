@@ -10,6 +10,8 @@ public interface BibliotecarioService {
 
 	Bibliotecario readById(int id);
 
+	int login(String email, String password);
+
 	int create(Bibliotecario entity);
 
 	boolean update(Bibliotecario entity);

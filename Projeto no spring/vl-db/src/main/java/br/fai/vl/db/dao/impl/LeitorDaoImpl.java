@@ -147,6 +147,7 @@ public class LeitorDaoImpl implements LeitorDao {
 
 				preparedStatement.execute();
 				resultSet = preparedStatement.getGeneratedKeys();
+
 				if (resultSet.next()) {
 					id = resultSet.getInt("id");
 				}
@@ -258,6 +259,36 @@ public class LeitorDaoImpl implements LeitorDao {
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
+	}
+
+	public List<Leitor> login() {
+		final List<Leitor> leitors = new ArrayList<Leitor>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "SELECT * FROM leitor;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final Leitor leitor = new Leitor();
+				leitor.setId(resultSet.getInt("id"));
+				leitor.setEmail(resultSet.getString("email"));
+				leitor.setSenha(resultSet.getString("senha"));
+				leitors.add(leitor);
+			}
+
+		} catch (final Exception e) {
+			System.out.println("Não foi possível resgatar os Leitores ou houve um erro interno no sistema");
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return leitors;
 	}
 
 }
