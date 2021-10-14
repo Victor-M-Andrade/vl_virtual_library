@@ -15,4 +15,6 @@ public interface EmprestimoService {
 	boolean update(Emprestimo entity);
 
 	boolean delete(int id);
+
+	boolean terminateLoan(int idEmprestimo);
 }

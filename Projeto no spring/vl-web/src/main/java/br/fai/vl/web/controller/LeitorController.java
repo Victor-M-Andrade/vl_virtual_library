@@ -39,9 +39,9 @@ public class LeitorController {
 	private String getLeitorDetail(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/leitor/entrar";
 		} else {
-			if (Account.getPermissionLevel() >= 2) {
+			if (Account.getPermissionLevel() >= 1) {
 
 				final Leitor leitor = service.readById(id);
 
@@ -50,7 +50,7 @@ public class LeitorController {
 				model.addAttribute("usuario", leitor);
 				return "usuario/detail";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/leitor/entrar";
 			}
 		}
 	}
@@ -59,9 +59,9 @@ public class LeitorController {
 	private String getLeitorEdit(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/leitor/entrar";
 		} else {
-			if (Account.getPermissionLevel() >= 2) {
+			if (Account.getPermissionLevel() >= 1) {
 
 				model.addAttribute("url", "/leitor/update");
 
@@ -70,7 +70,7 @@ public class LeitorController {
 
 				return "usuario/editar-perfil";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/leitor/entrar";
 			}
 		}
 	}
@@ -105,7 +105,7 @@ public class LeitorController {
 		if (!Account.isLogin()) {
 			return "redirect:/bibliotecario/entrar";
 		} else {
-			if (Account.getPermissionLevel() >= 2) {
+			if (Account.getPermissionLevel() >= 1) {
 
 				service.delete(id);
 				return "redirect:/usuario/list";

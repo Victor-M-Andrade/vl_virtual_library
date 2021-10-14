@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -80,7 +82,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		return emprestimo;
 	}
 
-	public int create(final int idExemplar) {
+	public int create(final int idLeitor) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -88,13 +90,13 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		String sql = "";
 
 		try {
-			sql = "insert into emprestimo(codigo, datarealizacao, leitor_id) " + " values (default, default, ?)";
+			sql = "insert into emprestimo(codigo, datarealizacao, leitor_id) " + " values (default, null, ?)";
 
 			connection = ConnectionFactory.getConnection();
 			connection.setAutoCommit(false);
 
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setInt(1, idExemplar);
+			preparedStatement.setInt(1, idLeitor);
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -104,18 +106,17 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 				preparedStatement.close();
 
 				sql = "insert into emprestimo_exemplar(datadevolucao, devolvido, dataefetivadevolucao,"
-						+ "multa, emprestimo_id, exemplar_id) " + "values(default, default, null, default, ?, ?);";
+						+ "multa, emprestimo_id, exemplar_id) " + "values(null, default, null, default, ?, ?);";
 
-				connection = ConnectionFactory.getConnection();
 				preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, id);
-				preparedStatement.setInt(2, idExemplar);
+				preparedStatement.setInt(2, idLeitor);
 
 				preparedStatement.execute();
 				resultSet = preparedStatement.getGeneratedKeys();
 
 				if (!resultSet.next()) {
-					id = -10;
+					id = -1;
 				}
 			}
 
@@ -143,7 +144,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		PreparedStatement preparedStatement = null;
 
 		try {
-			final String sql = "UPDATE emprestimo SET datarealizacao = ?, periodo = ? WHERE id = ?;";
+			String sql = "UPDATE emprestimo SET datarealizacao = ? WHERE id = ?;";
 
 			connection = ConnectionFactory.getConnection();
 			connection.setAutoCommit(false);
@@ -152,7 +153,26 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 			preparedStatement.setInt(2, entity.getId());
 
 			preparedStatement.execute();
-			connection.commit();
+			if (preparedStatement.getUpdateCount() != -1) {
+
+				preparedStatement.close();
+				sql = "UPDATE emprestimo_exemplar SET datadevolucao = ?, devolvido = ?, dataefetivadevolucao = ?, "
+						+ "multa = ? WHERE emprestimo_id = ?";
+
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setTimestamp(1, entity.getDataRealizacao());
+				preparedStatement.setBoolean(2, entity.isDevolvido());
+				preparedStatement.setTimestamp(3, entity.getDataEfetivaDevolucao());
+				preparedStatement.setBigDecimal(4, entity.getMulta());
+				preparedStatement.setInt(5, entity.getId());
+
+				preparedStatement.execute();
+				if (preparedStatement.getUpdateCount() != -1) {
+					connection.commit();
+				} else {
+					connection.rollback();
+				}
+			}
 
 			return true;
 
@@ -263,7 +283,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		return emprestimosAbertos;
 	}
 
-	public int addToCart(final int emprestimoId, final int exemplarId) {
+	public int addToLoads(final int emprestimoId, final int exemplarId) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -272,7 +292,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 		try {
 			sql = "insert into emprestimo_exemplar(datadevolucao, devolvido, dataefetivadevolucao,"
-					+ "multa, emprestimo_id, exemplar_id) " + "values(default, default, null, default, ?, ?);";
+					+ "multa, emprestimo_id, exemplar_id) " + "values(null, default, null, default, ?, ?);";
 
 			connection = ConnectionFactory.getConnection();
 			connection.setAutoCommit(false);
@@ -307,4 +327,83 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		return id;
 	}
 
+	public Map<Integer, Map<Integer, String>> checkOpenUserLoans(final int idLeitor) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+
+		final Map<Integer, Map<Integer, String>> emprestimosAbertos = new HashMap<Integer, Map<Integer, String>>();
+
+		try {
+			final String sql = "select E.id as Emprestimo_id, EE.id as Exemplar_id, L.titulo from emprestimo E "
+					+ "inner join emprestimo_Exemplar EE on E.id = EE.emprestimo_id "
+					+ "inner join Exemplar Ex on Ex.id = EE.exemplar_id " + "inner join Livro L on L.id = Ex.livro_id "
+					+ "where E.datarealizacao is null and E.leitor_id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+			prepareStatement = connection.prepareStatement(sql);
+			prepareStatement.setInt(1, idLeitor);
+
+			resultSet = prepareStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final Map<Integer, String> exemplarLivro = new HashMap<Integer, String>();
+				exemplarLivro.put(resultSet.getInt("Exemplar_id"), resultSet.getString("titulo"));
+				emprestimosAbertos.put(resultSet.getInt("Emprestimo_id"), exemplarLivro);
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, prepareStatement, connection);
+		}
+
+		return emprestimosAbertos;
+	}
+
+	public boolean terminateLoan(final int idEmprestimo) {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			String sql = "UPDATE emprestimo SET datarealizacao = now() WHERE id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idEmprestimo);
+
+			preparedStatement.execute();
+			if (preparedStatement.getUpdateCount() != -1) {
+
+				preparedStatement.close();
+				sql = "UPDATE emprestimo_exemplar SET datadevolucao = default WHERE emprestimo_id = ?";
+
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, idEmprestimo);
+
+				preparedStatement.execute();
+				if (preparedStatement.getUpdateCount() != -1) {
+					connection.commit();
+				} else {
+					connection.rollback();
+				}
+			}
+
+			return true;
+
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
 }

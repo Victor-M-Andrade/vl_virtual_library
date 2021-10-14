@@ -38,7 +38,7 @@ public class EmprestimoRestController {
 	// EmprestimoDTO
 	// - livroId
 	// - lalaId
-	@GetMapping("/create/{idLivro}-{idUsuario}")
+	@GetMapping("/create/{idLivro}/{idUsuario}")
 	public ResponseEntity<Integer> create(@PathVariable("idLivro") final int idLivroSolicitado,
 			@PathVariable("idUsuario") final int userId) {
 
@@ -55,5 +55,11 @@ public class EmprestimoRestController {
 	public ResponseEntity<Boolean> delete(@PathVariable("id") final int id) {
 
 		return ResponseEntity.ok(service.delete(id));
+	}
+
+	@GetMapping("/terminate-loan/{id}")
+	public ResponseEntity<Boolean> terminateLoan(@PathVariable("id") final int id) {
+
+		return ResponseEntity.ok(service.terminateLoan(id));
 	}
 }

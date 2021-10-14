@@ -1,6 +1,7 @@
 package br.fai.vl.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import br.fai.vl.model.Emprestimo;
 
@@ -20,5 +21,9 @@ public interface EmprestimoDao {
 
 	List<Integer> checkOpenReaderLoads(int leitoId);
 
-	int addToCart(int emprestimoId, int exemplarId);
+	int addToLoads(int emprestimoId, int exemplarId);
+
+	Map<Integer, Map<Integer, String>> checkOpenUserLoans(final int idLeitor);
+
+	boolean terminateLoan(int idEmprestimo);
 }
