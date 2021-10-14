@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.fai.vl.model.Autor;
 import br.fai.vl.model.Editora;
 import br.fai.vl.model.Genero;
+import br.fai.vl.model.Leitor;
 import br.fai.vl.model.Livro;
 import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.AutorService;
 import br.fai.vl.web.service.EditoraService;
+import br.fai.vl.web.service.EmprestimoService;
 import br.fai.vl.web.service.GeneroService;
+import br.fai.vl.web.service.LeitorService;
 import br.fai.vl.web.service.LivroService;
 
 @Controller
@@ -32,9 +35,12 @@ public class LivroController {
 	private AutorService autorService;
 	@Autowired
 	private EditoraService editoraService;
+	@Autowired
+	private LeitorService leitorService;
+	@Autowired
+	private EmprestimoService emprestimoService;
 
 	@GetMapping("/list")
-
 	public String getAcervo(final Model model) {
 		final List<Livro> livroList = service.readAll();
 		model.addAttribute("listaDeLivros", livroList);
@@ -61,19 +67,29 @@ public class LivroController {
 	public String getDescricaoLivro(@PathVariable final int id, final Model model) {
 		final Livro livro = service.readById(id);
 		model.addAttribute("detalheDoLivro", livro);
+		model.addAttribute("idLivro", id);
 		return "livro/descricao-livro";
 	}
 
-	@GetMapping("/finalizar-emprestimo")
-	public String getFinalizarEmprestimo() {
+	@GetMapping("/finalizar-emprestimo/{idLivro}")
+	public String getFinalizarEmprestimo(@PathVariable final int idLivro, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/leitor/entrar";
 		} else {
-			if (Account.getPermissionLevel() >= 1) {
-				return "leitor/finalizar-emprestimo";
+			model.addAttribute("idLivro", idLivro);
+
+			if (Account.getPermissionLevel() == 1) {
+
+				final Leitor leitor = leitorService.readById(Account.getIdUser());
+
+				model.addAttribute("leitor", leitor.getId());
+				model.addAttribute("dadosDoUsuario", leitor);
+
+				return "livro/finalizar-emprestimo";
+
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/leitor/entrar";
 			}
 		}
 
@@ -165,8 +181,15 @@ public class LivroController {
 		}
 	}
 
-//	@GetMapping("/enviar-livro")
-//	public String getEnviarLivro() {
-//		return "livro/enviar-livro";
-//	}
+	@PostMapping("/emprestrar-livro/{idLivro}/{leitorId}")
+	public String getEnviarLivro(@PathVariable final int idLivro, @PathVariable final int leitorId) {
+
+		final int id = emprestimoService.create(idLivro, leitorId);
+		if (id != -1) {
+			return "redirect:/account/my-loans";
+		} else {
+			return "redirect:/account/my-loans";
+		}
+
+	}
 }

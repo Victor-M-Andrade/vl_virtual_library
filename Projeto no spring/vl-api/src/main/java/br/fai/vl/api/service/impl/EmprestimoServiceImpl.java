@@ -36,13 +36,20 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		if (emprestimoList != null && emprestimoList.size() >= 1) {
 
 			emprestimoAberto = dao.checkOpenReaderLoads(leitorId);
+
 			if (emprestimoAberto == null || emprestimoAberto.size() == 0) {
-				return dao.create(emprestimoList.get(0));
+
+				System.out.println("irá criar um novo empréstimo");
+				return dao.create(leitorId);
+
 			} else {
-				return dao.addToCart(emprestimoAberto.get(0), emprestimoList.get(0));
+				System.out.println("Ainda tem que finalizar o empréstimo");
+				return dao.addToLoads(emprestimoAberto.get(0), emprestimoList.get(0));
+
 			}
 
 		} else {
+			System.out.println("não pode fazer empréstimo");
 			return -1;
 		}
 	}
@@ -55,6 +62,16 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	@Override
 	public boolean delete(final int id) {
 		return dao.delete(id);
+	}
+
+	@Override
+	public boolean terminateLoan(final int idEmprestimo) {
+
+		if (dao.terminateLoan(idEmprestimo)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

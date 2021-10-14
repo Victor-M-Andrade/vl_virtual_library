@@ -10,7 +10,7 @@ public interface EmprestimoService {
 
 	Emprestimo readById(int id);
 
-	int create(int idLivro);
+	int create(int idLivro, int idUser);
 
 	boolean update(Emprestimo entity);
 

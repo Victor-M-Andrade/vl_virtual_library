@@ -55,15 +55,15 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	}
 
 	@Override
-	public int create(final int idLivro) {
-		final String endpoint = "http://localhost:8085//api/v1/emprestimo/create/" + idLivro;
+	public int create(final int idLivro, final int idUser) {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/create/" + idLivro + "/" + idUser;
 		int id = Integer.valueOf(-1);
 
 		try {
 			// faz a chamada da API
 			final RestTemplate restTemplace = new RestTemplate();
 			// receber minha entidade
-			final HttpEntity<Integer> httpEntity = new HttpEntity<Integer>(idLivro);
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
 					Integer.class);
 			id = responseEntity.getBody();
