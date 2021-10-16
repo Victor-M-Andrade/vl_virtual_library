@@ -27,6 +27,8 @@ import br.fai.vl.web.service.LivroService;
 @RequestMapping("/livro")
 public class LivroController {
 
+	boolean erro = false;
+
 	@Autowired
 	private LivroService service;
 	@Autowired
@@ -66,8 +68,13 @@ public class LivroController {
 	@GetMapping("/detail/{id}")
 	public String getDescricaoLivro(@PathVariable final int id, final Model model) {
 		final Livro livro = service.readById(id);
+
+		model.addAttribute("error", erro);
 		model.addAttribute("detalheDoLivro", livro);
 		model.addAttribute("idLivro", id);
+
+		erro = false;
+
 		return "livro/descricao-livro";
 	}
 
@@ -182,13 +189,16 @@ public class LivroController {
 	}
 
 	@PostMapping("/emprestrar-livro/{idLivro}/{leitorId}")
-	public String getEnviarLivro(@PathVariable final int idLivro, @PathVariable final int leitorId) {
+	public String getEnviarLivro(@PathVariable final int idLivro, @PathVariable final int leitorId, final Model model) {
 
 		final int id = emprestimoService.create(idLivro, leitorId);
 		if (id != -1) {
 			return "redirect:/account/my-loans";
 		} else {
-			return "redirect:/account/my-loans";
+
+			erro = true;
+
+			return "redirect:/livro/detail/" + idLivro;
 		}
 
 	}

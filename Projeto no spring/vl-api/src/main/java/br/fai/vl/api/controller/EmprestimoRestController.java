@@ -7,12 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.fai.vl.api.service.EmprestimoService;
+import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Emprestimo;
 
 @RestController
@@ -57,9 +59,21 @@ public class EmprestimoRestController {
 		return ResponseEntity.ok(service.delete(id));
 	}
 
+	@GetMapping("/open-user-loams/{idLeitor}")
+	public ResponseEntity<List<EmprestimoDTO>> checkOpenUserLoans(@PathVariable("idLeitor") final int idLeitor) {
+
+		return ResponseEntity.ok(service.checkOpenUserLoans(idLeitor));
+	}
+
 	@GetMapping("/terminate-loan/{id}")
 	public ResponseEntity<Boolean> terminateLoan(@PathVariable("id") final int id) {
 
 		return ResponseEntity.ok(service.terminateLoan(id));
+	}
+
+	@PostMapping("/remove-loan-book")
+	public ResponseEntity<Boolean> removeLoanBook(@RequestBody final EmprestimoDTO entity) {
+
+		return ResponseEntity.ok(service.removeLoanBook(entity));
 	}
 }

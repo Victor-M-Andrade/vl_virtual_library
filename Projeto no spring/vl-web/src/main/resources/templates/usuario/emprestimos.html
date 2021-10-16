@@ -7,11 +7,13 @@
 <body>
 	<div layout:fragment="body">
 
-<br><br><br>
+		<br>
+		<br>
+		<br>
 
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">Carrinho</h1>
+				<h1 class="mt-4">Finalizar Emprestimo</h1>
 
 				<div class="row">
 
@@ -24,7 +26,7 @@
 										width="200" class="rounded-circle img-fluid" />
 								</div>
 								<div class="mb-2">
-									<p class="text-primary text-center">Adm</p>
+									<p class="text-primary text-center">User</p>
 								</div>
 							</div>
 						</div>
@@ -42,51 +44,35 @@
 										cellspacing="0">
 										<thead>
 											<tr>
-												<th>Id</th>
 												<th>Capa</th>
+												<th>Exemplar</th>
 												<th>Livro</th>
-												<th>Status</th>
+												<th>Opção</th>
 											</tr>
 										</thead>
 										<tfoot>
 											<tr>
-												<th>Id</th>
 												<th>Capa</th>
+												<th>Exemplar</th>
 												<th>Livro</th>
-												<th>Status</th>
+												<th>Opção</th>
 											</tr>
 										</tfoot>
 
 
 										<tbody>
-											<tr>
-												<td>1</td>
+											<tr th:each="exemplares : ${openLoans}">
 												<td><img
 													src="../resources/assets/img/capa-livros/a-arte-da-guerra.png"
 													alt="capa" width="100px"></td>
-												<td>A Arte da Guerra</td>
+												<td th:text="${exemplares.idExemplar}">A Arte da Guerra</td>
+												<td th:text="${exemplares.nomeLivro}">A Arte da Guerra</td>
 												<td>
 													<div class="col-12">
-														<button class="btn btn-danger">
+														<a class="btn btn-danger"
+															th:href="@{/account/remove-Loan-Book/{idEmprestimo}/{idExemplar} (idEmprestimo = ${exemplares.idEmprestimo}, idExemplar = ${exemplares.idExemplar})}">
 															<i class="fas fa-times"></i> Retirar do Carrinho
-														</button>
-													</div>
-												</td>
-											</tr>
-										</tbody>
-
-										<tbody>
-											<tr>
-												<td>2</td>
-												<td><img
-													src="../resources/assets/img/capa-livros/senhor-dos-aneis.png"
-													alt="capa" width="100px"></td>
-												<td>O Senhor dos Anéis</td>
-												<td>
-													<div class="col-12">
-														<button class="btn btn-danger">
-															<i class="fas fa-times"></i> Retirar do Carrinho
-														</button>
+														</a>
 													</div>
 												</td>
 											</tr>
@@ -103,13 +89,22 @@
 
 
 								<div class="row">
-									<div class="col-6">
-										<a th:href="@{/livro/finalizar-emprestimo}" class="btn btn-success col-12"><i
-											class="fas fa-check"></i> FINALIZAR EMPRÉSTIMO</a>
+									<div class="alert alert-danger" th:if="${idEmprestimo == -1}">
+										<span class="font-weight-bold align-middle">Desculpe!
+											mas nenhum livro foi solicitado para empréstimo</span>
 									</div>
 									<div class="col-6">
-										<a href="#" class="btn btn-danger col-12"><i
-											class="fas fa-times"></i> CANCELAR Emprestimos</a>
+										<a
+											th:href="@{/account/terminate-loan/{id} (id = ${idEmprestimo})}"
+											th:unless="${idEmprestimo == -1 }"
+											class="btn btn-success col-12"><i class="fas fa-check"></i>
+											FINALIZAR EMPRÉSTIMO</a>
+									</div>
+									<div class="col-6">
+										<a th:href="@{/account/delete/{id} (id = ${idEmprestimo})}" 
+											class="btn btn-danger col-12"
+											th:unless="${idEmprestimo == -1 }"><i
+											class="fas fa-times"></i> CANCELAR EMPRESTIMO</a>
 									</div>
 								</div>
 

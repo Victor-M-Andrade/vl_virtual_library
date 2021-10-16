@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Emprestimo;
 import br.fai.vl.web.service.EmprestimoService;
 
@@ -98,7 +99,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 	@Override
 	public boolean delete(final int id) {
-		final String endpoint = "http://localhost:8085//api/v1/emprestimo/delete/" + id;
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/delete/" + id;
 		boolean response = false;
 
 		try {
@@ -108,6 +109,65 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 					httpEntity, Boolean.class);
 
 			response = requestResponse.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public List<EmprestimoDTO> checkOpenUserLoans(final int idLeitor) {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/open-user-loams/" + idLeitor;
+		List<EmprestimoDTO> response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<EmprestimoDTO[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+					httpEntity, EmprestimoDTO[].class);
+
+			response = Arrays.asList(requestResponse.getBody());
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public boolean terminateLoan(final int idEmprestimo) {
+		final String endpoint = "http://localhost:8085//api/v1/emprestimo/terminate-loan/" + idEmprestimo;
+		boolean response = false;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+					Boolean.class);
+			response = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public boolean removeLoanBook(final EmprestimoDTO entity) {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/remove-loan-book";
+		boolean response = false;
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<EmprestimoDTO> httpEntity = new HttpEntity<EmprestimoDTO>(entity);
+			final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Boolean.class);
+			response = responseEntity.getBody();
 
 		} catch (final Exception e) {
 			System.out.println(e.getMessage());

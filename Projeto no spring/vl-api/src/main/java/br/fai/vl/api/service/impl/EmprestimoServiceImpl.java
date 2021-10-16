@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.fai.vl.api.service.EmprestimoService;
 import br.fai.vl.db.dao.EmprestimoDao;
+import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Emprestimo;
 
 @Service
@@ -65,13 +66,20 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	}
 
 	@Override
+	public List<EmprestimoDTO> checkOpenUserLoans(final int idLeitor) {
+		return dao.checkOpenUserLoans(idLeitor);
+	}
+
+	@Override
 	public boolean terminateLoan(final int idEmprestimo) {
 
-		if (dao.terminateLoan(idEmprestimo)) {
-			return true;
-		} else {
-			return false;
-		}
+		return dao.terminateLoan(idEmprestimo);
+	}
+
+	@Override
+	public boolean removeLoanBook(final EmprestimoDTO entity) {
+
+		return dao.removeLoanBook(entity);
 	}
 
 }

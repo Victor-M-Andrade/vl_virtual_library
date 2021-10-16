@@ -2,6 +2,7 @@ package br.fai.vl.api.service;
 
 import java.util.List;
 
+import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Emprestimo;
 
 public interface EmprestimoService {
@@ -16,5 +17,10 @@ public interface EmprestimoService {
 
 	boolean delete(int id);
 
+	List<EmprestimoDTO> checkOpenUserLoans(final int idLeitor);
+
 	boolean terminateLoan(int idEmprestimo);
+
+	boolean removeLoanBook(EmprestimoDTO entity);
+
 }

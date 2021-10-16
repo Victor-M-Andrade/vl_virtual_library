@@ -1,8 +1,8 @@
 package br.fai.vl.db.dao;
 
 import java.util.List;
-import java.util.Map;
 
+import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Emprestimo;
 
 public interface EmprestimoDao {
@@ -23,7 +23,9 @@ public interface EmprestimoDao {
 
 	int addToLoads(int emprestimoId, int exemplarId);
 
-	Map<Integer, Map<Integer, String>> checkOpenUserLoans(final int idLeitor);
+	List<EmprestimoDTO> checkOpenUserLoans(int idLeitor);
 
 	boolean terminateLoan(int idEmprestimo);
+
+	boolean removeLoanBook(EmprestimoDTO entity);
 }

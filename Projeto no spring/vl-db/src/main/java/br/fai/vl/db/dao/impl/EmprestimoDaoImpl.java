@@ -7,14 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import br.fai.vl.db.connection.ConnectionFactory;
 import br.fai.vl.db.dao.EmprestimoDao;
+import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Emprestimo;
 
 @Repository
@@ -193,21 +192,28 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 	public boolean delete(final int id) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		boolean sucess = false;
+		final boolean sucess = false;
 
 		try {
-			final String sql = "select deleteBorrow(?) as sucess;";
+			String sql = "DELETE FROM emprestimo_exemplar where emprestimo_id = ?;";
 
 			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 
-			resultSet = preparedStatement.executeQuery();
+			preparedStatement.execute();
+			preparedStatement.close();
 
-			if (resultSet.next()) {
-				sucess = resultSet.getBoolean("sucess");
-			}
+			sql = "DELETE FROM emprestimo where id = ?;";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+
+			preparedStatement.execute();
+			connection.commit();
+
+			return true;
 
 		} catch (final Exception e) {
 			try {
@@ -216,11 +222,11 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 				System.out.println(e2.getMessage());
 			}
 
+			return false;
+
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
-
-		return sucess;
 
 	}
 
@@ -327,15 +333,15 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		return id;
 	}
 
-	public Map<Integer, Map<Integer, String>> checkOpenUserLoans(final int idLeitor) {
+	public List<EmprestimoDTO> checkOpenUserLoans(final int idLeitor) {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 
-		final Map<Integer, Map<Integer, String>> emprestimosAbertos = new HashMap<Integer, Map<Integer, String>>();
+		final List<EmprestimoDTO> emprestimosAbertos = new ArrayList<EmprestimoDTO>();
 
 		try {
-			final String sql = "select E.id as Emprestimo_id, EE.id as Exemplar_id, L.titulo from emprestimo E "
+			final String sql = "select E.id as Emprestimo_id, Ex.id as Exemplar_id, L.titulo from emprestimo E "
 					+ "inner join emprestimo_Exemplar EE on E.id = EE.emprestimo_id "
 					+ "inner join Exemplar Ex on Ex.id = EE.exemplar_id " + "inner join Livro L on L.id = Ex.livro_id "
 					+ "where E.datarealizacao is null and E.leitor_id = ?;";
@@ -347,9 +353,11 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 			resultSet = prepareStatement.executeQuery();
 
 			while (resultSet.next()) {
-				final Map<Integer, String> exemplarLivro = new HashMap<Integer, String>();
-				exemplarLivro.put(resultSet.getInt("Exemplar_id"), resultSet.getString("titulo"));
-				emprestimosAbertos.put(resultSet.getInt("Emprestimo_id"), exemplarLivro);
+				final EmprestimoDTO openLoan = new EmprestimoDTO();
+				openLoan.setIdEmprestimo(resultSet.getInt("Emprestimo_id"));
+				openLoan.setIdExemplar(resultSet.getInt("Exemplar_id"));
+				openLoan.setNomeLivro(resultSet.getString("titulo"));
+				emprestimosAbertos.add(openLoan);
 			}
 
 		} catch (final Exception e) {
@@ -402,6 +410,38 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 			return false;
 
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
+
+	public boolean removeLoanBook(final EmprestimoDTO entity) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			final String sql = "delete from emprestimo_exemplar where emprestimo_id = ? and exemplar_id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+
+			connection.setAutoCommit(false);
+
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, entity.getIdEmprestimo());
+			preparedStatement.setInt(2, entity.getIdExemplar());
+
+			preparedStatement.execute();
+			connection.commit();
+			return true;
+
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final SQLException e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
