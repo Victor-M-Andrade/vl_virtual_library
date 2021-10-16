@@ -66,7 +66,7 @@
 									<br> <br>
 									<div class="row col-12">
 										<div class="col-6">
-											<a href="#" class="btn btn-success col-12"><i
+											<a th:href="@{/entrega/solicitar-entrega/{idEmprestimo} (idEmprestimo = ${lastLoan.id})}" class="btn btn-success col-12"><i
 												class="fas fa-motorcycle fa-lg"></i> SOLICITAR ENTREGA</a>
 										</div>
 										<div class="col-6">
@@ -77,25 +77,14 @@
 									<br> <br>
 									<div class="row col-12">
 										<div class="col-6">
-											<input type="text" class="form-control" readonly
-												placeholder="Status da solicitação">
+											<label type="text" class="form-control" th:text="${situacaoEntrega}" readonly></label>
 										</div>
 										<div class="col-6">
 											<input type="text" class="form-control" readonlyd
 												placeholder="Status da solicitação">
 										</div>
 									</div>
-									<br> <br>
-									<div class="row col-12">
-										<div class="col-6">
-											<a href="#" class="btn btn-danger col-12 font-weight-bold">Já
-												recebi este empréstimo</a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="btn btn-danger col-12 font-weight-bold">Empréstimo
-												já devolvido</a>
-										</div>
-									</div>
+
 								</div>
 							</div>
 						</div>

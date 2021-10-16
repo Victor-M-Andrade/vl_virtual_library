@@ -15,4 +15,6 @@ public interface EntregaDao {
 	boolean update(Entrega entity);
 
 	boolean delete(int id);
+
+	Entrega checkDeliveryRequest(final int idEmprestimo, final int idLeitor);
 }

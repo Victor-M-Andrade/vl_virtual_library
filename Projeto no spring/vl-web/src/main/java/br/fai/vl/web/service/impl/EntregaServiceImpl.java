@@ -37,7 +37,7 @@ public class EntregaServiceImpl implements EntregaService {
 
 	@Override
 	public Entrega readById(final int id) {
-		final String endpoint = "http://localhost:8085/api/v1/entrega/read-by-id";
+		final String endpoint = "http://localhost:8085/api/v1/entrega/read-by-id" + id;
 		Entrega response = null;
 
 		try {
@@ -56,7 +56,7 @@ public class EntregaServiceImpl implements EntregaService {
 
 	@Override
 	public int create(final Entrega entity) {
-		final String endpoint = "http://localhost:8085//api/v1/entrega/create";
+		final String endpoint = "http://localhost:8085/api/v1/entrega/create";
 		int id = Integer.valueOf(-1);
 
 		try {
@@ -109,6 +109,26 @@ public class EntregaServiceImpl implements EntregaService {
 
 			response = requestResponse.getBody();
 
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public String checkDeliveryRequest(final int idEmprestimo, final int idLeitor) {
+		final String endpoint = "http://localhost:8085/api/v1/entrega/check-delivery-request/" + idEmprestimo + "/"
+				+ idLeitor;
+		String response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<String> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+					String.class);
+
+			response = requestResponse.getBody();
 		} catch (final Exception e) {
 			System.out.println(e.getMessage());
 		}

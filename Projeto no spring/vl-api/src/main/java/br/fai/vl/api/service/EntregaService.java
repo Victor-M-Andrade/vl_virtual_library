@@ -14,4 +14,6 @@ public interface EntregaService {
 	boolean update(Entrega entity);
 
 	boolean delete(int id);
+
+	String checkDeliveryRequest(int idEmprestimo, int idLeitor);
 }

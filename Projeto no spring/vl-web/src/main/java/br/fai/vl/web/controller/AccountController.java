@@ -17,6 +17,7 @@ import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.AccountService;
 import br.fai.vl.web.service.BibliotecarioService;
 import br.fai.vl.web.service.EmprestimoService;
+import br.fai.vl.web.service.EntregaService;
 import br.fai.vl.web.service.LeitorService;
 
 @Controller
@@ -34,6 +35,9 @@ public class AccountController {
 
 	@Autowired
 	private EmprestimoService emprestimoService;
+
+	@Autowired
+	private EntregaService entregaService;
 
 	@GetMapping("/editar-perfil")
 	public String getEditar() {
@@ -77,6 +81,9 @@ public class AccountController {
 				final Emprestimo emprestimo = emprestimoService.lastLoanRecord(Account.getIdUser());
 				if (emprestimo != null) {
 					model.addAttribute("lastLoan", emprestimo);
+
+					model.addAttribute("situacaoEntrega",
+							entregaService.checkDeliveryRequest(emprestimo.getId(), Account.getIdUser()));
 
 					return "usuario/notificacao";
 				} else {

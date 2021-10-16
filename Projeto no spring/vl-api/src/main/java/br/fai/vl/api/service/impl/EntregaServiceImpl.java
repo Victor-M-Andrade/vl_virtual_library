@@ -44,4 +44,26 @@ public class EntregaServiceImpl implements EntregaService {
 
 		return dao.delete(id);
 	}
+
+	@Override
+	public String checkDeliveryRequest(final int idEmprestimo, final int idLeitor) {
+
+		final Entrega entrega = dao.checkDeliveryRequest(idEmprestimo, idLeitor);
+
+		if (entrega != null) {
+			if (entrega.getDataEntrega() == null) {
+				if (entrega.isEntregue() == false) {
+					return "Solicitação reprovada";
+				} else {
+					return "Solicitação em aprovação";
+				}
+
+			} else {
+				return "Previsão de entrega: " + entrega.getDataEntrega();
+			}
+		} else {
+			return "Entrega não solicitada";
+		}
+
+	}
 }

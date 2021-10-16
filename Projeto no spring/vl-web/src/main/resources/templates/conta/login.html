@@ -33,25 +33,17 @@
 										<label class="small mb-1" for="inputPassword">Senha</label>
 										<input class="form-control py-4" id="inputPassword" type="password"
 											placeholder="Insira a senha" name="password" th:field="${leitor.senha}" />
-									</div>								
-									<div class="form-group">
-										<div class="custom-control custom-checkbox">
-											<input class="custom-control-input"
-												id="rememberPasswordCheck" type="checkbox" /><label
-												class="custom-control-label" for="rememberPasswordCheck">Lembre-me</label>
-										</div>
 									</div>
-									
 									<div
 										class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-										<a class="small" th:href="@{/conta/recover-password}">Esqueceu a senha?</a>
+										<a class="small" th:href="@{/account/recover-password}">Esqueceu a senha?</a>
 										<button class="btn btn-primary" type="submit"> Login</button>
 									</div>
 								</form>
 							</div>
 							<div class="card-footer text-center">
 								<div class="small">
-									<a th:href="@{/conta/register}">Precisa de uma conta? Cadastre-se!</a>
+									<a th:href="@{/leitor/entrar}">Precisa de uma conta? Cadastre-se!</a>
 								</div>
 							</div>
 						</div>

@@ -89,7 +89,7 @@ public class EntregaDaoImpl implements EntregaDao {
 		ResultSet resultSet = null;
 
 		final String sql = "INSERT INTO entrega(datasolicitacao, dataentrega, entregue, leitor_id, emprestimo_id) "
-				+ "VALUES(?, ?, ?, ?, ?);";
+				+ "VALUES(default, null, true, ?, ?);";
 		int id = Integer.valueOf(-1);
 
 		try {
@@ -97,11 +97,8 @@ public class EntregaDaoImpl implements EntregaDao {
 
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setTimestamp(1, entity.getDataSolicitacao());
-			preparedStatement.setTimestamp(2, entity.getDataEntrega());
-			preparedStatement.setBoolean(3, entity.isEntregue());
-			preparedStatement.setInt(4, entity.getLeitorId());
-			preparedStatement.setInt(5, entity.getEmprestimoId());
+			preparedStatement.setInt(1, entity.getLeitorId());
+			preparedStatement.setInt(2, entity.getEmprestimoId());
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -184,4 +181,37 @@ public class EntregaDaoImpl implements EntregaDao {
 		}
 	}
 
+	public Entrega checkDeliveryRequest(final int idEmprestimo, final int idLeitor) {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		Entrega entrega = null;
+
+		try {
+			final String sql = "SELECT * FROM entrega WHERE emprestimo_id = ? and leitor_id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idEmprestimo);
+			preparedStatement.setInt(2, idLeitor);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				entrega = new Entrega();
+				entrega.setDataSolicitacao(resultSet.getTimestamp("datasolicitacao"));
+				entrega.setDataEntrega(resultSet.getTimestamp("dataentrega"));
+				entrega.setEntregue(resultSet.getBoolean("entregue"));
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return entrega;
+
+	}
 }

@@ -52,4 +52,11 @@ public class EntregaRestController {
 
 		return ResponseEntity.ok(service.delete(id));
 	}
+
+	@GetMapping("/check-delivery-request/{idEmprestimo}/{idLeitor}")
+	public ResponseEntity<String> checkDeliveryRequest(@PathVariable("idEmprestimo") final int idEmprestimo,
+			@PathVariable("idLeitor") final int idLeitor) {
+
+		return ResponseEntity.ok(service.checkDeliveryRequest(idEmprestimo, idLeitor));
+	}
 }
