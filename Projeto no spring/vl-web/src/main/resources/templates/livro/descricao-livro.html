@@ -17,10 +17,13 @@
                 	
                 	<img class="img-livro-descricao" src="../../resources/assets/img/capa-livros/senhor-dos-aneis.png" alt="">
                     <h1 class="mt-4" th:text="${detalheDoLivro.titulo}">O Senhor dos Anéis</h1>
+				<div class="alert alert-danger mt-4" th:if="${error}">
+					<span class="font-weight-bold">Desculpe! mas
+						não há exemplares disponíveis deste livro para empréstimo</span>
+				</div>
 
-                    
 
-                    <div class="row mt-4">
+				<div class="row mt-4">
 
                         <div class="col-12">
                             <nav>
