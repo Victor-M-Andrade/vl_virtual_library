@@ -446,4 +446,35 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
 	}
+
+	public Emprestimo lastLoanRecord(final int id) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Emprestimo emprestimo = null;
+
+		try {
+			final String sql = "select * from emprestimo where id = (select max(id) from emprestimo where leitor_id = ? and datarealizacao is not null);";
+
+			connection = ConnectionFactory.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				emprestimo = new Emprestimo();
+				emprestimo.setId(resultSet.getInt("id"));
+				emprestimo.setCodigo(resultSet.getInt("codigo"));
+				emprestimo.setDataRealizacao(resultSet.getTimestamp("datarealizacao"));
+				emprestimo.setLeitorId(resultSet.getInt("leitor_id"));
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return emprestimo;
+	}
 }

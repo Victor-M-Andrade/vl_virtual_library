@@ -38,7 +38,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 	@Override
 	public Emprestimo readById(final int id) {
-		final String endpoint = "http://localhost:8085/api/v1/emprestimo/read-by-id";
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/read-by-id/" + id;
 		Emprestimo response = null;
 
 		try {
@@ -169,6 +169,25 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 					Boolean.class);
 			response = responseEntity.getBody();
 
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public Emprestimo lastLoanRecord(final int id) {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/last-loan-record/" + id;
+		Emprestimo response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Emprestimo> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+					httpEntity, Emprestimo.class);
+
+			response = requestResponse.getBody();
 		} catch (final Exception e) {
 			System.out.println(e.getMessage());
 		}

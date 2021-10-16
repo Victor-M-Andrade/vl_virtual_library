@@ -23,4 +23,6 @@ public interface EmprestimoService {
 
 	boolean removeLoanBook(EmprestimoDTO entity);
 
+	Emprestimo lastLoanRecord(int id);
+
 }

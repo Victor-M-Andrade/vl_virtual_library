@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.fai.vl.dto.EmprestimoDTO;
 import br.fai.vl.model.Bibliotecario;
+import br.fai.vl.model.Emprestimo;
 import br.fai.vl.model.Leitor;
 import br.fai.vl.web.model.Account;
 import br.fai.vl.web.service.AccountService;
@@ -67,8 +68,22 @@ public class AccountController {
 	}
 
 	@GetMapping("/notificacao")
-	public String getNotificacao() {
-		return "usuario/notificacao";
+	public String getNotificacao(final Model model) {
+		if (!Account.isLogin()) {
+			return "redirect:/leitor/entrar";
+		} else {
+			if (Account.getPermissionLevel() == 1) {
+
+				final Emprestimo emprestimo = emprestimoService.lastLoanRecord(Account.getIdUser());
+
+				model.addAttribute("lastLoan", emprestimo);
+
+				return "usuario/notificacao";
+
+			} else {
+				return "redirect:/leitor/detail/" + Account.getIdUser();
+			}
+		}
 	}
 
 	@GetMapping("/notificacao-adm")

@@ -38,19 +38,27 @@
 						<div class="mb-2 card">
 							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-12 font-weight-bold">Informações refente ao seu último emprestimo</div>
+									<div class="col-sm-12 font-weight-bold">Informações
+										refente ao seu último emprestimo</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-12">Segue informações do seu último
-										pedido</div>
-									<div class="col-sm-12">Livro: O Senhor do Áneis</div>
+									<div class="col-sm-12">Código de registro do empréstimo</div>
+									<div class="col-sm-12 font-weight-bold" th:text="${lastLoan.codigo}">1234s</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-12">Seu pedido foi aceito por um
-										administrador</div>
-									<div class="col-sm-12">Seu livro deve chegar em breve</div>
+									<div class="col-sm-12">
+										Caso queira que seu emprestimo seja entregue clique em <strong>SOLICITAR
+											ENTREGA</strong>
+									</div>
+									<div class="col-sm-12">
+										Se já estiver com o livro e deseja que seja recolhido, clique
+										em <strong>SOLICITAR DEVOLUÇÃO</strong>
+									</div>
+									<br> <br>
+									<div class="col-sm-12 font-italic">**OBS: A sua
+										solicitação poderá ser aceita ou não pelo Administrador</div>
 									<br> <br>
 									<div class="row col-12">
 										<div class="col-6">
@@ -58,25 +66,32 @@
 												class="fas fa-motorcycle fa-lg"></i> SOLICITAR ENTREGA</a>
 										</div>
 										<div class="col-6">
-											<a href="#" class="btn btn-warning col-12"><i
-												class="fas fa-walking fa-lg"></i> RETIRAR PESSOALMENTE</a>
+											<a href="#" class="btn btn-info col-12"><i
+												class="fas fa-motorcycle fa-lg"></i> SOLICITAR DEVOLUÇÃO</a>
 										</div>
-										<!-- <div class="col-3">
-                                                    <a href="#" class="btn btn-info col-12"><i class="fas fa-motorcycle fa-lg"></i>
-                                                        SOLICITAR DEVOLUÇÃO</a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <a href="#" class="btn btn-danger col-12"><i class="fas fa-walking fa-lg"></i> DEVOLVER PESSOALMENTE</a>
-                                                </div> -->
+									</div>
+									<br>
+									<br>
+									<div class="row col-12">
+										<div class="col-6">
+											<input type="text" class="form-control" readonly placeholder="Status da solicitação">
+										</div>
+										<div class="col-6">
+											<input type="text" class="form-control" readonlyd placeholder="Status da solicitação">
+										</div>
+									</div>
+									<br>
+									<br>
+									<div class="row col-12">
+										<div class="col-6">
+											<a href="#" class="btn btn-danger col-12 font-weight-bold" >Já recebi este empréstimo</a>
+										</div>
+										<div class="col-6">
+											<a href="#" class="btn btn-danger col-12 font-weight-bold">Empréstimo já devolvido</a>
+										</div>
 									</div>
 								</div>
-
 							</div>
-						</div>
-
-						<div class="mb-2">
-							<a href="#" class="btn btn-info col-12">Já recebi esse
-								produto</a>
 						</div>
 
 					</div>

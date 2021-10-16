@@ -82,4 +82,10 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return dao.removeLoanBook(entity);
 	}
 
+	@Override
+	public Emprestimo lastLoanRecord(final int id) {
+
+		return dao.lastLoanRecord(id);
+	}
+
 }

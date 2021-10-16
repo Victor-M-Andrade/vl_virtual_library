@@ -28,4 +28,6 @@ public interface EmprestimoDao {
 	boolean terminateLoan(int idEmprestimo);
 
 	boolean removeLoanBook(EmprestimoDTO entity);
+
+	Emprestimo lastLoanRecord(int id);
 }

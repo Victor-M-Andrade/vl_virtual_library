@@ -76,4 +76,10 @@ public class EmprestimoRestController {
 
 		return ResponseEntity.ok(service.removeLoanBook(entity));
 	}
+
+	@GetMapping("/last-loan-record/{id}")
+	public ResponseEntity<Emprestimo> lastLoanRecord(@PathVariable("id") final int id) {
+
+		return ResponseEntity.ok(service.lastLoanRecord(id));
+	}
 }
