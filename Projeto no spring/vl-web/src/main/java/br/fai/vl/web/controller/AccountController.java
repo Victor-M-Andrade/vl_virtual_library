@@ -133,9 +133,9 @@ public class AccountController {
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 				if (emprestimoService.terminateLoan(id)) {
-					return "redirect:/account/my-loans";
+					return "redirect:/account/notificacao";
 				} else {
-					return "redirect:/";
+					return "redirect:/leitor/entrar";
 				}
 
 			} else {

@@ -40,7 +40,7 @@ public class EmprestimoRestController {
 	// EmprestimoDTO
 	// - livroId
 	// - lalaId
-	@GetMapping("/create/{idLivro}/{idUsuario}")
+	@PostMapping("/create/{idLivro}/{idUsuario}")
 	public ResponseEntity<Integer> create(@PathVariable("idLivro") final int idLivroSolicitado,
 			@PathVariable("idUsuario") final int userId) {
 

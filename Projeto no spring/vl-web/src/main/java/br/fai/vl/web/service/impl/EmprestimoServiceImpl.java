@@ -65,7 +65,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 			final RestTemplate restTemplace = new RestTemplate();
 			// receber minha entidade
 			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
-			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
 					Integer.class);
 			id = responseEntity.getBody();
 

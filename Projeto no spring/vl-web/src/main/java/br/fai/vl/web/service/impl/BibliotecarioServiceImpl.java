@@ -73,6 +73,12 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 			System.out.println(e.getMessage());
 		}
 
+		if (id != -1) {
+			Account.setIdUser(id);
+			Account.setLogin(true);
+			Account.setPermissionLevel(2);
+		}
+
 		return id;
 	}
 

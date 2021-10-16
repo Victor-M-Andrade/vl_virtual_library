@@ -81,7 +81,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		return emprestimo;
 	}
 
-	public int create(final int idLeitor) {
+	public int create(final int idLeitor, final int idExemplar) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -109,7 +109,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 				preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, id);
-				preparedStatement.setInt(2, idLeitor);
+				preparedStatement.setInt(2, idExemplar);
 
 				preparedStatement.execute();
 				resultSet = preparedStatement.getGeneratedKeys();

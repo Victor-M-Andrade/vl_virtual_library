@@ -94,7 +94,7 @@ public class BibliotecarioController {
 		final int id = service.create(bibliotecario);
 
 		if (id != -1) {
-			return "redirect:/bibliotecario/detail/" + id;
+			return "redirect:/bibliotecario/detail/" + Account.getIdUser();
 		} else {
 			return "/bibliotecario/register";
 		}

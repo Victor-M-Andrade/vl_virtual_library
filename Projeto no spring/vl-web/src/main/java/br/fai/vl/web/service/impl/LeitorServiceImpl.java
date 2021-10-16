@@ -71,6 +71,12 @@ public class LeitorServiceImpl implements LeitorService {
 			System.out.println(e.getMessage());
 		}
 
+		if (id != -1) {
+			Account.setIdUser(id);
+			Account.setLogin(true);
+			Account.setPermissionLevel(1);
+		}
+
 		return id;
 	}
 

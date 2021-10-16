@@ -29,23 +29,23 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	@Override
 	public int create(final int livroId, final int leitorId) {
 
-		List<Integer> emprestimoList = null;
+		List<Integer> availableCopies = null;
 		List<Integer> emprestimoAberto = null;
 
-		emprestimoList = dao.checkAvaliableCopies(livroId);
+		availableCopies = dao.checkAvaliableCopies(livroId);
 
-		if (emprestimoList != null && emprestimoList.size() >= 1) {
+		if (availableCopies != null && availableCopies.size() >= 1) {
 
 			emprestimoAberto = dao.checkOpenReaderLoads(leitorId);
 
 			if (emprestimoAberto == null || emprestimoAberto.size() == 0) {
 
-				System.out.println("irá criar um novo empréstimo");
-				return dao.create(leitorId);
+				System.out.println("irá criar um novo empréstimo" + availableCopies.get(0));
+				return dao.create(leitorId, availableCopies.get(0));
 
 			} else {
 				System.out.println("Ainda tem que finalizar o empréstimo");
-				return dao.addToLoads(emprestimoAberto.get(0), emprestimoList.get(0));
+				return dao.addToLoads(emprestimoAberto.get(0), availableCopies.get(0));
 
 			}
 
