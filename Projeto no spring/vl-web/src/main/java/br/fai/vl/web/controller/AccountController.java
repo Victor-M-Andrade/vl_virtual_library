@@ -75,10 +75,18 @@ public class AccountController {
 			if (Account.getPermissionLevel() == 1) {
 
 				final Emprestimo emprestimo = emprestimoService.lastLoanRecord(Account.getIdUser());
+				if (emprestimo != null) {
+					model.addAttribute("lastLoan", emprestimo);
 
-				model.addAttribute("lastLoan", emprestimo);
+					return "usuario/notificacao";
+				} else {
 
-				return "usuario/notificacao";
+					final Emprestimo emprestimoProvisorio = new Emprestimo();
+					emprestimoProvisorio.setCodigo(0);
+					model.addAttribute("lastLoan", emprestimoProvisorio);
+
+					return "usuario/notificacao";
+				}
 
 			} else {
 				return "redirect:/leitor/detail/" + Account.getIdUser();

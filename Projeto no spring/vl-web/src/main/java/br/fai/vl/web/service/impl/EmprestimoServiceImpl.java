@@ -38,7 +38,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 	@Override
 	public Emprestimo readById(final int id) {
-		final String endpoint = "http://localhost:8085/api/v1/emprestimo/read-by-id/" + id;
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/read-by-id";
 		Emprestimo response = null;
 
 		try {

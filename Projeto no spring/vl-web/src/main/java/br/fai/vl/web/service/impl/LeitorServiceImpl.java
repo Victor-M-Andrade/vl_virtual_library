@@ -119,7 +119,7 @@ public class LeitorServiceImpl implements LeitorService {
 
 	@Override
 	public boolean login(final Leitor entity) {
-		final String endpoint = "http://localhost:8085//api/v1/leitor/login";
+		final String endpoint = "http://localhost:8085/api/v1/leitor/login";
 		int id = Integer.valueOf(-1);
 
 		try {
