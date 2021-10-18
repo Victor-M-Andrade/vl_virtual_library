@@ -129,7 +129,7 @@ public class AccountController {
 	public String getOpenUserLoan(final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 
@@ -161,7 +161,7 @@ public class AccountController {
 				if (emprestimoService.terminateLoan(id)) {
 					return "redirect:/account/notificacao";
 				} else {
-					return "redirect:/leitor/entrar";
+					return "redirect:/account/entrar";
 				}
 
 			} else {
@@ -274,4 +274,30 @@ public class AccountController {
 		}
 	}
 
+	@GetMapping("/my-solicitation/{idEmprestimo}")
+	public String getSolicitations(@PathVariable final int idEmprestimo) {
+
+		if (!Account.isLogin()) {
+			return "redirect:/account/entrar";
+		} else {
+			if (Account.getPermissionLevel() == 1) {
+
+//				final List<EmprestimoDTO> openUserloan = emprestimoService.checkOpenUserLoans(Account.getIdUser());
+//
+//				if (!openUserloan.isEmpty()) {
+//					model.addAttribute("openLoans", openUserloan);
+//					model.addAttribute("idEmprestimo", openUserloan.get(0).getIdEmprestimo());
+//				} else {
+//					model.addAttribute("openLoans", null);
+//					model.addAttribute("idEmprestimo", -1);
+//				}
+
+				return "/usuario/fazer-solicitacoes";
+
+			} else {
+				return "redirect:/account/entrar";
+			}
+		}
+
+	}
 }

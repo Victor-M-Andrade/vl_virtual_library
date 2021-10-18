@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Notificações</title>
+</head>
+
+<body>
+	<div layout:fragment="body">
+		<br><br><br><br><br>
+
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Solicitação de Delivery</h1>
+
+				<div class="row">
+
+					<div class="mb-2 col-12 col-sm-2">
+						<div class="card">
+							<div class="card-body">
+								<div class="mb-3 text-center">
+									<img src="../resources/assets/img/logo/VL com fundo sem nome2.png" width="200"
+										class="rounded-circle img-fluid" />
+								</div>
+								<div class="mb-2">
+									<p class="text-primary text-center">Adm</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="mb-2 col-12 col-sm-10">
+
+						<div class="mb-2 card">
+							<div class="card-body">
+								<br>
+								<div class="row">
+
+									<div class="col-sm-8">EMPRÉSTIMOS APROVADOS</div>
+									<form
+										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+										<div class="input-group">
+											<input class="form-control" type="text" placeholder="Procurar por..." />
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+
+
+
+								<br>
+
+								<div class="table-responsive">
+
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Capa</th>
+												<th>Livro</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Id</th>
+												<th>Capa</th>
+												<th>Livro</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td><img src="../resources/assets/img/capa-livros/a-arte-da-guerra.png"
+														alt="" style="width: 100px;"></td>
+												<td style="text-align: center; vertical-align: middle;">Tiburssinho
+													Tiburrsius</td>
+												<td style="text-align: center; vertical-align: middle;">
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success col-12">
+																<i class="fas fa-motorcycle fa-lg"></i>
+																Solicitar Entrega
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-warning col-12">
+																<i class="fas fa-walking fa-lg"></i>
+																Retirar Pessoalmente
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>2</td>
+												<td><img src="../resources/assets/img/capa-livros/harry-potter.png"
+														alt="" style="width: 100px;"></td>
+												<td style="text-align: center; vertical-align: middle;">Harry Potter
+												</td>
+												<td style="text-align: center; vertical-align: middle;">
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success col-12">
+																<i class="fas fa-motorcycle fa-lg"></i>
+																Solicitar Entrega
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-warning col-12">
+																<i class="fas fa-walking fa-lg"></i>
+																Retirar Pessoalmente
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>3</td>
+												<td><img src="../resources/assets/img/capa-livros/senhor-dos-aneis.png"
+														alt="" style="width: 100px;"></td>
+												<td style="text-align: center; vertical-align: middle;">O Senhor dos
+													Anéis</td>
+												<td style="text-align: center; vertical-align: middle;">
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success col-12">
+																<i class="fas fa-motorcycle fa-lg"></i>
+																Solicitar Entrega
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-warning col-12">
+																<i class="fas fa-walking fa-lg"></i>
+																Retirar Pessoalmente
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+									</table>
+
+								</div>
+
+								<hr>
+
+								<div class="row">
+									<div class="col-6">
+										<a href="#" class="btn btn-success col-12" style="font-size: 20px;"><i
+												class="fas fa-motorcycle fa-lg"></i> SOLICITAR ENTREGA DE TODOS</a>
+									</div>
+									<div class="col-6">
+										<a href="#" class="btn btn-warning col-12" style="font-size: 20px;"><i
+												class="fas fa-walking fa-lg"></i> RETIRAR TODOS PESSOALMENTE</a>
+									</div>
+								</div>
+								<br>
+								<br>
+
+
+
+							</div>
+
+
+						</div>
+
+
+						<!-- LIVROS A SEREM ENTREGUES -->
+						<br>
+						<br>
+						<br>
+
+						<div class="mb-2 card">
+							<br>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-8">LIVROS A SEREM ENTREGUES</div>
+									<form
+										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+										<div class="input-group">
+											<input class="form-control" type="text" placeholder="Procurar por..." />
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+
+
+								<br>
+
+
+								<div class="table-responsive">
+
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Capa</th>
+												<th>Livro</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Id</th>
+												<th>Capa</th>
+												<th>Livro</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
+										<tbody>
+											<tr>
+												<td>4</td>
+												<td><img src="../resources/assets/img/capa-livros/it.png" alt=""
+														style="width: 100px;"></td>
+												<td style="text-align: center; vertical-align: middle;">IT a Coisa</td>
+												<td style="text-align: center; vertical-align: middle;">
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success col-12">
+																<i class="fas fa-motorcycle fa-lg"></i>
+																Solicitar Devolução
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-warning col-12">
+																<i class="fas fa-walking fa-lg"></i>
+																Devolver Pessoalmente
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td><img src="../resources/assets/img/capa-livros/hobbit.png" alt=""
+														style="width: 100px;"></td>
+												<td style="text-align: center; vertical-align: middle;">Hobbit
+												</td>
+												<td style="text-align: center; vertical-align: middle;">
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success col-12">
+																<i class="fas fa-motorcycle fa-lg"></i>
+																Solicitar Devolução
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-warning col-12">
+																<i class="fas fa-walking fa-lg"></i>
+																Devolver Pessoalmente
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+										<tbody>
+											<tr>
+												<td>6</td>
+												<td><img src="../resources/assets/img/capa-livros/coraline.png" alt=""
+														style="width: 100px;"></td>
+												<td style="text-align: center; vertical-align: middle;">Coraline</td>
+												<td style="text-align: center; vertical-align: middle;">
+													<div class="row">
+														<div class="col-6">
+															<a href="#" class="btn btn-success col-12">
+																<i class="fas fa-motorcycle fa-lg"></i>
+																Solicitar Devolução
+															</a>
+														</div>
+														<div class="col-6">
+															<a href="#" class="btn btn-warning col-12">
+																<i class="fas fa-walking fa-lg"></i>
+																Devolver Pessoalmente
+															</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+
+									</table>
+
+								</div>
+
+								<hr>
+
+								<div class="row">
+									<div class="col-6">
+										<a href="#" class="btn btn-success col-12" style="font-size: 20px;"><i
+												class="fas fa-motorcycle fa-lg"></i> SOLICITAR DEVOLUÇÃO DE TODOS</a>
+									</div>
+									<div class="col-6">
+										<a href="#" class="btn btn-warning col-12" style="font-size: 20px;"><i
+												class="fas fa-walking fa-lg"></i>
+											DEVOLVER TODOS PESSOALMENTE</a>
+									</div>
+								</div>
+								<br>
+								<br>
+
+
+
+							</div>
+
+
+						</div>
+					</div>
+
+
+				</div>
+
+				<hr>
+
+
+
+
+
+			</div>
+
+
+
+	</div>
+	</main>
+	</div>
+</body>

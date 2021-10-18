@@ -3,6 +3,7 @@ package br.fai.vl.dto;
 public class EmprestimoDTO {
 
 	private int idEmprestimo;
+	private int codEmprestimo;
 	private int idExemplar;
 	private String nomeLivro;
 
@@ -28,6 +29,14 @@ public class EmprestimoDTO {
 
 	public void setNomeLivro(final String nomeLivro) {
 		this.nomeLivro = nomeLivro;
+	}
+
+	public int getCodEmprestimo() {
+		return codEmprestimo;
+	}
+
+	public void setCodEmprestimo(final int codEmprestimo) {
+		this.codEmprestimo = codEmprestimo;
 	}
 
 }
