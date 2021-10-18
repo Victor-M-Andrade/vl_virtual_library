@@ -17,7 +17,7 @@ public class ConnectionFactory {
 
 	private static final String url = "jdbc:postgresql://localhost:5432/virtualLibrary";
 	private static final String userName = "postgres";
-	private static final String password = "postgres";
+	private static final String password = "123";
 
 	private static Connection connection = null;
 
