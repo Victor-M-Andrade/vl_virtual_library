@@ -19,27 +19,11 @@ public class LeitorController {
 	@Autowired
 	private LeitorService service;
 
-	@GetMapping("/entrar")
-	public String getLogin(final Leitor leitor) {
-		return "conta/login";
-	}
-
-	@PostMapping("/login")
-	private String login(final Leitor leitor, final Model model) {
-
-		if (service.login(leitor)) {
-			return "redirect:/leitor/detail/" + Account.getIdUser();
-		} else {
-			return "conta/login";
-		}
-
-	}
-
 	@GetMapping("/detail/{id}")
 	private String getLeitorDetail(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 1) {
 
@@ -50,7 +34,7 @@ public class LeitorController {
 				model.addAttribute("usuario", leitor);
 				return "usuario/detail";
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -59,7 +43,7 @@ public class LeitorController {
 	private String getLeitorEdit(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 1) {
 
@@ -70,7 +54,7 @@ public class LeitorController {
 
 				return "usuario/editar-perfil";
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}

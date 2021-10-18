@@ -31,7 +31,6 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
-
 			while (resultSet.next()) {
 				final Emprestimo emprestimo = new Emprestimo();
 				emprestimo.setId(resultSet.getInt("id"));
@@ -192,8 +191,6 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 	public boolean delete(final int id) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		final boolean sucess = false;
-
 		try {
 			String sql = "DELETE FROM emprestimo_exemplar where emprestimo_id = ?;";
 

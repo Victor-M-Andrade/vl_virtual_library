@@ -40,7 +40,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 			if (emprestimoAberto == null || emprestimoAberto.size() == 0) {
 
-				System.out.println("irá criar um novo empréstimo" + availableCopies.get(0));
+				System.out.println("irá criar um novo  empréstimo " + leitorId);
 				return dao.create(leitorId, availableCopies.get(0));
 
 			} else {

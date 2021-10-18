@@ -22,62 +22,42 @@
 						<div class="mb-2 card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-12">STATUS DOS PEDIDOS</div>
+                                            <div class="col-sm-12">MEUS EMPRÉSTIMOS</div>
                                             
                                         </div>
                                         <hr>
-                                
+                                		<div class="alert alert-danger col-sm-12"
+										th:if="${lastLoan.codigo == 0}">
+										<span class="font-weight-bold align-middle">Não há registros de empréstimos</span>
+									</div>
                                 
                                         <div class="table-responsive">
                                 
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Cód. Solicitação</th>
-                                                        <th>Livro</th>
-                                                        <th>Tipo da Solicitação</th>
-                                                        <th>Status da Solicitação</th>
+                                                        <th>ID</th>
+                                                        <th>Cód. Empréstimo</th>
+                                                        <th>Funções</th>
                                                         
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
                                                     <tr>
-                                                        <th>Cód. Solicitação</th>
-                                                        <th>Livro</th>
-                                                        <th>Tipo da Solicitação</th>
-                                                        <th>Status da Solicitação</th>
+                                                        <th>ID</th>
+                                                        <th>Cód. Empréstimo</th>
+                                                        <th>Funções</th>
                                                     </tr>
                                                 </tfoot>
 
 
                                                 <tbody>
-                                                    <tr>
-                                                        <td>108</td>
-                                                        <td>A Arte da Guerra</td>
-                                                        <td>Solicitar Entrega</td>
-                                                        <td>Em Análise</td>
+                                                    <tr th:each="emprestimo : ${listaDeEmprestimo}">
+                                                        <td th:text="${emprestimo.id}">108 (codigo do livro)</td>
+                                                        <td th:text="${emprestimo.codigo}">nome do livro</td>
+                                                        <td> minha functions</td>
                                                     </tr>
                                 
-                                                </tbody>
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td>107</td>
-                                                        <td>Senhor Dos Anéis</td>
-                                                        <td>Solicitar Entrega</td>
-                                                        <td>Aprovado</td>
-                                                    </tr>
-                                                
-                                                </tbody>
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td>106</td>
-                                                        <td>Hobbit</td>
-                                                        <td>Solicitar Entrega</td>
-                                                        <td>Aprovado</td>
-                                                    </tr>
-                                                
                                                 </tbody>
 
                                             </table>

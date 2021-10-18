@@ -19,27 +19,11 @@ public class BibliotecarioController {
 	@Autowired
 	private BibliotecarioService service;
 
-	@GetMapping("/entrar")
-	public String getLogin(final Bibliotecario bibliotecario) {
-		return "conta/login-bibliotecario";
-	}
-
-	@PostMapping("/login")
-	private String login(final Bibliotecario bibliotecario, final Model model) {
-
-		if (service.login(bibliotecario)) {
-			return "redirect:/bibliotecario/detail/" + Account.getIdUser();
-		} else {
-			return "conta/login";
-		}
-
-	}
-
 	@GetMapping("/detail/{id}")
 	private String getBibliotecarioDetail(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
@@ -50,7 +34,7 @@ public class BibliotecarioController {
 				model.addAttribute("usuario", bibliotecario);
 				return "usuario/detail";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -59,7 +43,7 @@ public class BibliotecarioController {
 	private String getBibliotecarioEdit(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
@@ -70,7 +54,7 @@ public class BibliotecarioController {
 
 				return "usuario/editar-perfil";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 
@@ -93,8 +77,10 @@ public class BibliotecarioController {
 
 		final int id = service.create(bibliotecario);
 
+		System.out.println(Account.getIdUser());
+
 		if (id != -1) {
-			return "redirect:/bibliotecario/detail/" + Account.getIdUser();
+			return "redirect:/account/list";
 		} else {
 			return "/bibliotecario/register";
 		}
@@ -104,14 +90,14 @@ public class BibliotecarioController {
 	private String delete(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
 				service.delete(id);
 				return "redirect:/usuario/list";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 

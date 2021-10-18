@@ -1,5 +1,6 @@
 package br.fai.vl.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.fai.vl.dto.EmprestimoDTO;
@@ -24,6 +26,8 @@ import br.fai.vl.web.service.RecolhimentoService;
 @Controller
 @RequestMapping("/account")
 public class AccountController {
+
+	private boolean loginInvalido = false;
 
 	@Autowired
 	private AccountService service;
@@ -47,7 +51,7 @@ public class AccountController {
 	public String getEditar() {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 				return "redirect:/leitor/edit/" + Account.getIdUser();
@@ -63,7 +67,7 @@ public class AccountController {
 	public String getPerfil() {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 				return "redirect:/leitor/detail/" + Account.getIdUser();
@@ -78,19 +82,22 @@ public class AccountController {
 	@GetMapping("/notificacao")
 	public String getNotificacao(final Model model) {
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 
-				final Emprestimo emprestimo = emprestimoService.lastLoanRecord(Account.getIdUser());
-				if (emprestimo != null) {
-					model.addAttribute("lastLoan", emprestimo);
+				final Emprestimo lastEmprestimo = emprestimoService.lastLoanRecord(Account.getIdUser());
+				final List<Emprestimo> emprestimoList = emprestimoService.readAll();
+				if (lastEmprestimo != null && !(emprestimoList.isEmpty())) {
+					model.addAttribute("lastLoan", lastEmprestimo);
+
+					model.addAttribute("listaDeEmprestimo", emprestimoList);
 
 					model.addAttribute("situacaoEntrega",
-							entregaService.checkDeliveryRequest(emprestimo.getId(), Account.getIdUser()));
+							entregaService.checkDeliveryRequest(lastEmprestimo.getId(), Account.getIdUser()));
 
 					model.addAttribute("situacaoRecolhimento",
-							recolhimentoService.requestCollection(emprestimo.getId(), Account.getIdUser()));
+							recolhimentoService.requestCollection(lastEmprestimo.getId(), Account.getIdUser()));
 
 					return "usuario/notificacao";
 				} else {
@@ -99,11 +106,16 @@ public class AccountController {
 					emprestimoProvisorio.setCodigo(0);
 					model.addAttribute("lastLoan", emprestimoProvisorio);
 
+					final List<Emprestimo> emprestimoListProvisorio = new ArrayList<Emprestimo>();
+
+					emprestimoListProvisorio.add(emprestimoProvisorio);
+					model.addAttribute("listaDeEmprestimo", emprestimoListProvisorio);
+
 					return "usuario/notificacao";
 				}
 
 			} else {
-				return "redirect:/leitor/detail/" + Account.getIdUser();
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -134,7 +146,7 @@ public class AccountController {
 				return "usuario/emprestimos";
 
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -143,7 +155,7 @@ public class AccountController {
 	public String terminateLoan(@PathVariable final int id) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 				if (emprestimoService.terminateLoan(id)) {
@@ -153,7 +165,7 @@ public class AccountController {
 				}
 
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -173,7 +185,7 @@ public class AccountController {
 	public String delete(@PathVariable final int id) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 				emprestimoService.delete(id);
@@ -181,10 +193,12 @@ public class AccountController {
 				return "redirect:/";
 
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
+
+// ======================= tudo sobre o Login =============================
 
 	@GetMapping("/get-out")
 	public String getOut() {
@@ -196,7 +210,7 @@ public class AccountController {
 	public String getList(final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
@@ -208,7 +222,7 @@ public class AccountController {
 
 				return "usuario/list";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -216,6 +230,48 @@ public class AccountController {
 	@GetMapping("/recover-password")
 	public String getRecoverPassword() {
 		return "conta/password";
+	}
+
+	@GetMapping("/entrar")
+	public String getLogin(final Account account, final Model model) {
+
+		return "conta/login";
+	}
+
+	@PostMapping("/login")
+	private String login(final Account account, final Model model) {
+
+		if (account.getLevelRequest() == 1) {
+			final Leitor leitor = new Leitor();
+			leitor.setEmail(account.getUserEmail());
+			leitor.setSenha(account.getUserPassword());
+
+			if (leitorService.login(leitor)) {
+
+				loginInvalido = false;
+				return "redirect:/";
+			} else {
+				loginInvalido = true;
+				model.addAttribute("login", loginInvalido);
+				return "conta/login";
+			}
+
+		} else if (account.getLevelRequest() == 2) {
+			final Bibliotecario bibliotecario = new Bibliotecario();
+			bibliotecario.setEmail(account.getUserEmail());
+			bibliotecario.setSenha(account.getUserPassword());
+			if (bibliotecarioService.login(bibliotecario)) {
+
+				loginInvalido = false;
+				return "redirect:/";
+			} else {
+				loginInvalido = true;
+				model.addAttribute("login", loginInvalido);
+				return "conta/login";
+			}
+		} else {
+			return "conta/login";
+		}
 	}
 
 }

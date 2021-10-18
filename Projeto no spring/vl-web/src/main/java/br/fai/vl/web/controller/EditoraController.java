@@ -25,7 +25,7 @@ public class EditoraController {
 	private String getEditoraList(final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			System.out.println(Account.getPermissionLevel());
 			if (Account.getPermissionLevel() >= 2) {
@@ -34,7 +34,7 @@ public class EditoraController {
 
 				return "editora/list";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 
@@ -44,7 +44,7 @@ public class EditoraController {
 	private String getEditoraEdit(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 				final Editora editora = service.readById(id);
@@ -52,7 +52,7 @@ public class EditoraController {
 
 				return "editora/edit";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -68,13 +68,13 @@ public class EditoraController {
 	private String getRegisterEditora(final Editora editora) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
 				return "editora/create";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 
@@ -96,14 +96,14 @@ public class EditoraController {
 	private String deleteEditora(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
 				service.delete(id);
 				return getEditoraList(model);
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 

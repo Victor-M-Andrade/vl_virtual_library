@@ -52,14 +52,14 @@ public class LivroController {
 	@GetMapping("/list-adm")
 	public String getAcervoAdm(final Model model) {
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 				final List<Livro> livroList = service.readAll();
 				model.addAttribute("listaDeLivros", livroList);
 				return "livro/acervo-adm";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 
@@ -82,7 +82,7 @@ public class LivroController {
 	public String getFinalizarEmprestimo(@PathVariable final int idLivro, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			model.addAttribute("idLivro", idLivro);
 
@@ -96,7 +96,7 @@ public class LivroController {
 				return "livro/finalizar-emprestimo";
 
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 
@@ -106,7 +106,7 @@ public class LivroController {
 	public String getRegisterLivro(final Model model, final Livro livro) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 1) {
 
@@ -121,7 +121,7 @@ public class LivroController {
 
 				return "livro/criar-livro";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 
@@ -142,7 +142,7 @@ public class LivroController {
 	public String getEditarLivro(@PathVariable final int id, final Model model) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/bibliotecario/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
@@ -160,7 +160,7 @@ public class LivroController {
 
 				return "livro/editar-livro";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
@@ -175,7 +175,7 @@ public class LivroController {
 	@GetMapping("/delete/{id}")
 	private String delete(@PathVariable final int id, final Model model) {
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() >= 2) {
 
@@ -183,7 +183,7 @@ public class LivroController {
 
 				return "redirect:/livro/list-adm";
 			} else {
-				return "redirect:/bibliotecario/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}
