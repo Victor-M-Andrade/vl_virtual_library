@@ -45,4 +45,24 @@ public class RecolhimentoServiceImpl implements RecolhimentoService {
 		return dao.delete(id);
 	}
 
+	@Override
+	public String requestCollection(final int idEmprestimo, final int idLeitor) {
+		final Recolhimento entrega = dao.requestCollection(idEmprestimo, idLeitor);
+
+		if (entrega != null) {
+			if (entrega.getDataRecolhimento() == null) {
+				if (entrega.isRecolhido() == false) {
+					return "Solicitação reprovada";
+				} else {
+					return "Solicitação em aprovação";
+				}
+
+			} else {
+				return "Previsão de entrega: " + entrega.getDataRecolhimento();
+			}
+		} else {
+			return "Entrega não solicitada";
+		}
+	}
+
 }

@@ -15,4 +15,6 @@ public interface RecolhimentoService {
 	boolean update(Recolhimento entity);
 
 	boolean delete(int id);
+
+	String requestCollection(int idEmprestimo, int idLeitor);
 }

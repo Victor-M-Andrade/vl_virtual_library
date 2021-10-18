@@ -52,4 +52,11 @@ public class RecolhimentoRestController {
 
 		return ResponseEntity.ok(service.delete(id));
 	}
+
+	@GetMapping("/request-collection/{idEmprestimo}/{idLeitor}")
+	public ResponseEntity<String> requestCollection(@PathVariable("idEmprestimo") final int idEmprestimo,
+			@PathVariable("idLeitor") final int idLeitor) {
+
+		return ResponseEntity.ok(service.requestCollection(idEmprestimo, idLeitor));
+	}
 }

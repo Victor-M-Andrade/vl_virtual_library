@@ -41,7 +41,7 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 			}
 
 		} catch (final Exception e) {
-			System.out.println("Não foi possível resgatar as entregas ou houve um erro interno no sistema");
+			System.out.println("Não foi possível resgatar as recolhimentos ou houve um erro interno no sistema");
 		} finally {
 			ConnectionFactory.close(resultSet, preparedStatement, connection);
 		}
@@ -89,7 +89,7 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 		ResultSet resultSet = null;
 
 		final String sql = "INSERT INTO recolhimento(datasolicitacao, datarecolhimento, recolhido, leitor_id, emprestimo_id) "
-				+ "VALUES(?, ?, ?, ?, ?);";
+				+ "VALUES(default, null, true, ?, ?);";
 		int id = Integer.valueOf(-1);
 
 		try {
@@ -97,11 +97,8 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 
 			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setTimestamp(1, entity.getDataSolicitacao());
-			preparedStatement.setTimestamp(2, entity.getDataRecolhimento());
-			preparedStatement.setBoolean(3, entity.isRecolhido());
-			preparedStatement.setInt(4, entity.getLeitorId());
-			preparedStatement.setInt(5, entity.getEmprestimoId());
+			preparedStatement.setInt(1, entity.getLeitorId());
+			preparedStatement.setInt(2, entity.getEmprestimoId());
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -182,6 +179,38 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
+	}
+
+	public Recolhimento requestCollection(final int idEmprestimo, final int idLeitor) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		Recolhimento recolhimento = null;
+
+		try {
+			final String sql = "SELECT * FROM recolhimento WHERE emprestimo_id = ? and leitor_id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idEmprestimo);
+			preparedStatement.setInt(2, idLeitor);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				recolhimento = new Recolhimento();
+				recolhimento.setDataSolicitacao(resultSet.getTimestamp("datasolicitacao"));
+				recolhimento.setDataRecolhimento(resultSet.getTimestamp("datarecolhimento"));
+				recolhimento.setRecolhido(resultSet.getBoolean("recolhido"));
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return recolhimento;
 	}
 
 }

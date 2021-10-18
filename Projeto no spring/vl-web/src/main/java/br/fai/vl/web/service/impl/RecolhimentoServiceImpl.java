@@ -116,4 +116,24 @@ public class RecolhimentoServiceImpl implements RecolhimentoService {
 		return response;
 	}
 
+	@Override
+	public String requestCollection(final int idEmprestimo, final int idLeitor) {
+		final String endpoint = "http://localhost:8085/api/v1/recolhimento/request-collection/" + idEmprestimo + "/"
+				+ idLeitor;
+		String response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<String> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+					String.class);
+
+			response = requestResponse.getBody();
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
 }

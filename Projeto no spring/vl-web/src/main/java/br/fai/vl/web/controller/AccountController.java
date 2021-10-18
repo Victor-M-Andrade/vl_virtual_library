@@ -19,6 +19,7 @@ import br.fai.vl.web.service.BibliotecarioService;
 import br.fai.vl.web.service.EmprestimoService;
 import br.fai.vl.web.service.EntregaService;
 import br.fai.vl.web.service.LeitorService;
+import br.fai.vl.web.service.RecolhimentoService;
 
 @Controller
 @RequestMapping("/account")
@@ -38,6 +39,9 @@ public class AccountController {
 
 	@Autowired
 	private EntregaService entregaService;
+
+	@Autowired
+	private RecolhimentoService recolhimentoService;
 
 	@GetMapping("/editar-perfil")
 	public String getEditar() {
@@ -84,6 +88,9 @@ public class AccountController {
 
 					model.addAttribute("situacaoEntrega",
 							entregaService.checkDeliveryRequest(emprestimo.getId(), Account.getIdUser()));
+
+					model.addAttribute("situacaoRecolhimento",
+							recolhimentoService.requestCollection(emprestimo.getId(), Account.getIdUser()));
 
 					return "usuario/notificacao";
 				} else {

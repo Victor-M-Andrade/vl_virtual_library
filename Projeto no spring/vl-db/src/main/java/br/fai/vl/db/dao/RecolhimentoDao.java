@@ -14,4 +14,6 @@ public interface RecolhimentoDao {
 	boolean update(Recolhimento entity);
 
 	boolean delete(int id);
+
+	Recolhimento requestCollection(int idEmprestimo, int idLeitor);
 }
