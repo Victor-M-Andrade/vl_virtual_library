@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html layout:decorate="~{login-layout}">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Criar Usuário</title>
@@ -16,6 +17,7 @@
 		}
 	</script>
 </head>
+
 <body>
 	<div layout:fragment="body">
 
@@ -27,10 +29,13 @@
 					<div class="col-lg-10">
 						<div class="card border-0 rounded-lg mt-5">
 							<div class="card-header">
-								<img class="logo"
-									src="../resources/assets/img/logo/VL fundo roxo2.png" alt="">
+								<img class="logo" src="../resources/assets/img/logo/VL fundo roxo2.png" alt="">
 							</div>
 							<div class="card-body">
+								<div class="alert alert-danger" th:if="${correto}">
+									<span class="font-weight-bold align-middle">Por favor, preencha os campos
+										corretamente</span>
+								</div>
 								<form th:action="@{/bibliotecario/create}" method="post" th:object="${bibliotecario}">
 									<div class="form-row">
 										<div class="col-md-6">
@@ -83,9 +88,8 @@
 										<div class="col-md-3">
 											<div class="form-group">
 												<label class="small mb-1" for="exampleFormControlSelect1">Tipo
-													de Conta</label> <input class="form-control py-4"
-													id="inputTelefone" type="text" placeholder="Bibliotecario"
-													readonly />
+													de Conta</label> <input class="form-control py-4" id="inputTelefone"
+													type="text" placeholder="Bibliotecario" readonly />
 											</div>
 										</div>
 										<div class="col-md-4">
@@ -93,8 +97,7 @@
 												<label class="small mb-1" for="inputEstado">Estado</label> <select
 													class="form-control small mb-1" id="estado" name="estado"
 													th:field="${bibliotecario.estado}">
-													<option selected th:value="-1">escolha ...</option>
-													<option th:value="AC">Acre</option>
+													<option selected th:value="AC">Acre</option>
 													<option th:value="AL">Alagoas</option>
 													<option th:value="AP">Amapá</option>
 													<option th:value="AM">Amazonas</option>
@@ -164,9 +167,8 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="small mb-1" for="inputPassword">Senha</label><input
-													class="form-control py-4" id="inputPassword"
-													type="password" placeholder="Insira a senha"
-													th:field="${bibliotecario.senha}" />
+													class="form-control py-4" id="inputPassword" type="password"
+													placeholder="Insira a senha" th:field="${bibliotecario.senha}" />
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -179,7 +181,12 @@
 										</div>
 									</div>
 									<div class="form-group mt-4 mb-0">
-										<button class="btn btn-primary btn-block" id="cadastro" onclick="validaSenhas()" type="submit">Criar
+										<div class="alert alert-danger" th:if="${correto}">
+											<span class="font-weight-bold align-middle">Por favor, preencha os campos
+												corretamente</span>
+										</div>
+										<button class="btn btn-primary btn-block" id="cadastro" onclick="validaSenhas()"
+											type="submit">Criar
 											a conta</button>
 									</div>
 								</form>
@@ -202,6 +209,6 @@
 	</div>
 </body>
 <scrpit> JQuery(function($){
-$("#inputCpf").mask("999.999.999-99"); }); </scrpit>
+	$("#inputCpf").mask("999.999.999-99"); }); </scrpit>
 
 </html>

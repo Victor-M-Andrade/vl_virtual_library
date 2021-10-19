@@ -106,4 +106,15 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return dao.openLoansList();
 	}
 
+	@Override
+	public boolean returnCopy(final int idExemplar, final int idEmprestimo) {
+		return dao.returnCopy(idExemplar, idEmprestimo);
+	}
+
+	@Override
+	public List<EmprestimoDTO> closeLoansList() {
+
+		return dao.closeLoansList();
+	}
+
 }

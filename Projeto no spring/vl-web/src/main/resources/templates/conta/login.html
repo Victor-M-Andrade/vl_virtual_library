@@ -39,7 +39,7 @@
 											placeholder="Insira a senha" name="password" th:field="${account.userPassword}"/>
 									</div>
 									<div class="form-group">
-										<label class="small mb-1" for="inputEmailAddress">Logar como:</label>
+										<label class="small mb-1" for="inputEmailAddress">Tipo de Usuário:</label>
 
 										<select class="form-control" th:field="${account.levelRequest}">
 											<option selected value="-1">Selecione...</option>
@@ -49,7 +49,7 @@
 									</div>
 
 									<div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-										<a class="small" th:href="@{/account/recover-password}">Esqueceu a senha?</a>
+										<a class="small" th:href="@{/account/forgot-my-passowrd}">Esqueceu a senha?</a>
 										<button class="btn btn-primary" type="submit"> Login</button>
 									</div>
 								</form>

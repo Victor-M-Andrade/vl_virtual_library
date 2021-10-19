@@ -101,4 +101,17 @@ public class EmprestimoRestController {
 
 		return ResponseEntity.ok(service.openLoansList());
 	}
+
+	@GetMapping("/return-copy/{idExemplar}/{idEmprestimo}")
+	public ResponseEntity<Boolean> returnCopy(@PathVariable("idExemplar") final int idExemplar,
+			@PathVariable("idEmprestimo") final int idEmprestimo) {
+
+		return ResponseEntity.ok(service.returnCopy(idExemplar, idEmprestimo));
+	}
+
+	@GetMapping("/close-loans-list")
+	public ResponseEntity<List<EmprestimoDTO>> closeLoansList() {
+
+		return ResponseEntity.ok(service.closeLoansList());
+	}
 }

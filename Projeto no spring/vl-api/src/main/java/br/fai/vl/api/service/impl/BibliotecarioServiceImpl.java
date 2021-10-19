@@ -56,4 +56,15 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 		return idBibliotecario;
 	}
 
+	@Override
+	public int checkEmail(final String email) {
+		// TODO Auto-generated method stub
+		return dao.checkEmail(email);
+	}
+
+	@Override
+	public boolean recoveryPasswor(final int idUser, final String newPassword) {
+		// TODO Auto-generated method stub
+		return dao.recoveryPasswor(idUser, newPassword);
+	}
 }

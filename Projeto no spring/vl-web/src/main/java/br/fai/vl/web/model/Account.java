@@ -5,6 +5,24 @@ public class Account {
 	private static boolean login = false;
 	private static int permissionLevel = 0;
 	private static String pageRequest = "";
+	private static int idUserRecoveryPassword = 0;
+	private static int typeUserRecoveryPassword = 0;
+
+	public static int getIdUserRecoveryPassword() {
+		return idUserRecoveryPassword;
+	}
+
+	public static void setIdUserRecoveryPassword(final int idUserRecoveryPassword) {
+		Account.idUserRecoveryPassword = idUserRecoveryPassword;
+	}
+
+	public static int getTypeUserRecoveryPassword() {
+		return typeUserRecoveryPassword;
+	}
+
+	public static void setTypeUserRecoveryPassword(final int typeUserRecoveryPassword) {
+		Account.typeUserRecoveryPassword = typeUserRecoveryPassword;
+	}
 
 	private String userEmail = "";
 	private String userPassword = "";

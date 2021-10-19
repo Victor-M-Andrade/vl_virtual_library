@@ -58,4 +58,16 @@ public class LeitorRestController {
 
 		return ResponseEntity.ok(service.login(entity.getEmail(), entity.getSenha()));
 	}
+
+	@PostMapping("/check-mail")
+	public ResponseEntity<Integer> checkEmail(@RequestBody final Leitor entity) {
+
+		return ResponseEntity.ok(service.checkEmail(entity.getEmail()));
+	}
+
+	@PostMapping("/recovery-password")
+	public ResponseEntity<Boolean> recoveryPasswor(@RequestBody final Leitor entity) {
+
+		return ResponseEntity.ok(service.recoveryPasswor(entity.getId(), entity.getSenha()));
+	}
 }

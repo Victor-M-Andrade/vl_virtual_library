@@ -57,7 +57,7 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 
 	@Override
 	public int create(final Bibliotecario entity) {
-		final String endpoint = "http://localhost:8085//api/v1/bibliotecario/create";
+		final String endpoint = "http://localhost:8085/api/v1/bibliotecario/create";
 		int id = Integer.valueOf(-1);
 
 		try {
@@ -141,6 +141,53 @@ public class BibliotecarioServiceImpl implements BibliotecarioService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public int checkEmail(final Bibliotecario entity) {
+		final String endpoint = "http://localhost:8085/api/v1/bibliotecario/check-mail";
+		int id = Integer.valueOf(-1);
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<Bibliotecario> httpEntity = new HttpEntity<Bibliotecario>(entity);
+			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Integer.class);
+			id = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		if (id != -1) {
+			Account.setIdUserRecoveryPassword(id);
+			Account.setTypeUserRecoveryPassword(2);
+		}
+
+		return id;
+	}
+
+	@Override
+	public boolean recoveryPasswor(final Bibliotecario entity) {
+		final String endpoint = "http://localhost:8085/api/v1/bibliotecario/recovery-password";
+		boolean response = false;
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<Bibliotecario> httpEntity = new HttpEntity<Bibliotecario>(entity);
+			final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Boolean.class);
+			response = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
 	}
 
 }

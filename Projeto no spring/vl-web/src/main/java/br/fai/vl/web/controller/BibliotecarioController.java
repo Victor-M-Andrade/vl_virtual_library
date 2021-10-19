@@ -19,6 +19,8 @@ public class BibliotecarioController {
 	@Autowired
 	private BibliotecarioService service;
 
+	private boolean camposCorretos = true;
+
 	@GetMapping("/detail/{id}")
 	private String getBibliotecarioDetail(@PathVariable final int id, final Model model) {
 
@@ -69,6 +71,8 @@ public class BibliotecarioController {
 
 	@GetMapping("/register")
 	public String getRegister(final Model model, final Bibliotecario bibliotecario) {
+
+		model.addAttribute("correto", camposCorretos);
 		return "conta/register-bibliotecario";
 	}
 
@@ -77,12 +81,14 @@ public class BibliotecarioController {
 
 		final int id = service.create(bibliotecario);
 
-		System.out.println(Account.getIdUser());
+		model.addAttribute("correto", camposCorretos);
 
 		if (id != -1) {
+			camposCorretos = true;
 			return "redirect:/account/list";
 		} else {
-			return "/bibliotecario/register";
+			camposCorretos = false;
+			return "redirect:/bibliotecario/register";
 		}
 	}
 

@@ -17,4 +17,8 @@ public interface BibliotecarioDao {
 	boolean update(Bibliotecario entity);
 
 	boolean delete(int id);
+
+	int checkEmail(String email);
+
+	boolean recoveryPasswor(int idUser, String newPassword);
 }

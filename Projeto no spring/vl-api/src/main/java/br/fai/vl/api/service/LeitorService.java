@@ -18,4 +18,8 @@ public interface LeitorService {
 
 	boolean delete(int id);
 
+	int checkEmail(String email);
+
+	boolean recoveryPasswor(int idUser, String newPassword);
+
 }

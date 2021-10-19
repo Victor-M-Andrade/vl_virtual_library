@@ -17,4 +17,8 @@ public interface LeitorDao {
 	boolean update(Leitor entity);
 
 	boolean delete(int id);
+
+	int checkEmail(String email);
+
+	boolean recoveryPasswor(int idUser, String newPassword);
 }

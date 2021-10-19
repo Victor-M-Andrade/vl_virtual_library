@@ -238,7 +238,7 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 			final String sql = "select Ex.id from livro L join exemplar Ex on Ex.livro_id = L.id "
 					+ "where Ex.id not in (select distinct EE.exemplar_id from emprestimo E "
 					+ "join emprestimo_exemplar EE on EE.emprestimo_id = E.id "
-					+ "where EE.devolvido = false ) and L.id = ?;";
+					+ "where EE.devolvido = true ) and L.id = ?;";
 
 			connection = ConnectionFactory.getConnection();
 			prepareStatement = connection.prepareStatement(sql);
@@ -558,6 +558,85 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 					+ "inner join exemplar Ex on En.exemplar_id = Ex.id " + "inner join livro L on L.id = Ex.livro_id "
 					+ "inner join leitor Le on Le.id = E.leitor_id " + "inner join pessoa P on P.id = Le.pessoa_id "
 					+ "where En.dataefetivadevolucao is null and E.datarealizacao is not null;";
+
+			connection = ConnectionFactory.getConnection();
+			prepareStatement = connection.prepareStatement(sql);
+
+			resultSet = prepareStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final EmprestimoDTO openLoan = new EmprestimoDTO();
+				openLoan.setIdEmprestimo(resultSet.getInt("id"));
+				openLoan.setCodEmprestimo(resultSet.getInt("codigo"));
+				openLoan.setIdExemplar(resultSet.getInt("exemplar_id"));
+				openLoan.setNomeLivro(resultSet.getString("titulo"));
+				openLoan.setUserName(resultSet.getString("nome"));
+				openLoan.setUserEmail(resultSet.getString("email"));
+				openLoan.setUserID(resultSet.getInt("iduser"));
+				emprestimosAbertos.add(openLoan);
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, prepareStatement, connection);
+		}
+
+		return emprestimosAbertos;
+	}
+
+	public boolean returnCopy(final int idExemplar, final int idEmprestimo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			final String sql = "UPDATE emprestimo_exemplar SET dataefetivadevolucao = now() WHERE exemplar_id = ? and emprestimo_id = ?;";
+
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idExemplar);
+			preparedStatement.setInt(2, idEmprestimo);
+
+			preparedStatement.execute();
+
+			if (preparedStatement.getUpdateCount() != -1) {
+				connection.commit();
+			} else {
+				connection.rollback();
+			}
+
+			return true;
+
+		} catch (
+
+		final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
+
+	public List<EmprestimoDTO> closeLoansList() {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+
+		final List<EmprestimoDTO> emprestimosAbertos = new ArrayList<EmprestimoDTO>();
+
+		try {
+			final String sql = "select E.id, E.codigo, En.exemplar_id, L.titulo, P.nome, Le.email, Le.id as idUser from emprestimo E "
+					+ "inner join emprestimo_exemplar En on E.id = En.emprestimo_id "
+					+ "inner join exemplar Ex on En.exemplar_id = Ex.id " + "inner join livro L on L.id = Ex.livro_id "
+					+ "inner join leitor Le on Le.id = E.leitor_id " + "inner join pessoa P on P.id = Le.pessoa_id "
+					+ "where En.dataefetivadevolucao is not null and E.datarealizacao is not null;";
 
 			connection = ConnectionFactory.getConnection();
 			prepareStatement = connection.prepareStatement(sql);

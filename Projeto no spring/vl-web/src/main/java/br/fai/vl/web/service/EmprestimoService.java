@@ -30,4 +30,8 @@ public interface EmprestimoService {
 	List<EmprestimoDTO> checkLoan(int idEmprestimo, int idLeitor);
 
 	List<EmprestimoDTO> openLoansList();
+
+	boolean returnCopy(int idExemplar, int idEmprestimo);
+
+	List<EmprestimoDTO> closeLoansList();
 }

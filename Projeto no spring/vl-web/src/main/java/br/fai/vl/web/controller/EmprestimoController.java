@@ -252,11 +252,13 @@ public class EmprestimoController {
 		} else {
 			if (Account.getPermissionLevel() == 2) {
 
-				final List<EmprestimoDTO> emprestimoDTO = emprestimoService.openLoansList();
+				final List<EmprestimoDTO> openLoanDTO = emprestimoService.openLoansList();
+				final List<EmprestimoDTO> closeLoanDTO = emprestimoService.closeLoansList();
 
-				model.addAttribute("emprestimos", emprestimoDTO);
+				model.addAttribute("emprestimosAbertos", openLoanDTO);
+				model.addAttribute("emprestimosFechados", closeLoanDTO);
 
-				if (emprestimoDTO.isEmpty() || emprestimoDTO.size() == 0) {
+				if (openLoanDTO.isEmpty() || openLoanDTO.size() == 0) {
 					model.addAttribute("semEmprestimos", true);
 				}
 
@@ -268,4 +270,21 @@ public class EmprestimoController {
 		}
 	}
 
+	@GetMapping("/devolver-exemplar/{idExemplar}/{idEmprestimo}")
+	public String getReturnCopy(@PathVariable final int idExemplar, @PathVariable final int idEmprestimo,
+			final Model model) {
+		if (!Account.isLogin()) {
+			return "redirect:/account/entrar";
+		} else {
+			if (Account.getPermissionLevel() == 2) {
+
+				emprestimoService.returnCopy(idExemplar, idEmprestimo);
+
+				return "redirect:/emprestimo/list";
+
+			} else {
+				return "redirect:/account/entrar";
+			}
+		}
+	}
 }

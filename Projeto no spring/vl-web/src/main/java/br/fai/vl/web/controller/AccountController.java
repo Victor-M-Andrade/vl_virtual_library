@@ -28,6 +28,7 @@ import br.fai.vl.web.service.RecolhimentoService;
 public class AccountController {
 
 	private boolean loginInvalido = false;
+	private boolean emailInvalido = false;
 
 	@Autowired
 	private AccountService service;
@@ -222,13 +223,8 @@ public class AccountController {
 		}
 	}
 
-	@GetMapping("/recover-password")
-	public String getRecoverPassword() {
-		return "conta/password";
-	}
-
 	@GetMapping("/entrar")
-	public String getLogin(final Account account, final Model model) {
+	public String getEntrar(final Account account) {
 
 		return "conta/login";
 	}
@@ -266,6 +262,78 @@ public class AccountController {
 			}
 		} else {
 			return "conta/login";
+		}
+	}
+
+	@GetMapping("/forgot-my-passowrd")
+	public String getForgotMyPassoword(final Account account) {
+		return "conta/password";
+	}
+
+	@PostMapping("/check-email")
+	private String checkEmail(final Account account, final Model model) {
+
+		if (account.getLevelRequest() == 1) {
+			final Leitor leitor = new Leitor();
+			leitor.setEmail(account.getUserEmail());
+
+			if (leitorService.checkEmail(leitor) != -1) {
+
+				emailInvalido = false;
+				return "redirect:/account/nova-senha";
+			} else {
+				emailInvalido = true;
+				model.addAttribute("email", emailInvalido);
+				return "conta/password";
+			}
+
+		} else if (account.getLevelRequest() == 2) {
+			final Bibliotecario bibliotecario = new Bibliotecario();
+			bibliotecario.setEmail(account.getUserEmail());
+			if (bibliotecarioService.checkEmail(bibliotecario) != -1) {
+
+				emailInvalido = false;
+				return "redirect:/account/nova-senha";
+			} else {
+				emailInvalido = true;
+				model.addAttribute("email", emailInvalido);
+				return "conta/password";
+			}
+		} else {
+			return "conta/password";
+		}
+	}
+
+	@GetMapping("/nova-senha")
+	private String getNovaSenha(final Account account) {
+
+		return "conta/recovery-password";
+	}
+
+	@PostMapping("/recovery-passowrd")
+	private String recoveryPassowrd(final Account account, final Model model) {
+
+		if (Account.getTypeUserRecoveryPassword() == 1) {
+
+			final Leitor leitor = new Leitor();
+			leitor.setSenha(account.getUserPassword());
+			leitor.setId(Account.getIdUserRecoveryPassword());
+
+			leitorService.recoveryPasswor(leitor);
+
+			return "redirect:/account/entrar";
+
+		} else if (Account.getTypeUserRecoveryPassword() == 2) {
+
+			final Bibliotecario bibliotecario = new Bibliotecario();
+			bibliotecario.setSenha(account.getUserPassword());
+			bibliotecario.setId(Account.getIdUserRecoveryPassword());
+
+			bibliotecarioService.recoveryPasswor(bibliotecario);
+
+			return "redirect:/account/entrar";
+		} else {
+			return "conta/recovery-password";
 		}
 	}
 

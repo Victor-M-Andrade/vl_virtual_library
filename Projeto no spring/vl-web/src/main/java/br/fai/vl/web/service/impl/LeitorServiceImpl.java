@@ -149,4 +149,50 @@ public class LeitorServiceImpl implements LeitorService {
 		}
 	}
 
+	@Override
+	public int checkEmail(final Leitor entity) {
+		final String endpoint = "http://localhost:8085/api/v1/leitor/check-mail";
+		int id = Integer.valueOf(-1);
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<Leitor> httpEntity = new HttpEntity<Leitor>(entity);
+			final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Integer.class);
+			id = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		if (id != -1) {
+			Account.setIdUserRecoveryPassword(id);
+			Account.setTypeUserRecoveryPassword(1);
+		}
+		return id;
+	}
+
+	@Override
+	public boolean recoveryPasswor(final Leitor entity) {
+		final String endpoint = "http://localhost:8085/api/v1/leitor/recovery-password";
+		boolean response = false;
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<Leitor> httpEntity = new HttpEntity<Leitor>(entity);
+			final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST, httpEntity,
+					Boolean.class);
+			response = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
 }

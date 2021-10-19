@@ -291,4 +291,71 @@ public class LeitorDaoImpl implements LeitorDao {
 		return leitors;
 	}
 
+	public int checkEmail(final String email) {
+
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		int id = -1;
+
+		try {
+			final String sql = "select id from leitor where email like ?;";
+
+			connection = ConnectionFactory.getConnection();
+			prepareStatement = connection.prepareStatement(sql);
+			prepareStatement.setString(1, email);
+
+			resultSet = prepareStatement.executeQuery();
+
+			if (resultSet != null) {
+
+				while (resultSet.next()) {
+					id = resultSet.getInt("id");
+				}
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, prepareStatement, connection);
+		}
+
+		return id;
+
+	}
+
+	public boolean recoveryPasswor(final int idUser, final String newPassword) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		final String sql = "UPDATE leitor SET senha = ?" + " WHERE id = ?;";
+		try {
+			connection = ConnectionFactory.getConnection();
+
+			connection.setAutoCommit(false);
+
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, newPassword);
+			preparedStatement.setInt(2, idUser);
+
+			preparedStatement.execute();
+
+			if (preparedStatement.getUpdateCount() != -1) {
+				connection.commit();
+			} else {
+				connection.rollback();
+			}
+			return true;
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final SQLException e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
 }

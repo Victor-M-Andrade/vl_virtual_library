@@ -258,4 +258,46 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 		return response;
 	}
+
+	@Override
+	public boolean returnCopy(final int idExemplar, final int idEmprestimo) {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/return-copy/" + idExemplar + "/"
+				+ idEmprestimo;
+		boolean response = false;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+					Boolean.class);
+
+			response = responseEntity.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public List<EmprestimoDTO> closeLoansList() {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/close-loans-list";
+		List<EmprestimoDTO> response = null;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<EmprestimoDTO[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET,
+					httpEntity, EmprestimoDTO[].class);
+
+			response = Arrays.asList(responseEntity.getBody());
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
 }

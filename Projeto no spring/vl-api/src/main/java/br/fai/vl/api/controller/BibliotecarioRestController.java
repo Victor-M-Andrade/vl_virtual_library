@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.fai.vl.api.service.BibliotecarioService;
 import br.fai.vl.model.Bibliotecario;
-import br.fai.vl.model.Leitor;
 
 @RestController
 @RequestMapping("/api/v1/bibliotecario")
@@ -55,8 +54,20 @@ public class BibliotecarioRestController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<Integer> login(@RequestBody final Leitor entity) {
+	public ResponseEntity<Integer> login(@RequestBody final Bibliotecario entity) {
 
 		return ResponseEntity.ok(service.login(entity.getEmail(), entity.getSenha()));
+	}
+
+	@PostMapping("/check-mail")
+	public ResponseEntity<Integer> checkEmail(@RequestBody final Bibliotecario entity) {
+
+		return ResponseEntity.ok(service.checkEmail(entity.getEmail()));
+	}
+
+	@PostMapping("/recovery-password")
+	public ResponseEntity<Boolean> recoveryPasswor(@RequestBody final Bibliotecario entity) {
+
+		return ResponseEntity.ok(service.recoveryPasswor(entity.getId(), entity.getSenha()));
 	}
 }
