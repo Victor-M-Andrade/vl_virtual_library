@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import br.fai.vl.db.connection.ConnectionFactory;
 import br.fai.vl.db.dao.EntregaDao;
+import br.fai.vl.dto.EntregaDTO;
 import br.fai.vl.model.Entrega;
 
 @Repository
@@ -214,4 +215,98 @@ public class EntregaDaoImpl implements EntregaDao {
 		return entrega;
 
 	}
+
+	public List<EntregaDTO> deliveryOrderList() {
+		final List<EntregaDTO> entregas = new ArrayList<EntregaDTO>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "select En.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo from entrega En "
+					+ "inner join emprestimo E on En.emprestimo_id = E.id "
+					+ "inner join leitor L on En.leitor_id = L.id " + "inner join pessoa Pe on L.pessoa_id = Pe.id "
+					+ "where En.dataentrega is null and entregue is true;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final EntregaDTO entrega = new EntregaDTO();
+				entrega.setIdEntrega(resultSet.getInt("id"));
+				entrega.setUserName(resultSet.getString("nome"));
+				entrega.setUserEmail(resultSet.getString("email"));
+				entrega.setIdEmprestimo(resultSet.getInt("idemprestimo"));
+				entrega.setCodEmprestimo(resultSet.getInt("codigo"));
+				entregas.add(entrega);
+			}
+
+		} catch (final Exception e) {
+			System.out.println("Não foi possível resgatar as entregas ou houve um erro interno no sistema");
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return entregas;
+	}
+
+	public boolean refuseDelivery(final int idEntrega) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		final String sql = "UPDATE entrega SET entregue = false WHERE id = ?;";
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idEntrega);
+
+			preparedStatement.execute();
+			connection.commit();
+
+			return true;
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final SQLException e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
+
+	public boolean acceptDelivery(final int idEntrega) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		final String sql = "UPDATE entrega SET dataentrega = now() WHERE id = ?;";
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idEntrega);
+
+			preparedStatement.execute();
+			connection.commit();
+
+			return true;
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final SQLException e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
+
 }

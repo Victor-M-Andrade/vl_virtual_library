@@ -87,23 +87,18 @@ public class AccountController {
 			if (Account.getPermissionLevel() == 1) {
 
 				final Emprestimo lastEmprestimo = emprestimoService.lastLoanRecord(Account.getIdUser());
-				final List<Emprestimo> emprestimoList = emprestimoService.readAll();
+				final List<Emprestimo> emprestimoList = emprestimoService.myPreviousLoans(Account.getIdUser());
 				if (lastEmprestimo != null && !(emprestimoList.isEmpty())) {
 					model.addAttribute("lastLoan", lastEmprestimo);
 
 					model.addAttribute("listaDeEmprestimo", emprestimoList);
-
-					model.addAttribute("situacaoEntrega",
-							entregaService.checkDeliveryRequest(lastEmprestimo.getId(), Account.getIdUser()));
-
-					model.addAttribute("situacaoRecolhimento",
-							recolhimentoService.requestCollection(lastEmprestimo.getId(), Account.getIdUser()));
 
 					return "usuario/notificacao";
 				} else {
 
 					final Emprestimo emprestimoProvisorio = new Emprestimo();
 					emprestimoProvisorio.setCodigo(0);
+					emprestimoProvisorio.setId(-1);
 					model.addAttribute("lastLoan", emprestimoProvisorio);
 
 					final List<Emprestimo> emprestimoListProvisorio = new ArrayList<Emprestimo>();
@@ -274,23 +269,29 @@ public class AccountController {
 		}
 	}
 
-	@GetMapping("/my-solicitation/{idEmprestimo}")
-	public String getSolicitations(@PathVariable final int idEmprestimo) {
+	@GetMapping("/my-previous-loans/{idEmprestimo}")
+	public String getMyPreviousLoans(@PathVariable final int idEmprestimo, final Model model) {
 
 		if (!Account.isLogin()) {
 			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 
-//				final List<EmprestimoDTO> openUserloan = emprestimoService.checkOpenUserLoans(Account.getIdUser());
-//
-//				if (!openUserloan.isEmpty()) {
-//					model.addAttribute("openLoans", openUserloan);
-//					model.addAttribute("idEmprestimo", openUserloan.get(0).getIdEmprestimo());
-//				} else {
-//					model.addAttribute("openLoans", null);
-//					model.addAttribute("idEmprestimo", -1);
-//				}
+				model.addAttribute("situacaoEntrega",
+						entregaService.checkDeliveryRequest(idEmprestimo, Account.getIdUser()));
+
+				model.addAttribute("situacaoRecolhimento",
+						recolhimentoService.requestCollection(idEmprestimo, Account.getIdUser()));
+
+				final List<EmprestimoDTO> openUserloan = emprestimoService.checkLoan(idEmprestimo, Account.getIdUser());
+
+				if (!openUserloan.isEmpty()) {
+					model.addAttribute("loans", openUserloan);
+					model.addAttribute("idEmprestimo", openUserloan.get(0).getIdEmprestimo());
+				} else {
+					model.addAttribute("loans", null);
+					model.addAttribute("idEmprestimo", -1);
+				}
 
 				return "/usuario/fazer-solicitacoes";
 

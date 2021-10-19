@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import br.fai.vl.dto.EntregaDTO;
 import br.fai.vl.model.Entrega;
 import br.fai.vl.web.service.EntregaService;
 
@@ -129,6 +130,66 @@ public class EntregaServiceImpl implements EntregaService {
 					String.class);
 
 			response = requestResponse.getBody();
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public List<EntregaDTO> deliveryOrderList() {
+
+		final String endpoint = "http://localhost:8085/api/v1/entrega/delivery-order-list";
+		List<EntregaDTO> response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<EntregaDTO[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+					httpEntity, EntregaDTO[].class);
+
+			response = Arrays.asList(requestResponse.getBody());
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public boolean refuseDelivery(final int id) {
+		final String endpoint = "http://localhost:8085/api/v1/entrega/refuse-delivery/" + id;
+		boolean response = false;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+					Boolean.class);
+
+			response = requestResponse.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public boolean acceptDelivery(final int id) {
+		final String endpoint = "http://localhost:8085/api/v1/entrega/accept-delivery/" + id;
+		boolean response = false;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+					Boolean.class);
+
+			response = requestResponse.getBody();
+
 		} catch (final Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.fai.vl.api.service.EntregaService;
 import br.fai.vl.db.dao.EntregaDao;
+import br.fai.vl.dto.EntregaDTO;
 import br.fai.vl.model.Entrega;
 
 @Service
@@ -65,5 +66,23 @@ public class EntregaServiceImpl implements EntregaService {
 			return "Entrega não solicitada";
 		}
 
+	}
+
+	@Override
+	public List<EntregaDTO> deliveryOrderList() {
+
+		return dao.deliveryOrderList();
+	}
+
+	@Override
+	public boolean refuseDelivery(final int idEntrega) {
+		// TODO Auto-generated method stub
+		return dao.refuseDelivery(idEntrega);
+	}
+
+	@Override
+	public boolean acceptDelivery(final int idEntrega) {
+		// TODO Auto-generated method stub
+		return dao.acceptDelivery(idEntrega);
 	}
 }

@@ -21,7 +21,7 @@ public class RecolhimentoController {
 	public String terminateLoan(@PathVariable final int idEmprestimo) {
 
 		if (!Account.isLogin()) {
-			return "redirect:/leitor/entrar";
+			return "redirect:/account/entrar";
 		} else {
 			if (Account.getPermissionLevel() == 1) {
 				final Recolhimento recolhimento = new Recolhimento();
@@ -30,10 +30,10 @@ public class RecolhimentoController {
 
 				recolhimentoService.create(recolhimento);
 
-				return "redirect:/account/notificacao";
+				return "redirect:/account/my-previous-loans/" + idEmprestimo;
 
 			} else {
-				return "redirect:/leitor/entrar";
+				return "redirect:/account/entrar";
 			}
 		}
 	}

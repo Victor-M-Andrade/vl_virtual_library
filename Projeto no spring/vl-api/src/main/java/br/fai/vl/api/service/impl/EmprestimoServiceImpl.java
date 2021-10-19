@@ -88,4 +88,16 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return dao.lastLoanRecord(id);
 	}
 
+	@Override
+	public List<Emprestimo> myPreviousLoans(final int idLeitor) {
+
+		return dao.myPreviousLoans(idLeitor);
+	}
+
+	@Override
+	public List<EmprestimoDTO> checkLoan(final int idEmprestimo, final int idLeitor) {
+
+		return dao.checkLoan(idEmprestimo, idLeitor);
+	}
+
 }

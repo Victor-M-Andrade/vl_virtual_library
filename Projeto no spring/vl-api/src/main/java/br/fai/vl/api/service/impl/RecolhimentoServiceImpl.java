@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.fai.vl.api.service.RecolhimentoService;
 import br.fai.vl.db.dao.RecolhimentoDao;
+import br.fai.vl.dto.RecolhimentoDTO;
 import br.fai.vl.model.Recolhimento;
 
 @Service
@@ -61,8 +62,26 @@ public class RecolhimentoServiceImpl implements RecolhimentoService {
 				return "Previsão de entrega: " + entrega.getDataRecolhimento();
 			}
 		} else {
-			return "Entrega não solicitada";
+			return "Recolhimento não solicitado";
 		}
+	}
+
+	@Override
+	public List<RecolhimentoDTO> pickUpOrderList() {
+
+		return dao.pickUpOrderList();
+	}
+
+	@Override
+	public boolean refuseCollection(final int idRecolhimento) {
+		// TODO Auto-generated method stub
+		return dao.refuseCollection(idRecolhimento);
+	}
+
+	@Override
+	public boolean acceptCollection(final int idRecolhimento) {
+		// TODO Auto-generated method stub
+		return dao.acceptCollection(idRecolhimento);
 	}
 
 }

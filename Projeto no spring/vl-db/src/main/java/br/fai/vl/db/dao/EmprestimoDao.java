@@ -30,4 +30,8 @@ public interface EmprestimoDao {
 	boolean removeLoanBook(EmprestimoDTO entity);
 
 	Emprestimo lastLoanRecord(int id);
+
+	List<Emprestimo> myPreviousLoans(int idLeitor);
+
+	List<EmprestimoDTO> checkLoan(int idEmprestimo, int idLeitor);
 }

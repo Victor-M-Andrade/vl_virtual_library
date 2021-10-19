@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.fai.vl.api.service.EntregaService;
+import br.fai.vl.dto.EntregaDTO;
 import br.fai.vl.model.Entrega;
 
 @RestController
@@ -58,5 +59,23 @@ public class EntregaRestController {
 			@PathVariable("idLeitor") final int idLeitor) {
 
 		return ResponseEntity.ok(service.checkDeliveryRequest(idEmprestimo, idLeitor));
+	}
+
+	@GetMapping("/delivery-order-list")
+	public ResponseEntity<List<EntregaDTO>> deliveryOrderList() {
+
+		return ResponseEntity.ok(service.deliveryOrderList());
+	}
+
+	@GetMapping("/refuse-delivery/{idEntrega}")
+	public ResponseEntity<Boolean> refuseDelivery(@PathVariable("idEntrega") final int idEntrega) {
+
+		return ResponseEntity.ok(service.refuseDelivery(idEntrega));
+	}
+
+	@GetMapping("/accept-delivery/{idEntrega}")
+	public ResponseEntity<Boolean> acceptDelivery(@PathVariable("idEntrega") final int idEntrega) {
+
+		return ResponseEntity.ok(service.acceptDelivery(idEntrega));
 	}
 }

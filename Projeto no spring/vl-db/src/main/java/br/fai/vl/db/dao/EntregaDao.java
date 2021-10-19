@@ -2,6 +2,7 @@ package br.fai.vl.db.dao;
 
 import java.util.List;
 
+import br.fai.vl.dto.EntregaDTO;
 import br.fai.vl.model.Entrega;
 
 public interface EntregaDao {
@@ -17,4 +18,10 @@ public interface EntregaDao {
 	boolean delete(int id);
 
 	Entrega checkDeliveryRequest(final int idEmprestimo, final int idLeitor);
+
+	List<EntregaDTO> deliveryOrderList();
+
+	boolean refuseDelivery(int idEntrega);
+
+	boolean acceptDelivery(int idEntrega);
 }

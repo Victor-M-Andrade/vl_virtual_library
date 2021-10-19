@@ -474,4 +474,74 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 		return emprestimo;
 	}
+
+	public List<Emprestimo> myPreviousLoans(final int idLeitor) {
+		final List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "SELECT * FROM emprestimo WHERE leitor_id = ? and datarealizacao is not null;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idLeitor);
+
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				final Emprestimo emprestimo = new Emprestimo();
+				emprestimo.setId(resultSet.getInt("id"));
+				emprestimo.setCodigo(resultSet.getInt("codigo"));
+				emprestimo.setDataRealizacao(resultSet.getTimestamp("datarealizacao"));
+				emprestimo.setLeitorId(resultSet.getInt("leitor_id"));
+				emprestimos.add(emprestimo);
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return emprestimos;
+	}
+
+	public List<EmprestimoDTO> checkLoan(final int idEmprestimo, final int idLeitor) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+
+		final List<EmprestimoDTO> emprestimosAbertos = new ArrayList<EmprestimoDTO>();
+
+		try {
+			final String sql = "select E.id as Emprestimo_id, Ex.id as Exemplar_id, L.titulo, E.codigo from emprestimo E "
+					+ "inner join emprestimo_Exemplar EE on E.id = EE.emprestimo_id "
+					+ "inner join Exemplar Ex on Ex.id = EE.exemplar_id " + "inner join Livro L on L.id = Ex.livro_id "
+					+ "where E.leitor_id = ? and E.id = ?";
+
+			connection = ConnectionFactory.getConnection();
+			prepareStatement = connection.prepareStatement(sql);
+			prepareStatement.setInt(1, idLeitor);
+			prepareStatement.setInt(2, idEmprestimo);
+
+			resultSet = prepareStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final EmprestimoDTO openLoan = new EmprestimoDTO();
+				openLoan.setIdEmprestimo(resultSet.getInt("Emprestimo_id"));
+				openLoan.setCodEmprestimo(resultSet.getInt("codigo"));
+				openLoan.setIdExemplar(resultSet.getInt("Exemplar_id"));
+				openLoan.setNomeLivro(resultSet.getString("titulo"));
+				emprestimosAbertos.add(openLoan);
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, prepareStatement, connection);
+		}
+
+		return emprestimosAbertos;
+	}
 }

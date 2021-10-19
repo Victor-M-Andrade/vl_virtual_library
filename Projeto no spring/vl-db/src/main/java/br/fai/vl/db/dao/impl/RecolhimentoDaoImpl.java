@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import br.fai.vl.db.connection.ConnectionFactory;
 import br.fai.vl.db.dao.RecolhimentoDao;
+import br.fai.vl.dto.RecolhimentoDTO;
 import br.fai.vl.model.Recolhimento;
 
 @Repository
@@ -211,6 +212,99 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 		}
 
 		return recolhimento;
+	}
+
+	public List<RecolhimentoDTO> pickUpOrderList() {
+		final List<RecolhimentoDTO> recohimentos = new ArrayList<RecolhimentoDTO>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "select R.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo from recolhimento R "
+					+ "inner join emprestimo E on R.emprestimo_id = E.id "
+					+ "inner join leitor L on R.leitor_id = L.id " + "inner join pessoa Pe on L.pessoa_id = Pe.id "
+					+ "where R.datarecolhimento is null and R.recolhido is true;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final RecolhimentoDTO recohimento = new RecolhimentoDTO();
+				recohimento.setIdRecolhimento(resultSet.getInt("id"));
+				recohimento.setUserName(resultSet.getString("nome"));
+				recohimento.setUserEmail(resultSet.getString("email"));
+				recohimento.setIdEmprestimo(resultSet.getInt("idemprestimo"));
+				recohimento.setCodEmprestimo(resultSet.getInt("codigo"));
+				recohimentos.add(recohimento);
+			}
+
+		} catch (final Exception e) {
+			System.out.println("Não foi possível resgatar as recohimentos ou houve um erro interno no sistema");
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return recohimentos;
+	}
+
+	public boolean refuseCollection(final int idRecolhimento) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		final String sql = "UPDATE entrega SET recolhido = false WHERE id = ?;";
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idRecolhimento);
+
+			preparedStatement.execute();
+			connection.commit();
+
+			return true;
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final SQLException e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
+	}
+
+	public boolean acceptCollection(final int idRecolhimento) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		final String sql = "UPDATE entrega SET datarecolhimento = now() WHERE id = ?;";
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, idRecolhimento);
+
+			preparedStatement.execute();
+			connection.commit();
+
+			return true;
+		} catch (final Exception e) {
+			try {
+				connection.rollback();
+			} catch (final SQLException e2) {
+				System.out.println(e2.getMessage());
+			}
+
+			return false;
+		} finally {
+			ConnectionFactory.close(preparedStatement, connection);
+		}
 	}
 
 }

@@ -82,4 +82,17 @@ public class EmprestimoRestController {
 
 		return ResponseEntity.ok(service.lastLoanRecord(id));
 	}
+
+	@GetMapping("/my-previousLoans/{idLeitor}")
+	public ResponseEntity<List<Emprestimo>> myPreviousLoans(@PathVariable("idLeitor") final int idLeitor) {
+
+		return ResponseEntity.ok(service.myPreviousLoans(idLeitor));
+	}
+
+	@GetMapping("/check-loan/{idEmprestimo}/{idLeitor}")
+	public ResponseEntity<List<EmprestimoDTO>> checkLoan(@PathVariable("idLeitor") final int idLeitor,
+			@PathVariable("idEmprestimo") final int idEmprestimo) {
+
+		return ResponseEntity.ok(service.checkLoan(idEmprestimo, idLeitor));
+	}
 }

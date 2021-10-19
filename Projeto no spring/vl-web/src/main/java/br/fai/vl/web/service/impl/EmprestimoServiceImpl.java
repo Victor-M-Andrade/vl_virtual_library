@@ -195,4 +195,45 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return response;
 	}
 
+	@Override
+	public List<Emprestimo> myPreviousLoans(final int idLeitor) {
+
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/my-previousLoans/" + idLeitor;
+		List<Emprestimo> response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Emprestimo[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+					httpEntity, Emprestimo[].class);
+
+			response = Arrays.asList(requestResponse.getBody());
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public List<EmprestimoDTO> checkLoan(final int idEmprestimo, final int idUser) {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/check-loan/" + idEmprestimo + "/" + idUser;
+		List<EmprestimoDTO> response = null;
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<EmprestimoDTO[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET,
+					httpEntity, EmprestimoDTO[].class);
+
+			response = Arrays.asList(responseEntity.getBody());
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
 }

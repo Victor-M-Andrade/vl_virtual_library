@@ -2,6 +2,7 @@ package br.fai.vl.web.service;
 
 import java.util.List;
 
+import br.fai.vl.dto.EntregaDTO;
 import br.fai.vl.model.Entrega;
 
 public interface EntregaService {
@@ -17,4 +18,10 @@ public interface EntregaService {
 	boolean delete(int id);
 
 	String checkDeliveryRequest(int idEmprestimo, int idLeitor);
+
+	List<EntregaDTO> deliveryOrderList();
+
+	boolean refuseDelivery(int id);
+
+	boolean acceptDelivery(int id);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.fai.vl.api.service.RecolhimentoService;
+import br.fai.vl.dto.RecolhimentoDTO;
 import br.fai.vl.model.Recolhimento;
 
 @RestController
@@ -58,5 +59,23 @@ public class RecolhimentoRestController {
 			@PathVariable("idLeitor") final int idLeitor) {
 
 		return ResponseEntity.ok(service.requestCollection(idEmprestimo, idLeitor));
+	}
+
+	@GetMapping("/pickup-order-list")
+	public ResponseEntity<List<RecolhimentoDTO>> pickUpOrderList() {
+
+		return ResponseEntity.ok(service.pickUpOrderList());
+	}
+
+	@GetMapping("/refuse-collection/{idRecolhimento}")
+	public ResponseEntity<Boolean> refuseCollection(@PathVariable("idRecolhimento") final int idRecolhimento) {
+
+		return ResponseEntity.ok(service.refuseCollection(idRecolhimento));
+	}
+
+	@GetMapping("/accept-collection/{idEntrega}")
+	public ResponseEntity<Boolean> acceptCollection(@PathVariable("idRecolhimento") final int idRecolhimento) {
+
+		return ResponseEntity.ok(service.acceptCollection(idRecolhimento));
 	}
 }
