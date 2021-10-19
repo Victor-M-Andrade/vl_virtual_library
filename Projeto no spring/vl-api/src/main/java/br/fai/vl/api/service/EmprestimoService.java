@@ -28,4 +28,6 @@ public interface EmprestimoService {
 	List<Emprestimo> myPreviousLoans(int idLeitor);
 
 	List<EmprestimoDTO> checkLoan(int idEmprestimo, int idLeitor);
+
+	List<EmprestimoDTO> openLoansList();
 }

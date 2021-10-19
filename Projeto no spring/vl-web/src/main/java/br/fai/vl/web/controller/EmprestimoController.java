@@ -244,4 +244,28 @@ public class EmprestimoController {
 		}
 	}
 
+	// ========= EMPRESTIMOS ==========
+	@GetMapping("/list")
+	public String getEmprestimoList(final Model model) {
+		if (!Account.isLogin()) {
+			return "redirect:/account/entrar";
+		} else {
+			if (Account.getPermissionLevel() == 2) {
+
+				final List<EmprestimoDTO> emprestimoDTO = emprestimoService.openLoansList();
+
+				model.addAttribute("emprestimos", emprestimoDTO);
+
+				if (emprestimoDTO.isEmpty() || emprestimoDTO.size() == 0) {
+					model.addAttribute("semEmprestimos", true);
+				}
+
+				return "emprestimo/list";
+
+			} else {
+				return "redirect:/account/entrar";
+			}
+		}
+	}
+
 }

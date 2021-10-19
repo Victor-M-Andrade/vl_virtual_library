@@ -6,6 +6,25 @@ public class EmprestimoDTO {
 	private int codEmprestimo;
 	private int idExemplar;
 	private String nomeLivro;
+	private int userID;
+	private String userName;
+	private String userEmail;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(final String userEmail) {
+		this.userEmail = userEmail;
+	}
 
 	public int getIdEmprestimo() {
 		return idEmprestimo;
@@ -37,6 +56,14 @@ public class EmprestimoDTO {
 
 	public void setCodEmprestimo(final int codEmprestimo) {
 		this.codEmprestimo = codEmprestimo;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(final int userID) {
+		this.userID = userID;
 	}
 
 }

@@ -236,4 +236,26 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 		return response;
 	}
+
+	@Override
+	public List<EmprestimoDTO> openLoansList() {
+		final String endpoint = "http://localhost:8085/api/v1/emprestimo/open-loans-list";
+		List<EmprestimoDTO> response = null;
+
+		try {
+			// faz a chamada da API
+			final RestTemplate restTemplace = new RestTemplate();
+			// receber minha entidade
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<EmprestimoDTO[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.GET,
+					httpEntity, EmprestimoDTO[].class);
+
+			response = Arrays.asList(responseEntity.getBody());
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
 }

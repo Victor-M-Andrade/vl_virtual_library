@@ -100,4 +100,10 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		return dao.checkLoan(idEmprestimo, idLeitor);
 	}
 
+	@Override
+	public List<EmprestimoDTO> openLoansList() {
+
+		return dao.openLoansList();
+	}
+
 }

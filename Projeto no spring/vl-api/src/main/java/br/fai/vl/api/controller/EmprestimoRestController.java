@@ -95,4 +95,10 @@ public class EmprestimoRestController {
 
 		return ResponseEntity.ok(service.checkLoan(idEmprestimo, idLeitor));
 	}
+
+	@GetMapping("/open-loans-list")
+	public ResponseEntity<List<EmprestimoDTO>> openLoansList() {
+
+		return ResponseEntity.ok(service.openLoansList());
+	}
 }

@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
+
 <head>
-<meta charset="UTF-8">
-<title>Lista de Usuários</title>
+	<meta charset="UTF-8">
+	<title>Lista de Usuários</title>
 </head>
+
 <body>
 	<div layout:fragment="body">
 
-<br><br><br>
+		<br><br><br>
 		<main>
 			<div class="container-fluid">
 				<h1 class="mt-4">Lista de Usuários</h1>
 
 				<div class="row">
 
-					
+
 
 					<div class="mb-2 col-12 col-sm-12">
 
@@ -24,31 +26,18 @@
 
 								<div class="table-responsive">
 
-									<table class="table table-bordered" id="dataTable" width="100%"
-										cellspacing="0">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-										
+
 										<div class="row col-12">
-										<div class="col-8">
-											<a th:href="@{/bibliotecario/register}" class="btn btn-info col-12"><i
-												class="fas fa-address-book"></i> CADASTRAR NOVO BIBLIOTECARIO(A)</a>
-										</div>
-									<form
-										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-										<div class="input-group col-3">
-											<input class="form-control" type="text"
-												placeholder="Procurar por..." />
-											<div class="input-group-append">
-												<button class="btn btn-primary" type="button">
-													<i class="fas fa-search"></i>
-												</button>
+											<div class="col-12">
+												<a th:href="@{/bibliotecario/register}" class="btn btn-info col-12"><i
+														class="fas fa-address-book"></i> CADASTRAR NOVO
+													BIBLIOTECARIO(A)</a>
 											</div>
 										</div>
-									</form>
-									
-								</div>
-								
-								<br>
+
+										<br>
 
 										<thead>
 											<tr>
@@ -56,7 +45,8 @@
 												<th>CPF</th>
 												<th>Telefone</th>
 												<th>Email</th>
-												<th>ações<th>
+												<th>ações
+												<th>
 											</tr>
 										</thead>
 										<tfoot>
@@ -65,7 +55,8 @@
 												<th>CPF</th>
 												<th>Telefone</th>
 												<th>Email</th>
-												<th>ações<th>
+												<th>ações
+												<th>
 											</tr>
 										</tfoot>
 
@@ -79,26 +70,29 @@
 												<td>
 													<div class="row col-12">
 														<div class="col-4">
-															<a th:href="@{/leitor/detail/{id} (id = ${leitor.id})}" class="btn btn-info col-9">
+															<a th:href="@{/leitor/detail/{id} (id = ${leitor.id})}"
+																class="btn btn-info col-9">
 																<i class="fas fa-id-card"></i>
 															</a>
 														</div>
 														<div class="col-4">
-															<a th:href="@{/leitor/edit/{id} (id = ${leitor.id})}" class="btn btn-warning col-9">
+															<a th:href="@{/leitor/edit/{id} (id = ${leitor.id})}"
+																class="btn btn-warning col-9">
 																<i class="fas fa-edit"></i>
 															</a>
 														</div>
 														<div class="col-4">
-															<a th:href="@{/leitor/delete/{id} (id = ${leitor.id})}" class="btn btn-danger col-9"> <i
-																class="fas fa-times"></i>
+															<a th:href="@{/leitor/delete/{id} (id = ${leitor.id})}"
+																class="btn btn-danger col-9"> <i
+																	class="fas fa-times"></i>
 															</a>
 														</div>
 													</div>
 												</td>
 											</tr>
 										</tbody>
-										
-										
+
+
 										<tbody>
 											<tr th:each="bibliotecario : ${listaDeBibliotecarios}">
 												<td th:text="${bibliotecario.nome}">Victor</td>
@@ -108,38 +102,42 @@
 												<td>
 													<div class="row col-12">
 														<div class="col-4">
-															<a th:href="@{/bibliotecario/detail/{id} (id = ${bibliotecario.id})}" class="btn btn-info col-9">
+															<a th:href="@{/bibliotecario/detail/{id} (id = ${bibliotecario.id})}"
+																class="btn btn-info col-9">
 																<i class="fas fa-id-card"></i>
 															</a>
 														</div>
 														<div class="col-4">
-															<a th:href="@{/bibliotecario/edit/{id} (id = ${bibliotecario.id})}" class="btn btn-warning col-9">
+															<a th:href="@{/bibliotecario/edit/{id} (id = ${bibliotecario.id})}"
+																class="btn btn-warning col-9">
 																<i class="fas fa-edit"></i>
 															</a>
 														</div>
 														<div class="col-4">
-															<a th:href="@{/bibliotecario/delete/{id} (id = ${bibliotecario.id})}" class="btn btn-danger col-9"> <i
-																class="fas fa-times"></i>
+															<a th:href="@{/bibliotecario/delete/{id} (id = ${bibliotecario.id})}"
+																class="btn btn-danger col-9"> <i
+																	class="fas fa-times"></i>
 															</a>
 														</div>
-														</div>
 													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-									
 								</div>
+								</td>
+								</tr>
+								</tbody>
+								</table>
+
 							</div>
 						</div>
 					</div>
-					<hr>
 				</div>
+				<hr>
 			</div>
-		</main>
-		
-		<br> <br>
+	</div>
+	</main>
+
+	<br> <br>
 
 	</div>
 </body>
+
 </html>

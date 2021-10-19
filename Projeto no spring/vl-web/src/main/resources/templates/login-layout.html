@@ -31,35 +31,22 @@
         
         <h4 class="text-white" style="margin-left: 35px;">Virtual Library</h4>
 
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Procurar por..." aria-label="Search"
-                    aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-
          <!-- Navbar-->
-                    <div class="btn-group dropleft">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user fa-fw"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" th:href="@{/account/perfil-usuario}"><i class="fas fa-user-alt icon-menu"></i>Perfil</a>
-                            <a class="dropdown-item" th:href="@{/account/editar-perfil}"><i class="fas fa-user-edit icon-menu"></i>Editar Perfil</a>
-                            <a class="dropdown-item" th:href="@{/account/notificacao}"><i class="fas fa-bell icon-menu"></i>Notificação <span
-                                    class="badge  badge-pill badge-danger">1</span></a>
-                            <a class="dropdown-item" th:href="@{/account/my-loans}"><i class="fas fa-shopping-cart icon-menu"></i>Finalizar Emprestimo<span
-                                    class="badge  badge-pill badge-danger">5</span></a>
-                            <a class="dropdown-item" th:href="@{/account/get-out}"><i class="fas fa-sign-out-alt icon-menu"></i>Sair</a>
-                        </div>
-                    </div>
+        <div class="btn-group dropleft d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" >
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user fa-fw"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" th:href="@{/account/perfil-usuario}"><i class="fas fa-user-alt icon-menu"></i>Perfil</a>
+                <a class="dropdown-item" th:href="@{/account/editar-perfil}"><i class="fas fa-user-edit icon-menu"></i>Editar Perfil</a>
+                <a class="dropdown-item" th:href="@{/account/notificacao}"><i class="fas fa-bell icon-menu"></i>Notificação <span
+                        class="badge  badge-pill badge-danger">1</span></a>
+                <a class="dropdown-item" th:href="@{/account/my-loans}"><i class="fas fa-shopping-cart icon-menu"></i>Finalizar Emprestimo<span
+                        class="badge  badge-pill badge-danger">5</span></a>
+                <a class="dropdown-item" th:href="@{/account/get-out}"><i class="fas fa-sign-out-alt icon-menu"></i>Sair</a>
+            </div>
+        </div>
 
     </nav>
     <div id="layoutSidenav">

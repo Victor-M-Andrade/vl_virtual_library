@@ -544,4 +544,44 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 
 		return emprestimosAbertos;
 	}
+
+	public List<EmprestimoDTO> openLoansList() {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+
+		final List<EmprestimoDTO> emprestimosAbertos = new ArrayList<EmprestimoDTO>();
+
+		try {
+			final String sql = "select E.id, E.codigo, En.exemplar_id, L.titulo, P.nome, Le.email, Le.id as idUser from emprestimo E "
+					+ "inner join emprestimo_exemplar En on E.id = En.emprestimo_id "
+					+ "inner join exemplar Ex on En.exemplar_id = Ex.id " + "inner join livro L on L.id = Ex.livro_id "
+					+ "inner join leitor Le on Le.id = E.leitor_id " + "inner join pessoa P on P.id = Le.pessoa_id "
+					+ "where En.dataefetivadevolucao is null and E.datarealizacao is not null;";
+
+			connection = ConnectionFactory.getConnection();
+			prepareStatement = connection.prepareStatement(sql);
+
+			resultSet = prepareStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final EmprestimoDTO openLoan = new EmprestimoDTO();
+				openLoan.setIdEmprestimo(resultSet.getInt("id"));
+				openLoan.setCodEmprestimo(resultSet.getInt("codigo"));
+				openLoan.setIdExemplar(resultSet.getInt("exemplar_id"));
+				openLoan.setNomeLivro(resultSet.getString("titulo"));
+				openLoan.setUserName(resultSet.getString("nome"));
+				openLoan.setUserEmail(resultSet.getString("email"));
+				openLoan.setUserID(resultSet.getInt("iduser"));
+				emprestimosAbertos.add(openLoan);
+			}
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.close(resultSet, prepareStatement, connection);
+		}
+
+		return emprestimosAbertos;
+	}
 }
