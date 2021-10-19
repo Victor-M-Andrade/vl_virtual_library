@@ -7,6 +7,7 @@ public class RecolhimentoDTO {
 	private int codEmprestimo;
 	private String userName;
 	private String userEmail;
+	private int userID;
 
 	public int getIdEmprestimo() {
 		return idEmprestimo;
@@ -46,6 +47,14 @@ public class RecolhimentoDTO {
 
 	public void setIdRecolhimento(final int idRecolhimento) {
 		this.idRecolhimento = idRecolhimento;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(final int userID) {
+		this.userID = userID;
 	}
 
 }

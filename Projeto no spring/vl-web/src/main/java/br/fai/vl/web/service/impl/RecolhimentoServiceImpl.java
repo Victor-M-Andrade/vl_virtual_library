@@ -157,4 +157,64 @@ public class RecolhimentoServiceImpl implements RecolhimentoService {
 		return response;
 	}
 
+	@Override
+	public boolean refuseCollection(final int id) {
+		final String endpoint = "http://localhost:8085/api/v1/recolhimento/refuse-collection/" + id;
+		boolean response = false;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+					Boolean.class);
+
+			response = requestResponse.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public boolean acceptCollection(final int id) {
+		final String endpoint = "http://localhost:8085/api/v1/recolhimento/accept-collection/" + id;
+		boolean response = false;
+
+		try {
+			final RestTemplate restTemplace = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET, httpEntity,
+					Boolean.class);
+
+			response = requestResponse.getBody();
+
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
+	@Override
+	public List<RecolhimentoDTO> closedPickUpOrderList() {
+
+		final String endpoint = "http://localhost:8085/api/v1/recolhimento/closed-pickup-order-list";
+		List<RecolhimentoDTO> response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<RecolhimentoDTO[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+					httpEntity, RecolhimentoDTO[].class);
+
+			response = Arrays.asList(requestResponse.getBody());
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
 }

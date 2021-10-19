@@ -224,7 +224,7 @@ public class EntregaDaoImpl implements EntregaDao {
 
 		try {
 			connection = ConnectionFactory.getConnection();
-			final String sql = "select En.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo from entrega En "
+			final String sql = "select En.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo, L.id as idUser from entrega En "
 					+ "inner join emprestimo E on En.emprestimo_id = E.id "
 					+ "inner join leitor L on En.leitor_id = L.id " + "inner join pessoa Pe on L.pessoa_id = Pe.id "
 					+ "where En.dataentrega is null and entregue is true;";
@@ -239,6 +239,8 @@ public class EntregaDaoImpl implements EntregaDao {
 				entrega.setUserEmail(resultSet.getString("email"));
 				entrega.setIdEmprestimo(resultSet.getInt("idemprestimo"));
 				entrega.setCodEmprestimo(resultSet.getInt("codigo"));
+
+				entrega.setUserID(resultSet.getInt("iduser"));
 				entregas.add(entrega);
 			}
 
@@ -307,6 +309,42 @@ public class EntregaDaoImpl implements EntregaDao {
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
+	}
+
+	public List<EntregaDTO> closedDeliveryOrderList() {
+		final List<EntregaDTO> entregas = new ArrayList<EntregaDTO>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "select En.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo, L.id as idUser from entrega En "
+					+ "inner join emprestimo E on En.emprestimo_id = E.id "
+					+ "inner join leitor L on En.leitor_id = L.id " + "inner join pessoa Pe on L.pessoa_id = Pe.id "
+					+ "where En.dataentrega is not null or En.entregue is false;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final EntregaDTO entrega = new EntregaDTO();
+				entrega.setIdEntrega(resultSet.getInt("id"));
+				entrega.setUserName(resultSet.getString("nome"));
+				entrega.setUserEmail(resultSet.getString("email"));
+				entrega.setIdEmprestimo(resultSet.getInt("idemprestimo"));
+				entrega.setCodEmprestimo(resultSet.getInt("codigo"));
+				entrega.setUserID(resultSet.getInt("iduser"));
+				entregas.add(entrega);
+			}
+
+		} catch (final Exception e) {
+			System.out.println("Não foi possível resgatar as entregas ou houve um erro interno no sistema");
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return entregas;
 	}
 
 }

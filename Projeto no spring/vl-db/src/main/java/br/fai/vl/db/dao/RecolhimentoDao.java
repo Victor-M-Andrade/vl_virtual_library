@@ -23,4 +23,6 @@ public interface RecolhimentoDao {
 	boolean refuseCollection(int idRecolhimento);
 
 	boolean acceptCollection(int idRecolhimento);
+
+	List<RecolhimentoDTO> closedPickUpOrderList();
 }

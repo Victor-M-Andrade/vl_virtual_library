@@ -78,4 +78,10 @@ public class EntregaRestController {
 
 		return ResponseEntity.ok(service.acceptDelivery(idEntrega));
 	}
+
+	@GetMapping("/closed-delivery-order-list")
+	public ResponseEntity<List<EntregaDTO>> closedDeliveryOrderList() {
+
+		return ResponseEntity.ok(service.closedDeliveryOrderList());
+	}
 }

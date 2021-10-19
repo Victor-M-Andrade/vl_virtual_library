@@ -85,4 +85,10 @@ public class EntregaServiceImpl implements EntregaService {
 		// TODO Auto-generated method stub
 		return dao.acceptDelivery(idEntrega);
 	}
+
+	@Override
+	public List<EntregaDTO> closedDeliveryOrderList() {
+		// TODO Auto-generated method stub
+		return dao.closedDeliveryOrderList();
+	}
 }

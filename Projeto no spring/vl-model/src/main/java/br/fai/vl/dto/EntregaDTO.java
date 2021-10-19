@@ -7,6 +7,7 @@ public class EntregaDTO {
 	private int codEmprestimo;
 	private String userName;
 	private String userEmail;
+	private int userID;
 
 	public int getIdEmprestimo() {
 		return idEmprestimo;
@@ -46,6 +47,14 @@ public class EntregaDTO {
 
 	public void setIdEntrega(final int idEntrega) {
 		this.idEntrega = idEntrega;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(final int userID) {
+		this.userID = userID;
 	}
 
 }

@@ -197,4 +197,24 @@ public class EntregaServiceImpl implements EntregaService {
 		return response;
 	}
 
+	@Override
+	public List<EntregaDTO> closedDeliveryOrderList() {
+
+		final String endpoint = "http://localhost:8085/api/v1/entrega/closed-delivery-order-list";
+		List<EntregaDTO> response = null;
+
+		try {
+			final RestTemplate restTemplate = new RestTemplate();
+			final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+			final ResponseEntity<EntregaDTO[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+					httpEntity, EntregaDTO[].class);
+
+			response = Arrays.asList(requestResponse.getBody());
+		} catch (final Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return response;
+	}
+
 }

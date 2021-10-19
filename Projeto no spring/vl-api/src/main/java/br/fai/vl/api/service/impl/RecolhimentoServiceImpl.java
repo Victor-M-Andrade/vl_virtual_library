@@ -48,18 +48,18 @@ public class RecolhimentoServiceImpl implements RecolhimentoService {
 
 	@Override
 	public String requestCollection(final int idEmprestimo, final int idLeitor) {
-		final Recolhimento entrega = dao.requestCollection(idEmprestimo, idLeitor);
+		final Recolhimento recolhimento = dao.requestCollection(idEmprestimo, idLeitor);
 
-		if (entrega != null) {
-			if (entrega.getDataRecolhimento() == null) {
-				if (entrega.isRecolhido() == false) {
+		if (recolhimento != null) {
+			if (recolhimento.getDataRecolhimento() == null) {
+				if (recolhimento.isRecolhido() == false) {
 					return "Solicitação reprovada";
 				} else {
 					return "Solicitação em aprovação";
 				}
 
 			} else {
-				return "Previsão de entrega: " + entrega.getDataRecolhimento();
+				return "Previsão de Recolhimento: " + recolhimento.getDataRecolhimento();
 			}
 		} else {
 			return "Recolhimento não solicitado";
@@ -82,6 +82,12 @@ public class RecolhimentoServiceImpl implements RecolhimentoService {
 	public boolean acceptCollection(final int idRecolhimento) {
 		// TODO Auto-generated method stub
 		return dao.acceptCollection(idRecolhimento);
+	}
+
+	@Override
+	public List<RecolhimentoDTO> closedPickUpOrderList() {
+		// TODO Auto-generated method stub
+		return dao.closedPickUpOrderList();
 	}
 
 }

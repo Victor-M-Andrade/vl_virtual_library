@@ -73,9 +73,15 @@ public class RecolhimentoRestController {
 		return ResponseEntity.ok(service.refuseCollection(idRecolhimento));
 	}
 
-	@GetMapping("/accept-collection/{idEntrega}")
+	@GetMapping("/accept-collection/{idRecolhimento}")
 	public ResponseEntity<Boolean> acceptCollection(@PathVariable("idRecolhimento") final int idRecolhimento) {
 
 		return ResponseEntity.ok(service.acceptCollection(idRecolhimento));
+	}
+
+	@GetMapping("/closed-pickup-order-list")
+	public ResponseEntity<List<RecolhimentoDTO>> closedPickUpOrderList() {
+
+		return ResponseEntity.ok(service.closedPickUpOrderList());
 	}
 }

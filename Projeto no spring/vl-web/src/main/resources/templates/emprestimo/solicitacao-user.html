@@ -21,7 +21,7 @@
 							<div class="card-body">
 								<div class="mb-3 text-center">
 									<img
-										src="../../resources/assets/img/logo/VL com fundo sem nome2.png"
+										src="../../../resources/assets/img/logo/VL com fundo sem nome2.png"
 										width="200" class="rounded-circle img-fluid" />
 								</div>
 							</div>
@@ -32,24 +32,6 @@
 
 						<div class="mb-2 card">
 							<div class="card-body">
-								<br>
-								<div class="row">
-									<form
-										class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-										<div class="input-group">
-											<input class="form-control" type="text"
-												placeholder="Procurar por..." />
-											<div class="input-group-append">
-												<button class="btn btn-primary" type="button">
-													<i class="fas fa-search"></i>
-												</button>
-											</div>
-										</div>
-									</form>
-								</div>
-
-
-
 								<br>
 
 								<div class="table-responsive">
@@ -76,7 +58,7 @@
 											<tr th:each="loan : ${loans}">
 												<td th:text="${loan.codEmprestimo}">1</td>
 												<td><img
-													src="../../resources/assets/img/capa-livros/a-arte-da-guerra.png"
+													src="../../../resources/assets/img/capa-livros/a-arte-da-guerra.png"
 													alt="" style="width: 100px;"></td>
 												<td th:text="${loan.idExemplar}">1</td>
 												<td style="text-align: center; vertical-align: middle;"
@@ -91,39 +73,15 @@
 								<hr>
 
 								<div class="row">
-									<div class="col-sm-12">
-										Caso queira que seu emprestimo seja entregue clique em <strong>SOLICITAR
-											ENTREGA</strong>
-									</div>
-									<div class="col-sm-12">
-										Se já estiver com o livro e deseja que seja recolhido, clique
-										em <strong>SOLICITAR DEVOLUÇÃO</strong>
-									</div>
-									<br> <br>
-									<div class="col-sm-12 font-italic">**OBS: A sua
-										solicitação poderá ser aceita ou não pelo Administrador</div>
 									<br> <br>
 									<div class="row col-12">
 										<div class="col-6">
-											<a
-												th:href="@{/emprestimo/solicitar-entrega/{idEmprestimo} (idEmprestimo = ${idEmprestimo})}"
-												class="btn btn-success col-12"><i
-												class="fas fa-motorcycle fa-lg"></i> SOLICITAR ENTREGA</a>
-										</div>
-										<div class="col-6">
-											<a
-												th:href="@{/emprestimo/solicitar-recolhimento/{idEmprestimo} (idEmprestimo = ${idEmprestimo})}"
-												class="btn btn-info col-12"><i
-												class="fas fa-motorcycle fa-lg"></i> SOLICITAR RECOLHIMENTO</a>
-										</div>
-									</div>
-									<br> <br>
-									<div class="row col-12">
-										<div class="col-6">
+											<div><strong>Resposta da solicitação de entrega</strong></div>
 											<label type="text" class="form-control"
 												th:text="${situacaoEntrega}" readonly></label>
 										</div>
 										<div class="col-6">
+											<div><strong>Resposta da solicitação de recolhimento</strong></div>
 											<label type="text" class="form-control"
 												th:text="${situacaoRecolhimento}" readonly></label>
 										</div>

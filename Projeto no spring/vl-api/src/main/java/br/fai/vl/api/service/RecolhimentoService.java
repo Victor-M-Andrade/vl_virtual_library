@@ -24,4 +24,6 @@ public interface RecolhimentoService {
 	boolean refuseCollection(int idRecolhimento);
 
 	boolean acceptCollection(int idRecolhimento);
+
+	List<RecolhimentoDTO> closedPickUpOrderList();
 }

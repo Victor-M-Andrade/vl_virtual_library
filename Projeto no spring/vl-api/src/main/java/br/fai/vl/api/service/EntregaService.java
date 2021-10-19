@@ -23,4 +23,6 @@ public interface EntregaService {
 	boolean refuseDelivery(int idEntrega);
 
 	boolean acceptDelivery(int idEntrega);
+
+	List<EntregaDTO> closedDeliveryOrderList();
 }

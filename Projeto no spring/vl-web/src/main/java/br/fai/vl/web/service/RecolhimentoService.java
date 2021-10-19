@@ -20,4 +20,10 @@ public interface RecolhimentoService {
 	String requestCollection(int idEmprestimo, int idLeitor);
 
 	List<RecolhimentoDTO> pickUpOrderList();
+
+	boolean refuseCollection(int id);
+
+	boolean acceptCollection(int id);
+
+	List<RecolhimentoDTO> closedPickUpOrderList();
 }

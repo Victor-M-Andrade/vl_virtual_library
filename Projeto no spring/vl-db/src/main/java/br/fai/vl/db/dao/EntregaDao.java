@@ -24,4 +24,6 @@ public interface EntregaDao {
 	boolean refuseDelivery(int idEntrega);
 
 	boolean acceptDelivery(int idEntrega);
+
+	List<EntregaDTO> closedDeliveryOrderList();
 }

@@ -222,7 +222,7 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 
 		try {
 			connection = ConnectionFactory.getConnection();
-			final String sql = "select R.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo from recolhimento R "
+			final String sql = "select R.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo, L.id as idUser from recolhimento R "
 					+ "inner join emprestimo E on R.emprestimo_id = E.id "
 					+ "inner join leitor L on R.leitor_id = L.id " + "inner join pessoa Pe on L.pessoa_id = Pe.id "
 					+ "where R.datarecolhimento is null and R.recolhido is true;";
@@ -237,6 +237,7 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 				recohimento.setUserEmail(resultSet.getString("email"));
 				recohimento.setIdEmprestimo(resultSet.getInt("idemprestimo"));
 				recohimento.setCodEmprestimo(resultSet.getInt("codigo"));
+				recohimento.setUserID(resultSet.getInt("iduser"));
 				recohimentos.add(recohimento);
 			}
 
@@ -253,7 +254,7 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		final String sql = "UPDATE entrega SET recolhido = false WHERE id = ?;";
+		final String sql = "UPDATE recolhimento SET recolhido = false WHERE id = ?;";
 
 		try {
 			connection = ConnectionFactory.getConnection();
@@ -282,7 +283,7 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		final String sql = "UPDATE entrega SET datarecolhimento = now() WHERE id = ?;";
+		final String sql = "UPDATE recolhimento SET datarecolhimento = now() WHERE id = ?;";
 
 		try {
 			connection = ConnectionFactory.getConnection();
@@ -305,6 +306,42 @@ public class RecolhimentoDaoImpl implements RecolhimentoDao {
 		} finally {
 			ConnectionFactory.close(preparedStatement, connection);
 		}
+	}
+
+	public List<RecolhimentoDTO> closedPickUpOrderList() {
+		final List<RecolhimentoDTO> entregas = new ArrayList<RecolhimentoDTO>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			final String sql = "select R.id, Pe.nome, L.email, E.codigo, E.id as idEmprestimo, L.id as idUser from recolhimento R "
+					+ "inner join emprestimo E on R.emprestimo_id = E.id "
+					+ "inner join leitor L on R.leitor_id = L.id " + "inner join pessoa Pe on L.pessoa_id = Pe.id "
+					+ "where R.datarecolhimento is not null or R.recolhido is false;";
+
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				final RecolhimentoDTO recolhimento = new RecolhimentoDTO();
+				recolhimento.setIdRecolhimento(resultSet.getInt("id"));
+				recolhimento.setUserName(resultSet.getString("nome"));
+				recolhimento.setUserEmail(resultSet.getString("email"));
+				recolhimento.setIdEmprestimo(resultSet.getInt("idemprestimo"));
+				recolhimento.setCodEmprestimo(resultSet.getInt("codigo"));
+				recolhimento.setUserID(resultSet.getInt("iduser"));
+				entregas.add(recolhimento);
+			}
+
+		} catch (final Exception e) {
+			System.out.println("Não foi possível resgatar as entregas ou houve um erro interno no sistema");
+		} finally {
+			ConnectionFactory.close(resultSet, preparedStatement, connection);
+		}
+
+		return entregas;
 	}
 
 }
