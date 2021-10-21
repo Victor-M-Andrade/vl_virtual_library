@@ -128,7 +128,7 @@ public class LivroController {
 	}
 
 	@PostMapping("/create")
-	private String create(final Livro livro, final Model model) {
+	private String create(final Livro livro, final Model model, final Integer numeroDeLivros) {
 		final int id = service.create(livro);
 
 		if (id != -1) {

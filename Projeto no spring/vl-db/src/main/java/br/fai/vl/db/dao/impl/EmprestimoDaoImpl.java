@@ -235,10 +235,8 @@ public class EmprestimoDaoImpl implements EmprestimoDao {
 		List<Integer> exemplaresDisponiveis = null;
 
 		try {
-			final String sql = "select Ex.id from livro L join exemplar Ex on Ex.livro_id = L.id "
-					+ "where Ex.id not in (select distinct EE.exemplar_id from emprestimo E "
-					+ "join emprestimo_exemplar EE on EE.emprestimo_id = E.id "
-					+ "where EE.devolvido = true ) and L.id = ?;";
+			final String sql = "select Ex.id from livro L inner join exemplar Ex on Ex.livro_id = L.id"
+					+ " where Ex.id not in(select EE.exemplar_id from emprestimo_exemplar EE) and L.id = ?;";
 
 			connection = ConnectionFactory.getConnection();
 			prepareStatement = connection.prepareStatement(sql);

@@ -19,7 +19,7 @@ public class BibliotecarioController {
 	@Autowired
 	private BibliotecarioService service;
 
-	private boolean camposCorretos = true;
+	private boolean camposCorretos = false;
 
 	@GetMapping("/detail/{id}")
 	private String getBibliotecarioDetail(@PathVariable final int id, final Model model) {
@@ -72,6 +72,7 @@ public class BibliotecarioController {
 	@GetMapping("/register")
 	public String getRegister(final Model model, final Bibliotecario bibliotecario) {
 
+		camposCorretos = false;
 		model.addAttribute("correto", camposCorretos);
 		return "conta/register-bibliotecario";
 	}
@@ -79,16 +80,22 @@ public class BibliotecarioController {
 	@PostMapping("/create")
 	private String create(final Bibliotecario bibliotecario, final Model model) {
 
-		final int id = service.create(bibliotecario);
-
-		model.addAttribute("correto", camposCorretos);
-
-		if (id != -1) {
+		if (bibliotecario.getEstado().equals("-1")) {
 			camposCorretos = true;
-			return "redirect:/account/list";
+			model.addAttribute("correto", camposCorretos);
+			return "conta/register-bibliotecario";
+
 		} else {
-			camposCorretos = false;
-			return "redirect:/bibliotecario/register";
+			final int id = service.create(bibliotecario);
+
+			if (id != -1) {
+				camposCorretos = false;
+				return "redirect:/account/list";
+			} else {
+				camposCorretos = true;
+				model.addAttribute("correto", camposCorretos);
+				return "conta/register-bibliotecario";
+			}
 		}
 	}
 

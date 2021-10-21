@@ -232,7 +232,7 @@ public class BibliotecarioDaoImpl implements BibliotecarioDao {
 		PreparedStatement preparedStatement = null;
 
 		// sql
-		final String sql = "DELETE FROM bibliotecario WHERE id = ?;";
+		final String sql = "delete from pessoa P where P.id = (select L.pessoa_id from bibliotecario L where L.id = ?);";
 
 		try {
 			// faz a conexão

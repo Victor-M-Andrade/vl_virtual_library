@@ -19,6 +19,8 @@ public class LeitorController {
 	@Autowired
 	private LeitorService service;
 
+	private boolean camposCorretos = false;
+
 	@GetMapping("/detail/{id}")
 	private String getLeitorDetail(@PathVariable final int id, final Model model) {
 
@@ -68,18 +70,31 @@ public class LeitorController {
 
 	@GetMapping("/register")
 	public String getRegister(final Model model, final Leitor livro) {
+
+		camposCorretos = false;
+		model.addAttribute("correto", camposCorretos);
 		return "conta/register";
 	}
 
 	@PostMapping("/create")
 	private String create(final Leitor leitor, final Model model) {
 
-		final int id = service.create(leitor);
+		if (leitor.getEstado().equals("-1")) {
+			camposCorretos = true;
+			model.addAttribute("correto", camposCorretos);
+			return "conta/register";
 
-		if (id != -1) {
-			return "redirect:/leitor/detail/" + id;
 		} else {
-			return "/conta/register";
+			final int id = service.create(leitor);
+
+			if (id != -1) {
+				camposCorretos = false;
+				return "redirect:/";
+			} else {
+				camposCorretos = true;
+				model.addAttribute("correto", camposCorretos);
+				return "conta/register";
+			}
 		}
 	}
 

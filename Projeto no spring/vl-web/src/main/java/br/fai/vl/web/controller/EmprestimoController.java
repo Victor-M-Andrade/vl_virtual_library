@@ -220,11 +220,9 @@ public class EmprestimoController {
 		} else {
 			if (Account.getPermissionLevel() == 2) {
 
-				model.addAttribute("situacaoEntrega",
-						entregaService.checkDeliveryRequest(idEmprestimo, Account.getIdUser()));
+				model.addAttribute("situacaoEntrega", entregaService.checkDeliveryRequest(idEmprestimo, idUser));
 
-				model.addAttribute("situacaoRecolhimento",
-						recolhimentoService.requestCollection(idEmprestimo, Account.getIdUser()));
+				model.addAttribute("situacaoRecolhimento", recolhimentoService.requestCollection(idEmprestimo, idUser));
 
 				final List<EmprestimoDTO> openUserloan = emprestimoService.checkLoan(idEmprestimo, idUser);
 

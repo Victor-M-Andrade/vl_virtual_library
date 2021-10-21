@@ -31,6 +31,10 @@
 									src="../resources/assets/img/logo/VL fundo roxo2.png" alt="">
 							</div>
 							<div class="card-body">
+								<div class="alert alert-danger" th:if="${correto}">
+									<span class="font-weight-bold align-middle">Por favor, preencha os campos
+										corretamente</span>
+								</div>
 								<form th:action="@{/leitor/create}" method="post"
 									th:object="${leitor}">
 									<div class="form-row">
@@ -38,15 +42,15 @@
 											<div class="form-group">
 												<label class="small mb-1" for="nome">Nome Completo</label><input
 													class="form-control py-4" id="nome" type="text"
-													placeholder="Insira seu nome" th:field="${leitor.nome}" />
+													placeholder="Insira seu nome" th:field="${leitor.nome}" required/>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="small mb-1" for="matricula">matricula</label><input
-													class="form-control py-4" id="matricula" type="text"
+													class="form-control py-4" id="matricula" type="number"
 													placeholder="Insira o seu sobrenome"
-													th:field="${leitor.matricula}" />
+													th:field="${leitor.matricula}" required/>
 											</div>
 										</div>
 									</div>
@@ -57,7 +61,7 @@
 											<div class="form-group">
 												<label class="small mb-1" for="cpf">CPF</label> <input
 													class="form-control py-4 cpf-mask" id="cpf" type="text"
-													placeholder="Ex: 000.000.000-00" th:field="${leitor.cpf}" />
+													placeholder="Ex: 000.000.000-00" th:field="${leitor.cpf}" required/>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -65,7 +69,7 @@
 												<label class="small mb-1" for="email">Email</label><input
 													class="form-control py-4" id="email" type="text"
 													placeholder="Ex: teste@teste.com"
-													th:field="${leitor.email}" />
+													th:field="${leitor.email}" required/>
 											</div>
 										</div>
 										<div class="col-md-3">
@@ -73,7 +77,7 @@
 												<label class="small mb-1" for="inputTelefone">Telefone</label><input
 													class="form-control py-4" id="inputTelefone" type="text"
 													placeholder="Ex: (12) 91234-1234"
-													th:field="${leitor.telefone}" />
+													th:field="${leitor.telefone}" required/>
 											</div>
 
 										</div>
@@ -131,7 +135,7 @@
 											<div class="form-group">
 												<label class="small mb-1" for="inputCidade">Cidade</label><input
 													class="form-control py-4" id="inputCidade" type="text"
-													placeholder="Insira a cidade" th:field="${leitor.cidade}" />
+													placeholder="Insira a cidade" th:field="${leitor.cidade}" required/>
 											</div>
 										</div>
 									</div>
@@ -141,22 +145,22 @@
 											<div class="form-group">
 												<label class="small mb-1" for="inputRua">Rua</label><input
 													class="form-control py-4" id="inputRua" type="text"
-													placeholder="Insira seu nome" th:field="${leitor.rua}" />
+													placeholder="Insira seu nome" th:field="${leitor.rua}" required/>
 											</div>
 										</div>
 										<div class="col-md-5">
 											<div class="form-group">
 												<label class="small mb-1" for="inputBairro">Bairro</label><input
 													class="form-control py-4" id="inputBairro" type="text"
-													placeholder="Insira o bairro" th:field="${leitor.bairro}" />
+													placeholder="Insira o bairro" th:field="${leitor.bairro}" required/>
 											</div>
 										</div>
 
 										<div class="col-md-2">
 											<div class="form-group">
 												<label class="small mb-1" for="inputNúmero">Número</label><input
-													class="form-control py-4" id="inputNúmero" type="text"
-													placeholder="nº" th:field="${leitor.numero}" />
+													class="form-control py-4" id="inputNúmero" type="number"
+													placeholder="nº" th:field="${leitor.numero}" required/>
 											</div>
 										</div>
 									</div>
@@ -167,7 +171,7 @@
 												<label class="small mb-1" for="inputPassword">Senha</label><input
 													class="form-control py-4" id="inputPassword"
 													type="password" placeholder="Insira a senha"
-													th:field="${leitor.senha}" />
+													th:field="${leitor.senha}" required/>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -175,7 +179,7 @@
 												<label class="small mb-1" for="inputConfirmPassword">Confirme
 													a senha</label><input class="form-control py-4"
 													id="inputConfirmPassword" type="password"
-													placeholder="Confirme a senha" />
+													placeholder="Confirme a senha" required/>
 											</div>
 										</div>
 									</div>
@@ -187,7 +191,7 @@
 							</div>
 							<div class="card-footer text-center">
 								<div class="small">
-									<a th:href="@{/conta/login}">Já possui uma conta? Faça o
+									<a th:href="@{/account/entrar}">Já possui uma conta? Faça o
 										login</a>
 								</div>
 							</div>
